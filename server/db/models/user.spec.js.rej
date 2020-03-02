@@ -1,0 +1,4 @@
+diff a/server/db/models/user.spec.js b/server/db/models/user.spec.js	(rejected hunks)
+@@ -30,2 +29,0 @@ describe('User model', () => {
+-
+-

@@ -21,7 +21,9 @@ const User = db.define('user', {
     allowNull: false
   },
   status: {
-    type: Sequelize.ENUM(['admin', 'user'])
+    type: Sequelize.ENUM(['admin', 'user']),
+    allowNull: false,
+    defaultValue: 'user'
   },
   salt: {
     type: Sequelize.STRING,
