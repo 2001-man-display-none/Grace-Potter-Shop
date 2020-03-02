@@ -4,7 +4,6 @@ const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 const {expect} = chai
 
-const db = require('../index')
 const Order = require('./order')
 
 describe('Cart model', () => {
