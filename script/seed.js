@@ -81,8 +81,8 @@ function fakeProduct() {
   return {
     name: plant(),
     description: faker.random.arrayElement([
-      faker.lorem.sentence(),
-      faker.lorem.paragraph()
+      faker.random.sentence,
+      faker.random.paragraph
     ]),
     image: faker.image.nature(),
     price: faker.commerce.price()
@@ -91,7 +91,7 @@ function fakeProduct() {
 
 function fakeOrder(user, status) {
   return {
-    user: user,
+    userId: user ? user.id : null,
     status: status
   }
 }
