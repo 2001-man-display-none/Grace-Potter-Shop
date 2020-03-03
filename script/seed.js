@@ -81,8 +81,8 @@ function fakeProduct() {
   return {
     name: plant(),
     description: faker.random.arrayElement([
-      faker.random.sentence,
-      faker.random.paragraph
+      faker.lorem.sentence(),
+      faker.lorem.paragraph()
     ]),
     image: faker.image.nature(),
     price: faker.commerce.price()
