@@ -1,38 +1,14 @@
-# Boilermaker
-
-_Good things come in pairs_
+# Grace Potter
 
 Looking to mix up a backend with `express`/`sequelize` and a frontend with
-`react`/`redux`? That's `boilermaker`!
+`react`/`redux`
 
-Follow along with the boilerplate workshop to make your own! This canonical
-version can serve as a reference, or a starting point. For an in depth
-discussion into the code that makes up this repository, see the
-[Boilermaker Guided Tour][boilermaker-yt]
-
-[boilermaker-yt]: https://www.youtube.com/playlist?list=PLx0iOsdUOUmn7D5XL4mRUftn8hvAJGs8H
 
 ## Setup
 
-To use this as boilerplate, you'll need to take the following steps:
-
-* Don't fork or clone this repo! Instead, create a new, empty
-  directory on your machine and `git init` (or create an empty repo on
-  Github and clone it to your local machine)
-* Run the following commands:
-
 ```
-git remote add boilermaker https://github.com/FullstackAcademy/boilermaker.git
-git fetch boilermaker
-git merge boilermaker/master
-```
-
-Why did we do that? Because every once in a while, `boilermaker` may
-be updated with additional features or bug fixes, and you can easily
-get those changes from now on by entering:
-
-```
-git fetch boilermaker
+git remote add grace-potter https://github.com/2001-man-display-none/2001-man-display-none-ecomm.git
+git fetch grace-potter
 git merge boilermaker/master
 ```
 
@@ -47,13 +23,12 @@ Now that you've got the code, follow these steps to get acclimated:
   parameter in `package.json`):
 
 ```
-export MY_APP_NAME=boilermaker
+export MY_APP_NAME
 createdb $MY_APP_NAME
 createdb $MY_APP_NAME-test
 ```
 
-* By default, running `npm test` will use `boilermaker-test`, while
-  regular development uses `boilermaker`
+* To test `npm test` 
 * Create a file called `secrets.js` in the project root
   * This file is listed in `.gitignore`, and will _only_ be required
     in your _development_ environment
@@ -82,7 +57,7 @@ process.env.GOOGLE_CALLBACK = '/auth/google/callback'
 Linters are fundamental to any project. They ensure that your code
 has a consistent style, which is critical to writing readable code.
 
-Boilermaker comes with a working linter (ESLint, with
+Grqace-Potter comes with a working linter (ESLint, with
 `eslint-config-fullstack`) "out of the box." However, everyone has
 their own style, so we recommend that you and your team work out yours
 and stick to it. Any linter rule that you object to can be "turned
