@@ -28,6 +28,14 @@ describe('seed script', () => {
         })
       ).to.eventually.be.not.empty
     })
+
+    it('creates at least one user with orders', () => {
+      return expect(
+        User.findAll({
+          include: [{model: Order}]
+        })
+      ).to.eventually.be.not.empty
+    })
   })
 
   describe('orders', () => {
@@ -39,6 +47,14 @@ describe('seed script', () => {
       return expect(
         Order.findAll({
           include: [{model: User, where: {id: null}, required: false}]
+        })
+      ).to.eventually.be.not.empty
+    })
+
+    it('creates at least one order belonging to a user', () => {
+      return expect(
+        Order.findAll({
+          include: [{model: User}]
         })
       ).to.eventually.be.not.empty
     })
