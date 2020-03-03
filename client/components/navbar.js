@@ -8,11 +8,13 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
+      <div>
+        <img src="../../public/gp-home.png" id="logo" />
+        <h1>Welcome To Grace Potter</h1>
+      </div>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
-          <img src="../../public/gp-home.png" id="logo" />
-          <h1>Welcome To Grace Potter</h1>
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
