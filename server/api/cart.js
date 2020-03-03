@@ -4,9 +4,11 @@ module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
+    // console.log('USER', req.params.userId)
     const [order] = await Order.findAll({
-      where: {userId: req.params.userId, status: 'pending'}
+      where: {userId: req.params.userId}
     })
+
     if (order) {
       const itemList = await OrderItem.findAll({where: {orderId: order.id}})
 
