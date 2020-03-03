@@ -19,16 +19,15 @@ const gotError = (error, failedAction) => ({
 // THUNK CREATORS
 export const fetchAll = () => async dispatch => {
   try {
-    const res = await axios.get('/api/products/')
+    const res = await axios.get('/api/products')
     dispatch(gotProducts(res.data))
   } catch (err) {
-    console.error(err)
     dispatch(gotError(err, {type: GOT_PRODUCTS}))
   }
 }
 
 // INITIAL STATE
-const initialState = {
+export const initialState = {
   status: 'loading',
   products: []
 }
@@ -40,6 +39,7 @@ export default function(state = initialState, action) {
     case GOT_PRODUCTS:
       return {...state, status: 'done', products: action.products}
     case GOT_ERROR:
+      console.error(action.error)
       return {...state, status: 'error', products: []}
     default:
       return state
