@@ -3,14 +3,16 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+//import {cart} from '/cart'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>BOILERMAKER</h1>
     <nav>
       {isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
+          <img src="../../public/gp-home.png" id="logo" />
+          <h1>Welcome To Grace Potter</h1>
           <Link to="/home">Home</Link>
           <a href="#" onClick={handleClick}>
             Logout
@@ -21,6 +23,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           {/* The navbar will show these links before you log in */}
           <Link to="/login">Login</Link>
           <Link to="/signup">Sign Up</Link>
+          {/* this cart link is for guest who wants to buy things as a user */}
+          <Link to="/cart">Cart</Link>
         </div>
       )}
     </nav>
