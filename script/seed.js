@@ -16,18 +16,19 @@ async function seed(quiet = false) {
   await db.sync({force: true})
   log('db synced!')
 
-  const users = await Promise.all(repeat(100, fakeUser))
+  const userData = repeat(100, fakeUser)
+  const users = await Promise.all(userData.map(d => User.create(d)))
   log(`seeded ${users.length} users`)
 
-  const products = await Promise.all(repeat(50, fakeProduct))
+  const productData = repeat(50, fakeProduct)
+  const products = await Promise.all(productData.map(p => Product.create(p)))
   log(`seeded ${products.length} products`)
 
-  const orders = await fakeOrders(users)
+  const orders = await fakeOrders(users, products)
   log(`seeded ${orders.length} orders`)
 
-  const items = (await Promise.all(
-    orders.map(order => fakeOrderItems(order, products))
-  )).flat()
+  const itemsData = orders.map(order => fakeOrderItems(order, products))
+  const items = await OrderItem.bulkCreate(itemsData.flat())
   log(`seeded ${items.length} order items`)
 
   log(`seeded successfully`)
@@ -52,11 +53,11 @@ async function runSeed() {
 }
 
 function fakeUser() {
-  return User.create({
+  return {
     name: faker.name.findName(),
     email: faker.internet.email(),
     password: faker.random.arrayElement(['password', '123'])
-  })
+  }
 }
 
 const plant = () => {
@@ -77,7 +78,7 @@ const accessory = () => {
 }
 
 function fakeProduct() {
-  return Product.create({
+  return {
     name: plant(),
     description: faker.random.arrayElement([
       faker.random.sentence,
@@ -85,37 +86,43 @@ function fakeProduct() {
     ]),
     image: faker.image.nature(),
     price: faker.commerce.price()
-  })
+  }
 }
 
-function fakeOrders(users) {
+function fakeOrder(user, status) {
+  return {
+    user: user,
+    status: status
+  }
+}
+
+function fakeOrders(users, products) {
   const promises = []
+  const addFake = (...args) => promises.push(Order.create(fakeOrder(...args)))
+
   // orders belonging to users
   users.map(user => {
     // at most one pending order
     if (faker.random.boolean) {
-      promises.push(user.createOrder({status: 'pending'}))
+      addFake(user, 'pending', products)
     }
     // any number of completed orders
     repeat(faker.random.arrayElement([0, 0, 1, 4, 20]), () => {
-      promises.push(user.createOrder({status: 'fulfilled'}))
+      addFake(user, 'fulfilled', products)
     })
   })
 
   // orders belonging to guests
   repeat(10, () => {
-    promises.push(
-      Order.create({
-        status: faker.random.arrayElement(['pending', 'fulfilled'])
-      })
-    )
+    const status = faker.random.arrayElement(['pending', 'fulfilled'])
+    addFake(null, status, products)
   })
 
   return Promise.all(promises)
 }
 
 function fakeOrderItems(order, products) {
-  const promises = []
+  const items = []
   const sizes = [1, 5, 10]
   const legalSizes = order.status === 'pending' ? sizes : [0, ...sizes]
   const used = {}
@@ -124,15 +131,13 @@ function fakeOrderItems(order, products) {
     if (used[product.id]) return
     used[product.id] = true
 
-    promises.push(
-      OrderItem.create({
-        orderId: order.id,
-        productId: product.id,
-        quantity: faker.random.arrayElement([1, 1, 1, 1, 5, 60])
-      })
-    )
+    items.push({
+      productId: product.id,
+      orderId: order.id,
+      quantity: faker.random.arrayElement([1, 1, 1, 1, 5, 60])
+    })
   })
-  return Promise.all(promises)
+  return items
 }
 
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
