@@ -80,10 +80,7 @@ const accessory = () => {
 function fakeProduct() {
   return {
     name: plant(),
-    description: faker.random.arrayElement([
-      faker.random.sentence,
-      faker.random.paragraph
-    ]),
+    description: faker.lorem.sentence(),
     image: faker.image.nature(),
     price: faker.commerce.price()
   }
