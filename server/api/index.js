@@ -1,8 +1,9 @@
-const router = require('express').Router()
+const router = require('express').Router({mergeParams: true})
 module.exports = router
 
 router.use('/users', require('./users'))
 router.use('/products', require('./products'))
+router.use('/users/:userId/cart', require('./cart'))
 
 router.use((req, res, next) => {
   const error = new Error('Not Found')

@@ -88,7 +88,7 @@ function fakeProduct() {
 
 function fakeOrder(user, status) {
   return {
-    user: user,
+    userId: user ? user.id : null,
     status: status
   }
 }
