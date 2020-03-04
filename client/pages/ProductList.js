@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-
 import {fetchAll} from '../store/products'
+import ProductTile from '../components/ProductTile'
 
 export class ProductList extends React.Component {
   componentDidMount() {
@@ -12,16 +12,12 @@ export class ProductList extends React.Component {
       case 'loading':
         return <div>loading...</div>
       case 'error':
-        return <div>sadface...</div>
+        return <div>Couldn't load products. Try again later.</div>
       case 'done':
         return (
           <div>
             <h1>Available Products</h1>
-            <div>
-              {this.props.products.map(product => (
-                <div key={product.id}>product.name</div>
-              ))}
-            </div>
+            <ProductTile {...this.props} />
           </div>
         )
       default:

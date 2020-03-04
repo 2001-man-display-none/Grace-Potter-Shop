@@ -25,6 +25,11 @@ const User = db.define('user', {
     allowNull: false,
     defaultValue: 'user'
   },
+  image: {
+    type: Sequelize.STRING,
+    defaultValue:
+      'https://worldofsucculents.com/wp-content/uploads/2016/01/Hoya-kerrii.jpg'
+  },
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
