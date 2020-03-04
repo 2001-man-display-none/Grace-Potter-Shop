@@ -25,7 +25,7 @@ router.get('/', async (req, res, next) => {
 
       res.json(items)
     } else {
-      res.sendStatus(404)
+      res.json([])
     }
   } catch (error) {
     next(error)
