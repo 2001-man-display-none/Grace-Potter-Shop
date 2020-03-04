@@ -39,3 +39,13 @@ describe('Cart route', () => {
     })
   })
 })
+
+describe('DELETE `/api/users/:userId/cart/productId`', () => {
+  it('DELETE /api/users/:userId/cart/productId', async () => {
+    const res = await request(app)
+      .delete('api/users/6/cart/2')
+      .expect(204)
+
+    expect(res.body)
+  })
+})
