@@ -1,21 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import CartTile from '../components/CartTile'
+import {fetchCart} from '../store/cart'
 
-const Cart = props => {
-  console.log(props)
-  return (
-    <div>
-      <p>Grace Potter</p>
-      {/* <CartTile props={props.cartItems} /> */}
-    </div>
-  )
+class Cart extends React.Component {
+  componentDidMount() {
+    this.props.fetchCart()
+  }
+  render() {
+    return (
+      <div>
+        <h1>Your Shopping Cart</h1>
+        <CartTile cartItems={this.props.cartItems} />
+      </div>
+    )
+  }
 }
 
 const stateProps = state => ({
   cartItems: state.cart.products
 })
 
-const ConnectedCart = connect(stateProps)(Cart)
+const dispatchProps = dispatch => ({
+  fetchCart: () => dispatch(fetchCart())
+})
+
+const ConnectedCart = connect(stateProps, dispatchProps)(Cart)
 
 export default ConnectedCart

@@ -1,10 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store/user'
 
-const Navbar = ({handleClick, isLoggedIn}) => (
+const Navbar = ({handleClick, isLoggedIn, numOfItemsInCart}) => (
   <div>
     <nav>
       <div id="nav-left">
@@ -34,7 +33,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           </div>
         )}
         <div>
-          <h6 id="cart-num">#</h6>
+          <h3 id="cart-num">{numOfItemsInCart}</h3>
           <Link to="/cart">Cart</Link>
         </div>
       </div>
@@ -49,7 +48,8 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    userId: state.user.id
+    userId: state.user.id,
+    numOfItemsInCart: state.cart.products.length
   }
 }
 
@@ -62,11 +62,3 @@ const mapDispatch = dispatch => {
 }
 
 export default connect(mapState, mapDispatch)(Navbar)
-
-/**
- * PROP TYPES
- */
-Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired
-}
