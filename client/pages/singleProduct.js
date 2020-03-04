@@ -1,6 +1,5 @@
 import React from 'react'
 import {connect} from 'react-redux'
-// import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/singleProduct'
 
 class SingleProduct extends React.Component {
@@ -11,8 +10,6 @@ class SingleProduct extends React.Component {
 
   render() {
     let singleProduct = this.props.singleProduct
-    console.log(this.props)
-    console.log('this is singleproduct', singleProduct)
 
     return (
       <div>
@@ -22,6 +19,15 @@ class SingleProduct extends React.Component {
           Meet {singleProduct.name}: {singleProduct.description}
         </p>
         <h3>${singleProduct.price}</h3>
+        <div>
+          <button
+            type="button"
+            className="button"
+            // onClick={this.handleRemove}
+          >
+            Add To Cart
+          </button>
+        </div>
       </div>
     )
   }

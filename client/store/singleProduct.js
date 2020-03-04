@@ -1,29 +1,38 @@
 import axios from 'axios'
 
-const SET_SINGLE_PRODUCT = 'SET_SINGLE_PRODUCT'
+const GOT_SINGLE_PRODUCT = 'GOT_SINGLE_PRODUCT'
+const GOT_ERROR = 'GOT_ERROR'
 
-const setSingleProduct = singleProduct => {
+export const gotSingleProduct = singleProduct => {
   return {
-    type: SET_SINGLE_PRODUCT,
+    type: GOT_SINGLE_PRODUCT,
     singleProduct
   }
 }
 
+export const gotError = (error, failedAction) => ({
+  type: GOT_ERROR,
+  error,
+  failedAction
+})
+
 export const fetchSingleProduct = productId => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/product/${productId}`)
-      dispatch(setSingleProduct(data))
+      const {data} = await axios.get(`/api/products/${productId}`)
+      dispatch(gotSingleProduct(data))
     } catch (err) {
-      console.log('there is an error in fetching single product', err)
+      dispatch(gotError(err, {type: GOT_SINGLE_PRODUCT}))
     }
   }
 }
 
 export const singleProductReducer = (state = {}, action) => {
   switch (action.type) {
-    case SET_SINGLE_PRODUCT:
+    case GOT_SINGLE_PRODUCT:
       return action.singleProduct
+    case GOT_ERROR:
+      return action.error
     default:
       return state
   }

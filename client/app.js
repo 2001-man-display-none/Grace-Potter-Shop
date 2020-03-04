@@ -2,13 +2,19 @@ import React from 'react'
 import {Navbar} from './components'
 import Routes from './routes'
 import {Route} from 'react-router-dom'
-import singleProductConnect from './components/singleProduct'
+import singleProductConnect from './pages/singleProduct'
+import ConnectedProductList from './pages/ProductList'
 
 const App = () => {
   return (
     <div>
       <Navbar />
-      <Route path="/product/:productId" component={singleProductConnect} />
+      <Route exact path="/products" component={ConnectedProductList} />
+      <Route
+        exact
+        path="/products/:productId"
+        component={singleProductConnect}
+      />
       <Routes />
     </div>
   )
