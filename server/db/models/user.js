@@ -20,7 +20,7 @@ const User = db.define('user', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  status: {
+  role: {
     type: Sequelize.ENUM(['admin', 'user']),
     allowNull: false,
     defaultValue: 'user'
@@ -37,9 +37,6 @@ const User = db.define('user', {
     get() {
       return () => this.getDataValue('salt')
     }
-  },
-  googleId: {
-    type: Sequelize.STRING
   }
 })
 
