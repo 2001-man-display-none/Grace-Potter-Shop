@@ -9,10 +9,9 @@ a {
 label {
   display: block;
 }
-
-nav a {
-  display: inline-block;
-  /* margin: 1em; */
+nav {
+  display: flex;
+  justify-content: space-between;
 }
 
 form div {
@@ -20,11 +19,29 @@ form div {
   display: inline-block;
 }
 
-#navbar {
-  display: flex;
-}
-
 #logo {
   display: flex;
   align-content: flex-end;
+}
+
+#nav-left {
+  display: flex;
+}
+
+#nav-right {
+  display: flex;
+  align-items: center;
+}
+
+#nav-right div {
+  display: flex;
+  align-items: center;
+}
+
+#cart-num {
+  /* background-color: purple; */
+  height: 200px;
+  width: 200px;
+  background-image: url('https://media.istockphoto.com/vectors/green-shopping-trolley-cart-icon-vector-vector-id898475762?k=6&m=898475762&s=170667a&w=0&h=PJX4WGXuwaEwdOOdS4lzEGx3XoFsdgnjiu4B-dm_7X0=');
+  background-size: 50% auto;
 }

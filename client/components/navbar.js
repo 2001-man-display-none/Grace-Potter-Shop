@@ -7,38 +7,35 @@ import {logout} from '../store'
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <nav>
-      <div id="navbar">
-        <div>
-          <div id="logo">
-            <img src="../../public/gp-home.png" />
-            <h3>Grace Potter</h3>
-          </div>
+      <div id="nav-left">
+        <div id="logo">
+          <img src="../../public/gp-home.png" />
+          <h3>Grace Potter</h3>
         </div>
         <div>
           <h4>Category</h4>
         </div>
+      </div>
+      <div id="nav-right">
+        {isLoggedIn ? (
+          <div>
+            {/* The navbar will show these links after you log in */}
+            <Link to="/home">Home</Link>
+            <a href="#" onClick={handleClick}>
+              Logout
+            </a>
+          </div>
+        ) : (
+          <div>
+            {/* The navbar will show these links before you log in */}
+            <Link to="/login">Login</Link>
+            <h5>or</h5>
+            <Link to="/signup">Sign Up</Link>
+          </div>
+        )}
         <div>
-          {isLoggedIn ? (
-            <div>
-              {/* The navbar will show these links after you log in */}
-              <Link to="/home">Home</Link>
-              <a href="#" onClick={handleClick}>
-                Logout
-              </a>
-            </div>
-          ) : (
-            <div>
-              {/* The navbar will show these links before you log in */}
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Sign Up</Link>
-            </div>
-          )}
-        </div>
-        <div>
-          {/* <Link to={`/users/${this.props.userId}/cart`} /> */}
-          {/* <img src="" /> */}
-          <h7>#</h7>
-          <h4>Cart</h4>
+          <h6 id="cart-num">#</h6>
+          <Link to="/cart">Cart</Link>
         </div>
       </div>
     </nav>
@@ -52,7 +49,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    userId: 'TO UPDATE'
+    userId: state.user.id
   }
 }
 
