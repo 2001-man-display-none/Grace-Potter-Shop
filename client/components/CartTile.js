@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 //make into class to keep subtotal as local state
 
@@ -48,4 +49,6 @@ const CartTile = props => {
   )
 }
 
-export default CartTile
+const ConnectedCartTile = connect(mapState, mapDispatch)(CartTile)
+
+export default ConnectedCartTile

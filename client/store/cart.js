@@ -1,10 +1,16 @@
 import axios from 'axios'
 
 const GOT_CART = 'GOT_CART'
+const DELETE_ITEM = 'DELETE_ITEM'
 
 export const gotCart = products => ({
-  type: 'GOT_CART',
+  type: GOT_CART,
   products
+})
+
+export const deleteItem = id => ({
+  type: DELETE_ITEM,
+  id
 })
 
 export const fetchCart = () => {
@@ -19,6 +25,18 @@ export const fetchCart = () => {
   }
 }
 
+export const deleteItemThunk = productId => {
+  return async (dispatch, getState) => {
+    try {
+      const state = getState()
+      await axios.delete(`api/users/${state.user.id}/cart/${productId}`)
+      dispatch(deleteItem(productId))
+    } catch (error) {
+      console.log('Delete Thunk went wrong')
+    }
+  }
+}
+
 // INITIAL STATE
 export const initialState = {
   products: []
@@ -29,6 +47,12 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_CART:
       return {...state, products: action.products}
+    case DELETE_ITEM: {
+      const remainingItems = state.products.filter(
+        item => item.id !== action.id
+      )
+      return {...state, products: remainingItems}
+    }
     default:
       return state
   }

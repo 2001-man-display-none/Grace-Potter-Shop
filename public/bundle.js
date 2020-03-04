@@ -137,6 +137,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+
 
  //make into class to keep subtotal as local state
 
@@ -169,7 +171,8 @@ var CartTile = function CartTile(props) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Subtotal"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "$$$$")));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (CartTile);
+var ConnectedCartTile = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapState, mapDispatch)(CartTile);
+/* harmony default export */ __webpack_exports__["default"] = (ConnectedCartTile);
 
 /***/ }),
 
@@ -952,13 +955,15 @@ socket.on('connect', function () {
 /*!******************************!*\
   !*** ./client/store/cart.js ***!
   \******************************/
-/*! exports provided: gotCart, fetchCart, initialState, default */
+/*! exports provided: gotCart, deleteItem, fetchCart, deleteItemThunk, initialState, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gotCart", function() { return gotCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItem", function() { return deleteItem; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCart", function() { return fetchCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteItemThunk", function() { return deleteItemThunk; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialState", function() { return initialState; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
@@ -974,10 +979,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var GOT_CART = 'GOT_CART';
+var DELETE_ITEM = 'DELETE_ITEM';
 var gotCart = function gotCart(products) {
   return {
-    type: 'GOT_CART',
+    type: GOT_CART,
     products: products
+  };
+};
+var deleteItem = function deleteItem(id) {
+  return {
+    type: DELETE_ITEM,
+    id: id
   };
 };
 var fetchCart = function fetchCart() {
@@ -1019,6 +1031,43 @@ var fetchCart = function fetchCart() {
       };
     }()
   );
+};
+var deleteItemThunk = function deleteItemThunk(productId) {
+  return (/*#__PURE__*/function () {
+      var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(dispatch, getState) {
+        var state;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                state = getState();
+                _context2.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_0___default.a["delete"]("api/users/".concat(state.user.id, "/cart/").concat(productId));
+
+              case 4:
+                dispatch(deleteItem(productId));
+                _context2.next = 10;
+                break;
+
+              case 7:
+                _context2.prev = 7;
+                _context2.t0 = _context2["catch"](0);
+                console.log('Delete Thunk went wrong');
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 7]]);
+      }));
+
+      return function (_x3, _x4) {
+        return _ref3.apply(this, arguments);
+      };
+    }()
+  );
 }; // INITIAL STATE
 
 var initialState = {
@@ -1034,6 +1083,16 @@ var initialState = {
       return _objectSpread({}, state, {
         products: action.products
       });
+
+    case DELETE_ITEM:
+      {
+        var remainingItems = state.products.filter(function (item) {
+          return item.id !== action.id;
+        });
+        return _objectSpread({}, state, {
+          products: remainingItems
+        });
+      }
 
     default:
       return state;
