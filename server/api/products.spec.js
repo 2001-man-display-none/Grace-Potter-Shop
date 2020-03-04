@@ -27,4 +27,26 @@ describe('Product routes', () => {
       expect(res.body[0].name).to.be.equal('catctus')
     })
   })
+
+  describe('/api/products/:productId', () => {
+    beforeEach(() => {
+      return Product.create({
+        id: 2,
+        name: 'catctus',
+        description: "it's a cat *and* a cactus!",
+        price: 11.99
+      })
+    })
+
+    it('GET /api/products/:productId', async () => {
+      const res = await request(app)
+        .get('/api/products/2')
+        .expect(200)
+      console.log(res.body)
+      expect(res.body).to.be.an('object')
+      expect(res.body.name).to.be.equal('catctus')
+      expect(res.body.description).to.be.equal("it's a cat *and* a cactus!")
+      expect(res.body.price).to.be.equal('11.99')
+    })
+  })
 })

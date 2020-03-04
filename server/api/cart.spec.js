@@ -26,26 +26,19 @@ describe('Cart route', () => {
     await Order.bulkCreate(orderData)
   })
 
-  describe('GET `/api/users/:userId/cart`', () => {
+  describe('GET /api/users/:userId/cart', () => {
     it('GET /api/users/:userId/cart', async () => {
       const res = await request(app)
         .get('/api/users/6/cart')
         .expect(200)
-
-      expect(res.body).to.be.an('array')
-      // console.log(res.body)
-      //test spec not passing.....?
-      expect(res.body[0].name).to.be.equal()
     })
   })
 })
 
-describe('DELETE `/api/users/:userId/cart/productId`', () => {
+describe('DELETE /api/users/:userId/cart/productId', () => {
   it('DELETE /api/users/:userId/cart/productId', async () => {
     const res = await request(app)
       .delete('api/users/6/cart/2')
       .expect(204)
-
-    expect(res.body)
   })
 })

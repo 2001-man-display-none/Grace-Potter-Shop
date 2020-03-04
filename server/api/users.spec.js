@@ -6,7 +6,7 @@ const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
 
-xdescribe('User routes', () => {
+describe('User routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
@@ -16,6 +16,7 @@ xdescribe('User routes', () => {
 
     beforeEach(() => {
       return User.create({
+        name: 'Cody',
         email: codysEmail
       })
     })

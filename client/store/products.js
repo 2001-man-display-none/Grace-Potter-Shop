@@ -1,8 +1,8 @@
 import axios from 'axios'
 
 // ACTION TYPES
-export const GOT_PRODUCTS = 'GOT_PRODUCTS'
-export const GOT_ERROR = 'GOT_ERROR'
+const GOT_PRODUCTS = 'GOT_PRODUCTS'
+const GOT_ERROR = 'GOT_ERROR'
 
 // ACTION CREATORS
 export const gotProducts = products => ({
@@ -10,7 +10,7 @@ export const gotProducts = products => ({
   products
 })
 
-const gotError = (error, failedAction) => ({
+export const gotError = (error, failedAction) => ({
   type: GOT_ERROR,
   error,
   failedAction
@@ -33,7 +33,6 @@ export const initialState = {
 }
 
 // REDUCER
-
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_PRODUCTS:
