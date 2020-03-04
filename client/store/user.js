@@ -30,17 +30,46 @@ export const me = () => async dispatch => {
   }
 }
 
-export const auth = (email, password, method) => async dispatch => {
+export const login = (
+  email,
+  password,
+  redirect = '/home'
+) => async dispatch => {
   let res
   try {
-    res = await axios.post(`/auth/${method}`, {email, password})
+    res = await axios.post(`/auth/login`, {email, password})
   } catch (authError) {
     return dispatch(getUser({error: authError}))
   }
 
   try {
     dispatch(getUser(res.data))
-    history.push('/home')
+    if (redirect) {
+      history.push(redirect)
+    }
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
+  }
+}
+
+export const signup = (
+  name,
+  email,
+  password,
+  redirect = '/home'
+) => async dispatch => {
+  let res
+  try {
+    res = await axios.post(`/auth/signup`, {name, email, password})
+  } catch (authError) {
+    return dispatch(getUser({error: authError}))
+  }
+
+  try {
+    dispatch(getUser(res.data))
+    if (redirect) {
+      history.push(redirect)
+    }
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
@@ -59,7 +88,7 @@ export const logout = () => async dispatch => {
 /**
  * REDUCER
  */
-export default function(state = defaultUser, action) {
+const userReducer = (state = defaultUser, action) => {
   switch (action.type) {
     case GET_USER:
       return action.user
@@ -69,3 +98,5 @@ export default function(state = defaultUser, action) {
       return state
   }
 }
+
+export default userReducer
