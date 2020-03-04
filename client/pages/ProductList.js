@@ -12,7 +12,7 @@ export class ProductList extends React.Component {
       case 'loading':
         return <div>loading...</div>
       case 'error':
-        return <div>sadface...</div>
+        return <div>Couldn't load products. Try again later.</div>
       case 'done':
         return (
           <div>
