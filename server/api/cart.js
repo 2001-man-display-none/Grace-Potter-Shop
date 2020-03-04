@@ -31,3 +31,20 @@ router.get('/', async (req, res, next) => {
     next(error)
   }
 })
+
+//deleted button needs productId passed through
+router.delete('/:productId', async (req, res, next) => {
+  try {
+    const item = await OrderItem.findAll({
+      where: {
+        productId: req.params.productId,
+        orderId: req.params.orderId
+      }
+    })
+    if (!item) return res.sendStatus(404)
+    await item.destroy()
+    res.sendStatus(204)
+  } catch (error) {
+    next(error)
+  }
+})
