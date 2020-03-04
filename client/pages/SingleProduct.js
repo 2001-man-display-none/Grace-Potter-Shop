@@ -47,7 +47,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-const singleProductConnect = connect(mapStateToProps, mapDispatchToProps)(
+const SingleProductConnect = connect(mapStateToProps, mapDispatchToProps)(
   SingleProduct
 )
-export default singleProductConnect
+export default SingleProductConnect
