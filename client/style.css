@@ -1,0 +1,149 @@
+@import url('~normalize.css/normalize.css');
+
+/* general styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* navbar styles */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(197, 233, 197);
+  padding: 5px;
+}
+
+nav > div:not(:first-child) {
+  padding: 0 12px;
+}
+
+nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: block;
+  margin: 0;
+  padding: 0 12px;
+}
+
+#logo {
+  padding: 0 4px;
+  display: flex;
+  align-content: flex-end;
+}
+
+#logo img {
+  height: 60px;
+}
+
+.nav-left {
+  display: flex;
+}
+
+.nav-center {
+  flex: 1;
+  display: flex;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.nav-right div {
+  display: flex;
+  align-items: center;
+}
+
+/* forms (just login/signup for now) */
+
+form > div {
+  margin: 1em;
+  display: block;
+}
+
+label {
+  display: block;
+}
+
+/* cart stuff? */
+
+.cart-info {
+  position: relative;
+  height: 40px;
+  width: 40px;
+}
+
+.cart-icon {
+  /* background-color: purple; */
+  width: 100%;
+  height: 100%;
+  background-image: url('https://media.istockphoto.com/vectors/green-shopping-trolley-cart-icon-vector-vector-id898475762?k=6&m=898475762&s=170667a&w=0&h=PJX4WGXuwaEwdOOdS4lzEGx3XoFsdgnjiu4B-dm_7X0=');
+  background-size: 100%;
+  text-align: center;
+}
+
+.cart-num {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#cart-tile {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  border-top: 2px lightgray solid;
+  margin-bottom: 10px;
+}
+
+#subtotal {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2px lightgray solid;
+}
+
+#subtotal h3 {
+  margin-left: 25px;
+}
+
+#cart-price {
+  display: flex;
+}
+
+#cart-price p {
+  margin-left: 10px;
+}
+
+/* products page stuff */
+
+.product-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.product-card {
+  width: 200px;
+  padding: 20px;
+}
+
+.product-card img {
+  width: 100%;
+}
