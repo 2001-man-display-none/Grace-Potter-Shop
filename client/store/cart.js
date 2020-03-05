@@ -26,7 +26,6 @@ export const deleteItemThunk = productId => {
       const {data} = await axios.delete(
         `api/users/${state.user.id}/cart/${productId}`
       )
-      console.log(data)
       dispatch(gotCart(data))
     } catch (error) {
       console.log('Delete Thunk went wrong')
