@@ -8,7 +8,7 @@ const Order = db.model('order')
 // const Product = db.model('product')
 // const OrderItem = db.model('orderItem')
 
-describe('Cart route', () => {
+xdescribe('Cart route', () => {
   // let storedCart
 
   const orderData = [
@@ -40,7 +40,7 @@ describe('Cart route', () => {
   })
 })
 
-describe('DELETE `/api/users/:userId/cart/productId`', () => {
+xdescribe('DELETE `/api/users/:userId/cart/productId`', () => {
   it('DELETE /api/users/:userId/cart/productId', async () => {
     const res = await request(app)
       .delete('api/users/6/cart/2')

@@ -45,7 +45,7 @@ const Navbar = ({handleClick, isLoggedIn, numOfItemsInCart}) => (
         )}
         <div>
           <div className="cart-info">
-            <div className="cart-icon"></div>
+            <div className="cart-icon" />
             <div className="cart-num">{numOfItemsInCart}</div>
           </div>
           <Link to="/cart">Cart</Link>
