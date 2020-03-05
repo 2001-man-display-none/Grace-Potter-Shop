@@ -18,9 +18,9 @@ Order.prototype.setQuantity = function(product, quantity) {
   }
 }
 
-Order.prototype.getQuantities = function(options) {
+Order.prototype.getQuantities = function(options = {}) {
   const mergedOptions = {
-    ...(options || {}),
+    ...options,
     through: {attributes: ['quantity']}
   }
   return this.getProducts(mergedOptions)
