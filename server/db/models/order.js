@@ -9,4 +9,21 @@ const Order = db.define('order', {
   }
 })
 
+Order.prototype.setQuantity = function(product, quantity) {
+  // const OrderItem = db.model('order_item')
+  if (quantity > 0) {
+    return this.addProduct(product, {through: {quantity}})
+  } else {
+    return this.removeProduct(product)
+  }
+}
+
+Order.prototype.getQuantities = function(options) {
+  const mergedOptions = {
+    ...(options || {}),
+    joinTableAttributes: ['quantity']
+  }
+  return this.getProducts(mergedOptions)
+}
+
 module.exports = Order
