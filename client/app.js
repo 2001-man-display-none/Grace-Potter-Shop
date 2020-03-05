@@ -1,9 +1,12 @@
 import React from 'react'
-import {Navbar} from './components'
-import Routes from './routes'
 import {Route} from 'react-router-dom'
+
+import Routes from './routes'
+import {Navbar} from './components'
 import SingleProductConnect from './pages/SingleProduct'
 import ConnectedProductList from './pages/ProductList'
+
+import './style.css'
 
 const App = () => {
   return (

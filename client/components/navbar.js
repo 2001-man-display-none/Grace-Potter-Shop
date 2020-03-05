@@ -6,16 +6,16 @@ import {logout} from '../store/user'
 const Navbar = ({handleClick, isLoggedIn, numOfItemsInCart}) => (
   <div>
     <nav>
-      <div id="nav-left">
+      <div className="nav-left">
         <div id="logo">
-          <img src="../../public/gp-home.png" />
+          <img src="/gp-home.png" />
           <h3>Grace Potter</h3>
         </div>
-        <div>
-          <h4>Category</h4>
-        </div>
       </div>
-      <div id="nav-right">
+      <div className="nav-center">
+        <h4>Category</h4>
+      </div>
+      <div className="nav-right">
         {isLoggedIn ? (
           <div>
             {/* The navbar will show these links after you log in */}
@@ -27,8 +27,7 @@ const Navbar = ({handleClick, isLoggedIn, numOfItemsInCart}) => (
         ) : (
           <div>
             {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <h5>or</h5>
+            <Link to="/login">Login</Link> <span>or</span>{' '}
             <Link to="/signup">Sign Up</Link>
           </div>
         )}
@@ -38,7 +37,6 @@ const Navbar = ({handleClick, isLoggedIn, numOfItemsInCart}) => (
         </div>
       </div>
     </nav>
-    <hr />
   </div>
 )
 
