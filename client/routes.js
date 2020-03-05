@@ -18,7 +18,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {loggedIn} = this.props
+    const loggedIn = this.props.isLoggedIn
     const guest = !loggedIn
 
     // You might be wondering why we haave to repeat the guest / loggedIn
