@@ -21,7 +21,7 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    const user = await User.findByPk(req.params.userId)
+    const user = req.user
     const productId = req.params.productId
     if (user) {
       const userCart = await user.getCart()
@@ -61,7 +61,7 @@ router.post('/checkout', async (req, res, next) => {
     const newOrder = await Order.findByPk(order.id, {
       include: [{model: Product}]
     })
-    console.log(newOrder)
+
     res.status(201).json(newOrder)
   } catch (error) {
     next(error)
