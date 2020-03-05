@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import {GET_USER, REMOVE_USER} from './user'
 
 const GOT_CART = 'GOT_CART'
 const LATEST_ORDER = 'LATEST_ORDER'
@@ -61,6 +62,11 @@ export default function(state = initialState, action) {
       return {...state, products: action.products}
     case LATEST_ORDER:
       return {...state, products: [], latestOrder: action.order}
+    case GET_USER:
+      return state
+    case REMOVE_USER:
+      console.log('removed user you logged out')
+      return {...state, products: []}
     default:
       return state
   }

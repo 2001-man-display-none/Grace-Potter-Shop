@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {login} from '../store/user'
+import {fetchCart} from '../store/cart'
 
 /**
  * COMPONENT
@@ -44,7 +45,7 @@ const mapDispatch = dispatch => {
       evt.preventDefault()
       const email = evt.target.email.value
       const password = evt.target.password.value
-      dispatch(login(email, password))
+      dispatch(login(email, password)).then(() => dispatch(fetchCart()))
     }
   }
 }
