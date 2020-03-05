@@ -400,9 +400,7 @@ var Navbar = function Navbar(_ref) {
     id: "nav-left"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "logo"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    src: "../../public/gp-home.png"
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Grace Potter")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Category"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Grace Potter")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Category"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     id: "nav-right"
   }, isLoggedIn ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: "/home"

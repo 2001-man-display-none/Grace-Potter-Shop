@@ -22,6 +22,10 @@ form div {
 #logo {
   display: flex;
   align-content: flex-end;
+  height: 50px;
+  width: 50px;
+  background-image: url(https://cdn.clipart.email/85295a07f41c80ce5e468f8630629fb3_pink-flower-pot-clipart_300-300.jpeg);
+  background-size: 100%;
 }
 
 #nav-left {

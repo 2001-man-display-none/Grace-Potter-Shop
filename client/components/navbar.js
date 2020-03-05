@@ -8,7 +8,6 @@ const Navbar = ({handleClick, isLoggedIn, numOfItemsInCart}) => (
     <nav>
       <div id="nav-left">
         <div id="logo">
-          <img src="../../public/gp-home.png" />
           <h3>Grace Potter</h3>
         </div>
         <div>
