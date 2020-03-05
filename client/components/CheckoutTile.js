@@ -5,7 +5,7 @@ import {deleteItemThunk} from '../store/cart'
 
 //make into class to keep subtotal as local state
 
-const CartTile = props => {
+const CheckoutTile = props => {
   return (
     <div>
       <div id="cart">
@@ -18,28 +18,17 @@ const CartTile = props => {
             </div>
             <div>
               <Link to={`/items/${item.id}`}>
-                <h2>{item.name}</h2>
+                <h3>{item.name}</h3>
               </Link>
-              {/* <p>{item.description}</p> */}
-              <p>${item.price}</p>
             </div>
             <div>
               <div>
                 <span>Quantity: # {item.quantity}</span>
               </div>
-              <div>
-                <button type="button">+</button>
-                <button type="button">-</button>
-              </div>
               <div id="cart-price">
-                <p>Total:</p>
-                <p>${item.price * 2}</p>
+                <p>Subtotal: ${item.price * 2} </p>
               </div>
-              <div>
-                <button type="button" onClick={() => props.deleteItem(item.id)}>
-                  Remove item from cart
-                </button>
-              </div>
+              <div></div>
             </div>
           </div>
         ))}
@@ -52,6 +41,6 @@ const mapDispatch = dispatch => ({
   deleteItem: id => dispatch(deleteItemThunk(id))
 })
 
-const ConnectedCartTile = connect(null, mapDispatch)(CartTile)
+const ConnectedCheckoutTile = connect(null, mapDispatch)(CheckoutTile)
 
-export default ConnectedCartTile
+export default ConnectedCheckoutTile

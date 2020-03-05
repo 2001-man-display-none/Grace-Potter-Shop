@@ -1,10 +1,16 @@
 import axios from 'axios'
 
 const GOT_CART = 'GOT_CART'
+const LATEST_ORDER = 'LATEST_ORDER'
 
 export const gotCart = products => ({
   type: GOT_CART,
   products
+})
+
+export const latestOrder = order => ({
+  type: LATEST_ORDER,
+  order
 })
 
 export const fetchCart = () => {
@@ -15,6 +21,18 @@ export const fetchCart = () => {
       dispatch(gotCart(data))
     } catch (error) {
       console.log('Something went wrong')
+    }
+  }
+}
+
+export const updateState = (redirect = '/confirmation') => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/cart/checkout')
+      dispatch(latestOrder(data))
+      history.pushState(redirect)
+    } catch (error) {
+      console.log(error)
     }
   }
 }
@@ -35,7 +53,8 @@ export const deleteItemThunk = productId => {
 
 // INITIAL STATE
 export const initialState = {
-  products: []
+  products: [],
+  latestOrder: {}
 }
 
 // REDUCER
@@ -43,6 +62,8 @@ export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_CART:
       return {...state, products: action.products}
+    case LATEST_ORDER:
+      return {...state, products: [], latestOrder: action.order}
     default:
       return state
   }

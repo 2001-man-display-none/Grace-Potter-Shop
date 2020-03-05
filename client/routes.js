@@ -8,7 +8,8 @@ import {Login, Signup, UserHome} from './components'
 import Cart from './pages/Cart'
 import SingleProduct from './pages/SingleProduct'
 import ProductList from './pages/ProductList'
-
+import Checkout from './pages/Checkout'
+import OrderConfirmation from './pages/OrderConfirmation'
 /**
  * COMPONENT
  */
@@ -34,6 +35,10 @@ class Routes extends Component {
         {/* Routes for logged in users only */}
         {loggedIn && <Route path="/home" component={UserHome} />}
         {loggedIn && <Route path="/cart" component={Cart} />}
+        {loggedIn && <Route path="/checkout" component={Checkout} />}
+        {loggedIn && (
+          <Route path="/confirmation" component={OrderConfirmation} />
+        )}
         )}
         {/* Displays our product list as a fallback */}
         <Route component={ProductList} />
