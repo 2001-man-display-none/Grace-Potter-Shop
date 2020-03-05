@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchCart, updateState} from '../store/cart'
+import {fetchCart, checkout} from '../store/cart'
 import {Link} from 'react-router-dom'
 import ConnectedCheckoutTile from '../components/CheckoutTile'
 
@@ -18,7 +18,7 @@ class Checkout extends React.Component {
           <button
             type="button"
             onClick={() => {
-              this.props.updateState(this.props.user.id)
+              this.props.checkout()
             }}
           >
             Confirm Order
@@ -45,7 +45,7 @@ const stateProps = state => ({
 
 const dispatchProps = dispatch => ({
   fetchCart: () => dispatch(fetchCart()),
-  updateState: id => dispatch(updateState(id))
+  checkout: id => dispatch(checkout(id))
 })
 
 const ConnectedCheckout = connect(stateProps, dispatchProps)(Checkout)

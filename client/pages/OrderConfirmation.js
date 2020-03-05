@@ -7,6 +7,7 @@ class OrderConfirmation extends React.Component {
   componentDidMount() {
     this.props.fetchCart()
   }
+
   render() {
     return (
       <div>
@@ -15,8 +16,12 @@ class OrderConfirmation extends React.Component {
           <img id="check-mark" src="/green-check-mark.png"></img>
           <h2> Your order is confirmed!</h2>
         </div>
-        <p>Thanks for shopping at Grace Potter. Your order is on the way! </p>
-        {this.props.cartItems.map(item => (
+        <p>
+          Thanks for shopping at Grace Potter. Your confirmation number is:
+          {this.props.order.id}. Your order is on the way!
+        </p>
+
+        {this.props.order.products.map(item => (
           <div key={item.id} id="confirmation-tile">
             <ul>
               {/* <img src={item.image}></img> */}
@@ -36,7 +41,7 @@ class OrderConfirmation extends React.Component {
 
 const stateProps = state => ({
   user: state.user,
-  cartItems: state.cart.products
+  order: state.cart.latestOrder
 })
 
 const dispatchProps = dispatch => ({

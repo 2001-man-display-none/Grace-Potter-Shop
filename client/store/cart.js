@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 const GOT_CART = 'GOT_CART'
 const LATEST_ORDER = 'LATEST_ORDER'
@@ -14,10 +15,9 @@ export const latestOrder = order => ({
 })
 
 export const fetchCart = () => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     try {
-      const state = getState()
-      const {data} = await axios.get(`api/users/${state.user.id}/cart`)
+      const {data} = await axios.get('/api/cart')
       dispatch(gotCart(data))
     } catch (error) {
       console.log('Something went wrong')
@@ -25,12 +25,12 @@ export const fetchCart = () => {
   }
 }
 
-export const updateState = (redirect = '/confirmation') => {
+export const checkout = (redirect = '/confirmation') => {
   return async dispatch => {
     try {
       const {data} = await axios.post('/api/cart/checkout')
       dispatch(latestOrder(data))
-      history.pushState(redirect)
+      history.push(redirect)
     } catch (error) {
       console.log(error)
     }
@@ -38,12 +38,9 @@ export const updateState = (redirect = '/confirmation') => {
 }
 
 export const deleteItemThunk = productId => {
-  return async (dispatch, getState) => {
+  return async dispatch => {
     try {
-      const state = getState()
-      const {data} = await axios.delete(
-        `api/users/${state.user.id}/cart/${productId}`
-      )
+      const {data} = await axios.delete(`/api/cart/${productId}`)
       dispatch(gotCart(data))
     } catch (error) {
       console.log('Delete Thunk went wrong')
