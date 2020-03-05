@@ -9,13 +9,67 @@ a {
 label {
   display: block;
 }
-
-nav a {
-  display: inline-block;
-  margin: 1em;
+nav {
+  display: flex;
+  justify-content: space-between;
 }
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+#logo {
+  display: flex;
+  align-content: flex-end;
+}
+
+#nav-left {
+  display: flex;
+}
+
+#nav-right {
+  display: flex;
+  align-items: center;
+}
+
+#nav-right div {
+  display: flex;
+  align-items: center;
+}
+
+#cart-num {
+  /* background-color: purple; */
+  height: 50px;
+  width: 50px;
+  background-image: url('https://media.istockphoto.com/vectors/green-shopping-trolley-cart-icon-vector-vector-id898475762?k=6&m=898475762&s=170667a&w=0&h=PJX4WGXuwaEwdOOdS4lzEGx3XoFsdgnjiu4B-dm_7X0=');
+  background-size: 100%;
+  text-align: center;
+}
+
+#cart-tile {
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  border-top: 2px lightgray solid;
+  margin-bottom: 10px;
+}
+
+#subtotal {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 2px lightgray solid;
+}
+
+#subtotal h3 {
+  margin-left: 25px;
+}
+
+#cart-price {
+  display: flex;
+}
+
+#cart-price p {
+  margin-left: 10px;
 }
