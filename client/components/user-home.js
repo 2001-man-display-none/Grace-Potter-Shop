@@ -1,17 +1,21 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {fetchCart} from '../store/cart'
 
 /**
  * COMPONENT
  */
-export const UserHome = props => {
-  const {name} = props
-
-  return (
-    <div>
-      <h3>Welcome, {name}!</h3>
-    </div>
-  )
+class UserHome extends React.Component {
+  componentDidMount() {
+    this.props.fetchCart()
+  }
+  render() {
+    return (
+      <div>
+        <h3>Welcome, {this.props.name}!</h3>
+      </div>
+    )
+  }
 }
 
 /**
@@ -24,4 +28,8 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+const mapDispatch = dispatch => ({
+  fetchCart: () => dispatch(fetchCart())
+})
+
+export default connect(mapState, mapDispatch)(UserHome)
