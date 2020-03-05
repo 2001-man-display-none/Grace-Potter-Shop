@@ -25,9 +25,14 @@ router.delete('/:productId', async (req, res, next) => {
     const order = await Order.findOne({
       where: {userId: req.params.userId, status: 'pending'}
     })
+
     await order.removeProduct(product)
 
-    res.sendStatus(204)
+    const newOrder = await Order.findOne({
+      where: {userId: req.params.userId, status: 'pending'},
+      include: [{model: Product, order: [['createAt', 'DESC']]}]
+    })
+    res.json(newOrder.products).status(204)
   } catch (error) {
     next(error)
   }

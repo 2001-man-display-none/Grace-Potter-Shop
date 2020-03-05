@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import CartTile from '../components/CartTile'
+import ConnectedCartTile from '../components/CartTile'
 import {fetchCart} from '../store/cart'
 
 class Cart extends React.Component {
@@ -11,7 +11,7 @@ class Cart extends React.Component {
     return (
       <div>
         <h1>Your Shopping Cart</h1>
-        <CartTile cartItems={this.props.cartItems} />
+        <ConnectedCartTile cartItems={this.props.cartItems} />
       </div>
     )
   }
