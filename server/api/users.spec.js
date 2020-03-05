@@ -6,12 +6,12 @@ const db = require('../db')
 const app = require('../index')
 const User = db.model('user')
 
-describe.only('User routes', () => {
+describe('User routes', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
 
-  describe('admin-only routes', () => {
+  describe('admin-only user routes', () => {
     let cody
     let admin
 
@@ -38,7 +38,7 @@ describe.only('User routes', () => {
       })
     })
 
-    describe('/api/users/', () => {
+    describe('GET /api/users', () => {
       it("doesn't work for guests", async () => {
         const res = await request(app)
           .get('/api/users')

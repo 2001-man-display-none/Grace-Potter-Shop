@@ -49,7 +49,7 @@ router.delete('/:productId', adminsOnly, async (req, res, next) => {
   }
 })
 
-router.put('/:product', adminsOnly, async (req, res, next) => {
+router.put('/:productId', adminsOnly, async (req, res, next) => {
   try {
     let productId = req.params.productId
     let product = await Product.findByPk(productId)
