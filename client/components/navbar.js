@@ -6,38 +6,52 @@ import {logout} from '../store/user'
 const Navbar = ({handleClick, isLoggedIn, numOfItemsInCart}) => (
   <div>
     <nav>
-      <div id="nav-left">
-        <div id="logo">
+      <ul className="nav-left">
+        <li id="logo">
+          <img className="logo" src="/gp-home.png" />
+        </li>
+        <li>
           <h3>Grace Potter</h3>
-        </div>
-        <div>
-          <h4>Category</h4>
-        </div>
-      </div>
-      <div id="nav-right">
+        </li>
+      </ul>
+      <ul className="nav-center">
+        <li>
+          <Link to="/products">Products</Link>
+        </li>
+      </ul>
+      <ul className="nav-right">
         {isLoggedIn ? (
-          <div>
+          <>
             {/* The navbar will show these links after you log in */}
-            <Link to="/home">Home</Link>
-            <a href="#" onClick={handleClick}>
-              Logout
-            </a>
-          </div>
+            <li>
+              <Link to="/home">Home</Link>
+            </li>
+            <li>
+              <a href="#" onClick={handleClick}>
+                Logout
+              </a>
+            </li>
+          </>
         ) : (
-          <div>
+          <>
             {/* The navbar will show these links before you log in */}
-            <Link to="/login">Login</Link>
-            <h5>or</h5>
-            <Link to="/signup">Sign Up</Link>
-          </div>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Sign Up</Link>
+            </li>
+          </>
         )}
         <div>
-          <h3 id="cart-num">{numOfItemsInCart}</h3>
+          <div className="cart-info">
+            <div className="cart-icon" />
+            <div className="cart-num">{numOfItemsInCart}</div>
+          </div>
           <Link to="/cart">Cart</Link>
         </div>
-      </div>
+      </ul>
     </nav>
-    <hr />
   </div>
 )
 

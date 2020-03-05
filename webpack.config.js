@@ -1,3 +1,6 @@
+const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -7,8 +10,8 @@ module.exports = {
     './client/index.js'
   ],
   output: {
-    path: __dirname,
-    filename: './public/bundle.js'
+    path: path.join(__dirname, 'public'),
+    filename: 'bundle.js'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -17,12 +20,28 @@ module.exports = {
   watchOptions: {
     ignored: /node_modules/
   },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'style.css'
+    })
+  ],
   module: {
     rules: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loader: 'babel-loader'
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {hmr: isDev, reloadAll: true}
+          },
+          'css-loader'
+        ]
       }
     ]
   }
