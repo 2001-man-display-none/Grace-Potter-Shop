@@ -3,14 +3,14 @@ import {Link} from 'react-router-dom'
 
 const ProductTile = props => {
   return (
-    <div>
+    <div className="product-list">
       {props.products.map(product => (
-        <div key={product.id}>
+        <div key={product.id} className="product-card">
           <Link to={`/products/${product.id}`}>
-            <img src={product.image} width="200" height="200" />
+            <img src={product.image} />
             <h2>{product.name}</h2>
           </Link>
-          <p>${product.price}</p>
+          <p className="price">${product.price}</p>
         </div>
       ))}
     </div>
