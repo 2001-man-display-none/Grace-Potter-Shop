@@ -7,14 +7,10 @@
 
 body {
   font-family: sans-serif;
-  margin: 0;
 }
 
 a {
   text-decoration: none;
-}
-
-img {
 }
 
 /* navbar styles */
@@ -27,11 +23,24 @@ nav {
   padding: 5px;
 }
 
-nav > * {
-  /* margin: 4px 8px; */
+nav > div:not(:first-child) {
+  padding: 0 12px;
+}
+
+nav ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: block;
+  margin: 0;
+  padding: 0 12px;
 }
 
 #logo {
+  padding: 0 4px;
   display: flex;
   align-content: flex-end;
 }
@@ -59,11 +68,11 @@ nav > * {
   align-items: center;
 }
 
-/* forms (login/signup for now) */
+/* forms (just login/signup for now) */
 
-form div {
+form > div {
   margin: 1em;
-  display: inline-block;
+  display: block;
 }
 
 label {
@@ -72,13 +81,27 @@ label {
 
 /* cart stuff? */
 
-#cart-num {
+.cart-info {
+  position: relative;
+  height: 40px;
+  width: 40px;
+}
+
+.cart-icon {
   /* background-color: purple; */
-  height: 50px;
-  width: 50px;
+  width: 100%;
+  height: 100%;
   background-image: url('https://media.istockphoto.com/vectors/green-shopping-trolley-cart-icon-vector-vector-id898475762?k=6&m=898475762&s=170667a&w=0&h=PJX4WGXuwaEwdOOdS4lzEGx3XoFsdgnjiu4B-dm_7X0=');
   background-size: 100%;
   text-align: center;
+}
+
+.cart-num {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  font-weight: bold;
+  font-size: 20px;
 }
 
 #cart-tile {
@@ -106,4 +129,21 @@ label {
 
 #cart-price p {
   margin-left: 10px;
+}
+
+/* products page stuff */
+
+.product-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.product-card {
+  width: 200px;
+  padding: 20px;
+}
+
+.product-card img {
+  width: 100%;
 }

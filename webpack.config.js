@@ -36,7 +36,10 @@ module.exports = {
         test: /\.css$/,
         exclude: /node_modules/,
         use: [
-          {loader: MiniCssExtractPlugin.loader, options: {hmr: isDev}},
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {hmr: isDev, reloadAll: true}
+          },
           'css-loader'
         ]
       }
