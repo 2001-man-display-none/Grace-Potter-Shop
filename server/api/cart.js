@@ -32,6 +32,7 @@ router.put('/:productId', async (req, res, next) => {
     next(error)
   }
 })
+
 //deleted button needs productId passed through
 router.delete('/:productId', async (req, res, next) => {
   try {
