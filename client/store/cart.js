@@ -3,7 +3,7 @@ import axios from 'axios'
 const GOT_CART = 'GOT_CART'
 
 export const gotCart = products => ({
-  type: 'GOT_CART',
+  type: GOT_CART,
   products
 })
 
@@ -15,6 +15,20 @@ export const fetchCart = () => {
       dispatch(gotCart(data))
     } catch (error) {
       console.log('Something went wrong')
+    }
+  }
+}
+
+export const deleteItemThunk = productId => {
+  return async (dispatch, getState) => {
+    try {
+      const state = getState()
+      const {data} = await axios.delete(
+        `api/users/${state.user.id}/cart/${productId}`
+      )
+      dispatch(gotCart(data))
+    } catch (error) {
+      console.log('Delete Thunk went wrong')
     }
   }
 }
