@@ -44,9 +44,14 @@ const getOrCreateCart = async (req, options) => {
 
 router.get('/', async (req, res, next) => {
   try {
-    // const user = req.user
     const order = await getCart(req, {
-      include: [{model: Product, order: [['createAt', 'DESC']]}]
+      include: [
+        {
+          model: Product,
+          through: {attributes: ['quantity']},
+          order: [['createAt', 'DESC']]
+        }
+      ]
     })
 
     if (order) {
@@ -59,7 +64,6 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//deleted button needs productId passed through
 router.delete('/:productId', async (req, res, next) => {
   try {
     const order = await getCart(req)
@@ -84,11 +88,11 @@ router.delete('/:productId', async (req, res, next) => {
 
 router.post('/checkout', async (req, res, next) => {
   try {
-    // const user = req.user
     const order = await getCart(req)
     await order.update({status: 'fulfilled'})
     const newOrder = await Order.findByPk(order.id, {
-      include: [{model: Product}]
+      include: [{model: Product}],
+      through: {attributes: ['quantity']}
     })
     console.log(newOrder)
     res.status(201).json(newOrder)
