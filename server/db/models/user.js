@@ -49,12 +49,12 @@ User.prototype.correctPassword = function(candidatePwd) {
   return User.encryptPassword(candidatePwd, this.salt()) === this.password()
 }
 
-User.prototype.getCart = function(options) {
+User.prototype.getCart = function(options = {}) {
   const Order = db.model('order')
   const mergedOptions = {
-    ...(options || {}),
+    ...options,
     where: {
-      ...((options && options.where) || {}),
+      ...(options.where || {}),
       ...{status: 'pending', userId: this.id}
     }
   }
@@ -69,11 +69,11 @@ User.prototype.getOrCreateCart = async function() {
   return cart
 }
 
-User.prototype.getInvoices = function(options) {
+User.prototype.getInvoices = function(options = {}) {
   const mergedOptions = {
-    ...(options || {}),
+    ...options,
     where: {
-      ...((options && options.where) || {}),
+      ...(options.where || {}),
       ...{status: 'fulfilled'}
     }
   }
