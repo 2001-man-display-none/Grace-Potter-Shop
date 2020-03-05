@@ -1,5 +1,5 @@
 const router = require('express').Router({mergeParams: true})
-const {Order, Product} = require('../db/models')
+const {User, Order, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -18,6 +18,20 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const user = await User.findByPk(req.params.userId)
+    const productId = req.params.productId
+    if (user) {
+      const userCart = await user.getCart()
+      await userCart.setQuantity(productId, req.body)
+      const updatedCart = await userCart.getQuantities()
+      res.status(200).json(updatedCart)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
 //deleted button needs productId passed through
 router.delete('/:productId', async (req, res, next) => {
   try {
