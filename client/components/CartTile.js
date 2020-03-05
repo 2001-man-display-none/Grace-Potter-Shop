@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {deleteItemThunk} from '../store/cart'
 
 //make into class to keep subtotal as local state
 
@@ -35,7 +36,9 @@ const CartTile = props => {
                 <p>${item.price * 2}</p>
               </div>
               <div>
-                <button type="button">Remove item from cart</button>
+                <button type="button" onClick={() => props.deleteItem(item.id)}>
+                  Remove item from cart
+                </button>
               </div>
             </div>
           </div>
@@ -49,6 +52,10 @@ const CartTile = props => {
   )
 }
 
-const ConnectedCartTile = connect(mapState, mapDispatch)(CartTile)
+const mapDispatch = dispatch => ({
+  deleteItem: id => dispatch(deleteItemThunk(id))
+})
+
+const ConnectedCartTile = connect(null, mapDispatch)(CartTile)
 
 export default ConnectedCartTile

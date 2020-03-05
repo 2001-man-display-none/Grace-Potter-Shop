@@ -30,6 +30,7 @@ export const deleteItemThunk = productId => {
     try {
       const state = getState()
       await axios.delete(`api/users/${state.user.id}/cart/${productId}`)
+      console.log(productId)
       dispatch(deleteItem(productId))
     } catch (error) {
       console.log('Delete Thunk went wrong')
@@ -48,6 +49,7 @@ export default function(state = initialState, action) {
     case GOT_CART:
       return {...state, products: action.products}
     case DELETE_ITEM: {
+      console.log(state)
       const remainingItems = state.products.filter(
         item => item.id !== action.id
       )
