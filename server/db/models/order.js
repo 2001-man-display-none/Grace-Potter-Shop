@@ -39,4 +39,12 @@ Order.prototype.getQuantities = function(options = {}) {
   return this.getProducts(mergedOptions)
 }
 
+Order.findCartByPk = function(pk, options = {}) {
+  const mergedOptions = {
+    ...options,
+    where: {...(options.where || {}), status: 'pending'}
+  }
+  return Order.findByPk(pk, mergedOptions)
+}
+
 module.exports = Order

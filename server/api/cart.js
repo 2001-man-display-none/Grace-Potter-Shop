@@ -2,40 +2,9 @@ const router = require('express').Router({mergeParams: true})
 const {Order, Product} = require('../db/models')
 module.exports = router
 
-/// TODO: manage session cart on login/logout/signup
-
-const cartMiddleware = (req, res, next) => {
-  const user = req.user
-  if (user) {
-    req.getCart = opts => user.getCart(opts)
-    req.getOrCreateCart = opts => user.getOrCreateCart(opts)
-  } else {
-    req.getCart = (opts = {}) => {
-      if (req.session.cartId) {
-        return Order.findByPk(req.session.cartId, {
-          ...opts,
-          where: {...(opts.where || {}), status: 'pending'}
-        })
-      }
-    }
-    req.getOrCreateCart = async () => {
-      let cart = await req.getCart()
-      if (!cart) {
-        cart = await Order.create()
-      }
-      // eslint-disable-next-line require-atomic-updates
-      req.session.cartId = cart.id
-      return cart
-    }
-  }
-  next()
-}
-
-router.use(cartMiddleware)
-
 router.get('/', async (req, res, next) => {
   try {
-    const order = await req.getCart({
+    const order = await req.cart.get({
       include: [
         {
           model: Product,
@@ -57,7 +26,7 @@ router.get('/', async (req, res, next) => {
 
 router.post('/checkout', async (req, res, next) => {
   try {
-    const order = await req.getCart()
+    const order = await req.cart.get()
     await order.update({status: 'fulfilled'})
     const newOrder = await Order.findByPk(order.id, {
       include: [{model: Product}],
@@ -74,7 +43,7 @@ router.put('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
 
-    const cart = await req.getOrCreateCart()
+    const cart = await req.cart.getOrCreate()
     await cart.setQuantity(productId, req.body.quantity)
     const updatedCart = await cart.getQuantities()
 
@@ -88,7 +57,7 @@ router.post('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
 
-    const cart = await req.getOrCreateCart()
+    const cart = await req.cart.getOrCreate()
     const prevCount = await cart.getQuantity(productId)
     await cart.setQuantity(productId, prevCount + 1)
 
@@ -102,7 +71,7 @@ router.post('/:productId', async (req, res, next) => {
 
 router.delete('/:productId', async (req, res, next) => {
   try {
-    const order = await req.getCart()
+    const order = await req.cart.get()
     if (!order) {
       res.json([]).status(204)
       return
@@ -112,7 +81,7 @@ router.delete('/:productId', async (req, res, next) => {
 
     await order.removeProduct(product)
 
-    const newOrder = await req.getCart({
+    const newOrder = await req.cart.get({
       include: [{model: Product, order: [['createAt', 'DESC']]}]
     })
 

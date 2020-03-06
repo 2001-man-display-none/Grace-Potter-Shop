@@ -5,11 +5,14 @@ const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
 const SequelizeStore = require('connect-session-sequelize')(session.Store)
+const socketio = require('socket.io')
+
+const cartMiddleware = require('./cartMiddleware')
+
 const db = require('./db')
 const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 3000
 const app = express()
-const socketio = require('socket.io')
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -62,6 +65,9 @@ const createApp = () => {
   )
   app.use(passport.initialize())
   app.use(passport.session())
+
+  // add custom middleware for cart management
+  app.use(cartMiddleware)
 
   // auth and api routes
   app.use('/auth', require('./auth'))
