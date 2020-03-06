@@ -55,6 +55,21 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post('/checkout', async (req, res, next) => {
+  try {
+    const order = await req.getCart()
+    await order.update({status: 'fulfilled'})
+    const newOrder = await Order.findByPk(order.id, {
+      include: [{model: Product}],
+      through: {attributes: ['quantity']}
+    })
+
+    res.status(201).json(newOrder)
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
@@ -102,21 +117,6 @@ router.delete('/:productId', async (req, res, next) => {
     })
 
     res.json(newOrder.products).status(204)
-  } catch (error) {
-    next(error)
-  }
-})
-
-router.post('/checkout', async (req, res, next) => {
-  try {
-    const order = await req.getCart()
-    await order.update({status: 'fulfilled'})
-    const newOrder = await Order.findByPk(order.id, {
-      include: [{model: Product}],
-      through: {attributes: ['quantity']}
-    })
-
-    res.status(201).json(newOrder)
   } catch (error) {
     next(error)
   }
