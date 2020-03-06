@@ -28,17 +28,6 @@ export const fetchSingleProduct = productId => {
   }
 }
 
-export const addToCart = productId => {
-  return async dispatch => {
-    try {
-      const {data} = await axios.post(`/api/products/${productId}`)
-      dispatch(gotCart(data))
-    } catch (err) {
-      console.log('not able to add to cart', err)
-    }
-  }
-}
-
 export const singleProductReducer = (state = {}, action) => {
   switch (action.type) {
     case GOT_SINGLE_PRODUCT:

@@ -2,7 +2,6 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {deleteItemThunk, updateQty} from '../store/cart'
-import {render} from 'enzyme'
 
 class CartTile extends React.Component {
   constructor() {
@@ -80,7 +79,7 @@ class CartTile extends React.Component {
                 </div>
                 <div id="cart-price">
                   <p>Total:</p>
-                  <p>${item.price * 2}</p>
+                  <p>${(item.price * item.order_item.quantity).toFixed(2)}</p>
                 </div>
                 <div>
                   <button

@@ -23,10 +23,13 @@ const CheckoutTile = props => {
             </div>
             <div>
               <div>
-                <span>Quantity: # {item.quantity}</span>
+                <span>Quantity: #{item.order_item.quantity} </span>
               </div>
               <div id="cart-price">
-                <p>Subtotal: ${item.price * 2} </p>
+                <p>
+                  Subtotal: $
+                  {(item.price * item.order_item.quantity).toFixed(2)}{' '}
+                </p>
               </div>
               <div></div>
             </div>

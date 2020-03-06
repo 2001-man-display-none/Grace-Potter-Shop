@@ -29,17 +29,14 @@ class Routes extends Component {
         {/* Routes available to all visitors */}
         <Route exact path="/products" component={ProductList} />
         <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/confirmation" component={OrderConfirmation} />
         {/* Routes for guest visitors only */}
         {guest && <Route path="/login" component={Login} />}
         {guest && <Route path="/signup" component={Signup} />}
         {/* Routes for logged in users only */}
         {loggedIn && <Route path="/home" component={UserHome} />}
-        {loggedIn && <Route path="/cart" component={Cart} />}
-        {loggedIn && <Route path="/checkout" component={Checkout} />}
-        {loggedIn && (
-          <Route path="/confirmation" component={OrderConfirmation} />
-        )}
-        )}
         {/* Displays our product list as a fallback */}
         <Route component={ProductList} />
       </Switch>

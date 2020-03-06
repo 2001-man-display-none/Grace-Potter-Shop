@@ -41,6 +41,25 @@ describe('Order model', () => {
       })
     })
 
+    describe('getQuantity', () => {
+      it('returns the quantity of a product in the order', async () => {
+        await order.addProduct(product, {through: {quantity: 10}})
+        const quantity = await order.getQuantity(product)
+        expect(quantity).to.be.equal(10)
+      })
+
+      it('can accept a numeric product id', async () => {
+        await order.addProduct(product, {through: {quantity: 10}})
+        const quantity = await order.getQuantity(product.id)
+        expect(quantity).to.be.equal(10)
+      })
+
+      it('returns 0 if the product is not present', async () => {
+        const quantity = await order.getQuantity(product.id)
+        expect(quantity).to.be.equal(0)
+      })
+    })
+
     describe('setQuantity', () => {
       it('adds an item to the order if not present', async () => {
         await order.setQuantity(product, 2)
@@ -52,14 +71,24 @@ describe('Order model', () => {
         expect(products[0].order_item.quantity).to.equal(2)
       })
 
+      it('can accept the product as an id', async () => {
+        await order.setQuantity(product.id, 2)
+        const products = await order.getProducts({
+          joinTableAttributes: ['quantity']
+        })
+        expect(products).to.be.an('array')
+        expect(products[0].id).to.equal(product.id)
+        expect(products[0].order_item.quantity).to.equal(2)
+      })
+
       it('updates the quantity if item already present', async () => {
-        await order.setQuantity(product, 2)
         await order.setQuantity(product, 1)
+        await order.setQuantity(product, 2)
         const products = await order.getProducts({
           joinTableAttributes: ['quantity']
         })
         expect(products[0].id).to.equal(product.id)
-        expect(products[0].order_item.quantity).to.equal(1)
+        expect(products[0].order_item.quantity).to.equal(2)
       })
 
       it('removes an item from the order if the quantity is 0', async () => {

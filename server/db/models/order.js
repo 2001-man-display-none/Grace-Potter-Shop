@@ -19,12 +19,32 @@ Order.prototype.setQuantity = function(product, quantity) {
   }
 }
 
+Order.prototype.getQuantity = async function(product) {
+  const OrderItem = db.model('order_item')
+  const productId = typeof product === 'object' ? product.id : product
+  const item = await OrderItem.findOne({
+    where: {
+      orderId: this.id,
+      productId: productId
+    }
+  })
+  return item ? item.quantity : 0
+}
+
 Order.prototype.getQuantities = function(options = {}) {
   const mergedOptions = {
     ...options,
     through: {attributes: ['quantity']}
   }
   return this.getProducts(mergedOptions)
+}
+
+Order.findCartByPk = function(pk, options = {}) {
+  const mergedOptions = {
+    ...options,
+    where: {...(options.where || {}), status: 'pending'}
+  }
+  return Order.findByPk(pk, mergedOptions)
 }
 
 module.exports = Order

@@ -26,7 +26,18 @@ export const fetchCart = () => {
   }
 }
 
-export const updateQty = (itemId, newQty) => {
+export const addToCart = productId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post(`/api/cart/${productId}`)
+      dispatch(gotCart(data))
+    } catch (err) {
+      console.log('not able to add to cart', err)
+    }
+  }
+}
+
+export const updateQty = (productId, oldQty) => {
   return async dispatch => {
     try {
       const {data} = await axios.patch(`/api/cart/${itemId}`, newQty)
