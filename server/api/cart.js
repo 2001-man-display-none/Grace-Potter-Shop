@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//up/down quantity buttons need to pass down productId & qtyAmt
+//quantity buttons need to pass down productId & qtyAmt
 router.put('/:productId', async (req, res, next) => {
   try {
     const user = req.user
