@@ -12,12 +12,12 @@ const CartTile = props => {
         {props.cartItems.map(item => (
           <div key={item.id} id="cart-tile">
             <div>
-              <Link to={`/items/${item.id}`}>
+              <Link to={`/products/${item.id}`}>
                 <img src={item.image} width="200" height="200" />
               </Link>
             </div>
             <div>
-              <Link to={`/items/${item.id}`}>
+              <Link to={`/products/${item.id}`}>
                 <h2>{item.name}</h2>
               </Link>
               {/* <p>{item.description}</p> */}

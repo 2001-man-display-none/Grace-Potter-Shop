@@ -10,12 +10,25 @@ const Order = db.define('order', {
 })
 
 Order.prototype.setQuantity = function(product, quantity) {
-  // const OrderItem = db.model('order_item')
+  const OrderItem = db.model('order_item')
+  const productId = typeof product === 'object' ? product.id : product
   if (quantity > 0) {
-    return this.addProduct(product, {through: {quantity}})
+    return OrderItem.upsert({orderId: this.id, productId, quantity})
   } else {
     return this.removeProduct(product)
   }
+}
+
+Order.prototype.getQuantity = async function(product) {
+  const OrderItem = db.model('order_item')
+  const productId = typeof product === 'object' ? product.id : product
+  const item = await OrderItem.findOne({
+    where: {
+      orderId: this.id,
+      productId: productId
+    }
+  })
+  return item ? item.quantity : 0
 }
 
 Order.prototype.getQuantities = function(options = {}) {
@@ -24,6 +37,14 @@ Order.prototype.getQuantities = function(options = {}) {
     through: {attributes: ['quantity']}
   }
   return this.getProducts(mergedOptions)
+}
+
+Order.findCartByPk = function(pk, options = {}) {
+  const mergedOptions = {
+    ...options,
+    where: {...(options.where || {}), status: 'pending'}
+  }
+  return Order.findByPk(pk, mergedOptions)
 }
 
 module.exports = Order

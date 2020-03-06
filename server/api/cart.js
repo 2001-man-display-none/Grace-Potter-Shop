@@ -1,12 +1,17 @@
 const router = require('express').Router({mergeParams: true})
-const {User, Order, Product} = require('../db/models')
+const {Order, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
-    const user = req.user
-    const order = await user.getCart({
-      include: [{model: Product, order: [['createAt', 'DESC']]}]
+    const order = await req.cart.get({
+      include: [
+        {
+          model: Product,
+          through: {attributes: ['quantity']},
+          order: [['createAt', 'DESC']]
+        }
+      ]
     })
 
     if (order) {
@@ -19,52 +24,68 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-//quantity buttons need to pass down productId & qtyAmt
-router.put('/:productId', async (req, res, next) => {
+router.post('/checkout', async (req, res, next) => {
   try {
-    const user = req.user
-    const productId = req.params.productId
-    if (user) {
-      const order = await user.getCart()
-      await order.setQuantity(productId, req.body)
-      const updatedCart = await order.getQuantities()
+    const order = await req.cart.get()
+    await order.update({status: 'fulfilled'})
+    const newOrder = await Order.findByPk(order.id, {
+      include: [{model: Product}],
+      through: {attributes: ['quantity']}
+    })
 
-      res.status(200).json(updatedCart)
-    }
+    res.status(201).json(newOrder)
   } catch (error) {
     next(error)
   }
 })
 
-//deleted button needs productId passed through
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const productId = req.params.productId
+
+    const cart = await req.cart.getOrCreate()
+    await cart.setQuantity(productId, req.body.quantity)
+    const updatedCart = await cart.getQuantities()
+
+    res.status(200).json(updatedCart)
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.post('/:productId', async (req, res, next) => {
+  try {
+    const productId = req.params.productId
+
+    const cart = await req.cart.getOrCreate()
+    const prevCount = await cart.getQuantity(productId)
+    await cart.setQuantity(productId, prevCount + 1)
+
+    const updatedCart = await cart.getQuantities()
+
+    res.status(201).json(updatedCart)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/:productId', async (req, res, next) => {
   try {
-    const user = req.user
-    const order = await user.getCart()
+    const order = await req.cart.get()
+    if (!order) {
+      res.json([]).status(204)
+      return
+    }
+
     const product = await Product.findByPk(req.params.productId)
 
     await order.removeProduct(product)
 
-    const newOrder = await user.getCart({
+    const newOrder = await req.cart.get({
       include: [{model: Product, order: [['createAt', 'DESC']]}]
     })
 
     res.json(newOrder.products).status(204)
-  } catch (error) {
-    next(error)
-  }
-})
-
-router.post('/checkout', async (req, res, next) => {
-  try {
-    const user = req.user
-    const order = await user.getCart()
-    await order.update({status: 'fulfilled'})
-    const newOrder = await Order.findByPk(order.id, {
-      include: [{model: Product}]
-    })
-
-    res.status(201).json(newOrder)
   } catch (error) {
     next(error)
   }
