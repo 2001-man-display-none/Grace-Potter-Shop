@@ -2,6 +2,8 @@ const router = require('express').Router({mergeParams: true})
 const {Order, Product} = require('../db/models')
 module.exports = router
 
+/// TODO: manage session cart on login/logout/signup
+
 const getGuestCart = (req, options = {}) => {
   const cartId = req.session.cartId
   if (cartId) {
