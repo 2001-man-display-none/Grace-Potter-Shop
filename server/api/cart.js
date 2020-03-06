@@ -66,6 +66,22 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const user = req.user
+    const productId = req.params.productId
+    if (user) {
+      const order = await user.getCart()
+      await order.setQuantity(productId, req.body.quantity)
+      const updatedCart = await order.getQuantities()
+
+      res.status(200).json(updatedCart)
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.delete('/:productId', async (req, res, next) => {
   try {
     const order = await getCart(req)
@@ -96,7 +112,7 @@ router.post('/checkout', async (req, res, next) => {
       include: [{model: Product}],
       through: {attributes: ['quantity']}
     })
-    console.log(newOrder)
+
     res.status(201).json(newOrder)
   } catch (error) {
     next(error)
