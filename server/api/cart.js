@@ -4,49 +4,38 @@ module.exports = router
 
 /// TODO: manage session cart on login/logout/signup
 
-const getGuestCart = (req, options = {}) => {
-  const cartId = req.session.cartId
-  if (cartId) {
-    const mergedOptions = {
-      ...options,
-      where: {...(options.where || {}), status: 'pending'}
+const cartMiddleware = (req, res, next) => {
+  const user = req.user
+  if (user) {
+    req.getCart = opts => user.getCart(opts)
+    req.getOrCreateCart = opts => user.getOrCreateCart(opts)
+  } else {
+    req.getCart = (opts = {}) => {
+      if (req.session.cartId) {
+        return Order.findByPk(req.session.cartId, {
+          ...opts,
+          where: {...(opts.where || {}), status: 'pending'}
+        })
+      }
     }
-    return Order.findByPk(cartId, mergedOptions)
-  } else {
-    return null
+    req.getOrCreateCart = async () => {
+      let cart = await req.getCart()
+      if (!cart) {
+        cart = await Order.create()
+      }
+      // eslint-disable-next-line require-atomic-updates
+      req.session.cartId = cart.id
+      return cart
+    }
   }
+  next()
 }
 
-const getOrCreateGuestCart = async (req, options) => {
-  let cart = getGuestCart(req, options)
-  if (cart) {
-    return cart
-  } else {
-    return Order.create(options)
-  }
-}
-
-const getCart = async (req, options) => {
-  const user = req.user
-  if (user) {
-    return user.getCart(options)
-  } else {
-    return getGuestCart(req, options)
-  }
-}
-
-const getOrCreateCart = async (req, options) => {
-  const user = req.user
-  if (user) {
-    return user.getOrCreateCart(options)
-  } else {
-    return getOrCreateGuestCart(req, options)
-  }
-}
+router.use(cartMiddleware)
 
 router.get('/', async (req, res, next) => {
   try {
-    const order = await getCart(req, {
+    const order = await req.getCart({
       include: [
         {
           model: Product,
@@ -68,23 +57,37 @@ router.get('/', async (req, res, next) => {
 
 router.put('/:productId', async (req, res, next) => {
   try {
-    const user = req.user
     const productId = req.params.productId
-    if (user) {
-      const order = await user.getCart()
-      await order.setQuantity(productId, req.body.quantity)
-      const updatedCart = await order.getQuantities()
 
-      res.status(200).json(updatedCart)
-    }
+    const cart = await req.getOrCreateCart()
+    await cart.setQuantity(productId, req.body.quantity)
+    const updatedCart = await cart.getQuantities()
+
+    res.status(200).json(updatedCart)
   } catch (error) {
     next(error)
   }
 })
 
+router.post('/:productId', async (req, res, next) => {
+  try {
+    const productId = req.params.productId
+
+    const cart = await req.getOrCreateCart()
+    const prevCount = await cart.getQuantity(productId)
+    await cart.setQuantity(productId, prevCount + 1)
+
+    const updatedCart = await cart.getQuantities()
+
+    res.status(201).json(updatedCart)
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/:productId', async (req, res, next) => {
   try {
-    const order = await getCart(req)
+    const order = await req.getCart()
     if (!order) {
       res.json([]).status(204)
       return
@@ -94,7 +97,7 @@ router.delete('/:productId', async (req, res, next) => {
 
     await order.removeProduct(product)
 
-    const newOrder = await getCart(req, {
+    const newOrder = await req.getCart({
       include: [{model: Product, order: [['createAt', 'DESC']]}]
     })
 
@@ -106,7 +109,7 @@ router.delete('/:productId', async (req, res, next) => {
 
 router.post('/checkout', async (req, res, next) => {
   try {
-    const order = await getCart(req)
+    const order = await req.getCart()
     await order.update({status: 'fulfilled'})
     const newOrder = await Order.findByPk(order.id, {
       include: [{model: Product}],
