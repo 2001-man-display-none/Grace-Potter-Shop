@@ -15,7 +15,6 @@ router.post('/login', async (req, res, next) => {
       req.login(user, err => (err ? next(err) : res.json(user)))
       if (req.cart) {
         req.cart.saveToUser()
-        console.log('saving cart')
       }
     }
   } catch (err) {
