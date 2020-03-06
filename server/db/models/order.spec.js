@@ -72,13 +72,13 @@ describe('Order model', () => {
       })
 
       it('updates the quantity if item already present', async () => {
-        await order.setQuantity(product, 2)
         await order.setQuantity(product, 1)
+        await order.setQuantity(product, 2)
         const products = await order.getProducts({
           joinTableAttributes: ['quantity']
         })
         expect(products[0].id).to.equal(product.id)
-        expect(products[0].order_item.quantity).to.equal(1)
+        expect(products[0].order_item.quantity).to.equal(2)
       })
 
       it('removes an item from the order if the quantity is 0', async () => {
