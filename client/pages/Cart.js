@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import ConnectedCartTile from '../components/CartTile'
+import CartTile from '../components/CartTile'
 import {fetchCart} from '../store/cart'
 import {Link} from 'react-router-dom'
 
@@ -23,7 +23,11 @@ class Cart extends React.Component {
             <h3>Total: $ {this.total().toFixed(2)}</h3>
             <Link to="/checkout">Proceed to Checkout</Link>
           </div>
-          <ConnectedCartTile cartItems={this.props.cartItems} />
+          <div id="cart">
+            {this.props.cartItems.map(item => (
+              <CartTile key={item.id} item={item} />
+            ))}
+          </div>
           <div className="total">
             <h3>Total: $ {this.total().toFixed(2)}</h3>
             <Link to="/checkout">Proceed to Checkout</Link>

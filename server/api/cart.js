@@ -2,6 +2,7 @@ const router = require('express').Router({mergeParams: true})
 const {Order, Product} = require('../db/models')
 module.exports = router
 
+// /api/cart
 router.get('/', async (req, res, next) => {
   try {
     const order = await req.cart.get({
@@ -39,7 +40,7 @@ router.post('/checkout', async (req, res, next) => {
   }
 })
 
-router.put('/:productId', async (req, res, next) => {
+router.patch('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
 
