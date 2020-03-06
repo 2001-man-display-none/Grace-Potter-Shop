@@ -157,3 +157,13 @@ label {
   display: flex;
   color: green;
 }
+
+#empty-cart {
+  display: flex;
+  align-items: flex-end;
+}
+
+#empty-cart img {
+  height: 175px;
+  width: 168px;
+}

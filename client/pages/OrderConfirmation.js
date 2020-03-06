@@ -1,27 +1,22 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchCart} from '../store/cart'
-import {Link} from 'react-router-dom'
+import {Link, Redirect} from 'react-router-dom'
 
-class OrderConfirmation extends React.Component {
-  componentDidMount() {
-    this.props.fetchCart()
-  }
-
-  render() {
+const OrderConfirmation = props => {
+  if (props.order.id) {
     return (
       <div>
-        <h1>Hey {this.props.user.name},</h1>
+        <h1>Hey {props.user.name},</h1>
         <div id="confirmation-page">
           <img id="check-mark" src="/green-check-mark.png"></img>
           <h2> Your order is confirmed!</h2>
         </div>
         <p>
           Thanks for shopping at Grace Potter. Your confirmation number is:
-          {this.props.order.id}. Your order is on the way!
+          {props.order.id}. Your order is on the way!
         </p>
 
-        {this.props.order.products.map(item => (
+        {props.order.products.map(item => (
           <div key={item.id} id="confirmation-tile">
             <ul>
               {/* <img src={item.image}></img> */}
@@ -36,6 +31,8 @@ class OrderConfirmation extends React.Component {
         </div>
       </div>
     )
+  } else {
+    return <Redirect to="/home" />
   }
 }
 
@@ -44,13 +41,6 @@ const stateProps = state => ({
   order: state.cart.latestOrder
 })
 
-const dispatchProps = dispatch => ({
-  fetchCart: () => dispatch(fetchCart())
-})
-
-const ConnectedOrderConfirmation = connect(
-  stateProps,
-  dispatchProps
-)(OrderConfirmation)
+const ConnectedOrderConfirmation = connect(stateProps)(OrderConfirmation)
 
 export default ConnectedOrderConfirmation
