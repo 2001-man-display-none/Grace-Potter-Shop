@@ -62,10 +62,7 @@ export default function(state = initialState, action) {
       return {...state, products: action.products}
     case LATEST_ORDER:
       return {...state, products: [], latestOrder: action.order}
-    case GET_USER:
-      return state
     case REMOVE_USER:
-      console.log('removed user you logged out')
       return {...state, products: []}
     default:
       return state
