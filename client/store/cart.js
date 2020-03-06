@@ -37,10 +37,10 @@ export const addToCart = productId => {
   }
 }
 
-export const updateQty = (productId, oldQty) => {
+export const updateQty = (productId, newQty) => {
   return async dispatch => {
     try {
-      const {data} = await axios.patch(`/api/cart/${itemId}`, newQty)
+      const {data} = await axios.patch(`/api/cart/${productId}`, newQty)
       dispatch(gotCart(data))
     } catch (err) {
       console.log('not able to update quantity', err)
