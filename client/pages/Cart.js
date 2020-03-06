@@ -9,25 +9,35 @@ class Cart extends React.Component {
     this.props.fetchCart()
   }
   render() {
-    return (
-      <div>
-        <h1>Your Shopping Cart</h1>
-        <div className="total">
-          <h3>Total: $$$$</h3>
-          <Link to="/checkout">Proceed to Checkout</Link>
+    if (this.props.cartItems.length > 0) {
+      return (
+        <div>
+          <h1>Your Shopping Cart</h1>
+          <div className="total">
+            <h3>Total: $$$$</h3>
+            <Link to="/checkout">Proceed to Checkout</Link>
+          </div>
+          <ConnectedCartTile cartItems={this.props.cartItems} />
+          <div className="total">
+            <h3>Total: $$$$</h3>
+            <Link to="/checkout">Proceed to Checkout</Link>
+          </div>
         </div>
-        <ConnectedCartTile cartItems={this.props.cartItems} />
-        <div className="total">
-          <h3>Total: $$$$</h3>
-          <Link to="/checkout">Proceed to Checkout</Link>
+      )
+    } else {
+      return (
+        <div id="empty-cart">
+          <h1>Your cart is empty... </h1>
+          <img src="/sad-flower.png"></img>
         </div>
-      </div>
-    )
+      )
+    }
   }
 }
 
 const stateProps = state => ({
-  cartItems: state.cart.products
+  cartItems: state.cart.products,
+  user: state.user
 })
 
 const dispatchProps = dispatch => ({
