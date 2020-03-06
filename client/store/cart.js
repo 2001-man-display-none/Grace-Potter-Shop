@@ -25,6 +25,17 @@ export const fetchCart = () => {
   }
 }
 
+export const updateQty = (productId, oldQty) => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put(`/api/cart/${productId}`, oldQty)
+      dispatch(gotCart(data))
+    } catch (err) {
+      console.log('not able to update quantity', err)
+    }
+  }
+}
+
 export const checkout = (redirect = '/confirmation') => {
   return async dispatch => {
     try {

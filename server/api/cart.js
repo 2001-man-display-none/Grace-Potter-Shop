@@ -19,14 +19,16 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+//add to cart + up/down quantity buttons need to pass down productId & qtyAmt
 router.put('/:productId', async (req, res, next) => {
   try {
     const user = req.user
     const productId = req.params.productId
     if (user) {
-      const userCart = await user.getCart()
-      await userCart.setQuantity(productId, req.body)
-      const updatedCart = await userCart.getQuantities()
+      const order = await user.getCart()
+      await order.setQuantity(productId, req.body)
+      const updatedCart = await order.getQuantities()
+
       res.status(200).json(updatedCart)
     }
   } catch (error) {

@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {gotCart} from './cart'
 
 const GOT_SINGLE_PRODUCT = 'GOT_SINGLE_PRODUCT'
 const GOT_ERROR = 'GOT_ERROR'
@@ -23,6 +24,17 @@ export const fetchSingleProduct = productId => {
       dispatch(gotSingleProduct(data))
     } catch (err) {
       dispatch(gotError(err, {type: GOT_SINGLE_PRODUCT}))
+    }
+  }
+}
+
+export const addToCart = productId => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post(`/api/products/${productId}`)
+      dispatch(gotCart(data))
+    } catch (err) {
+      console.log('not able to add to cart', err)
     }
   }
 }
