@@ -18,6 +18,17 @@ Order.prototype.setQuantity = function(product, quantity) {
   }
 }
 
+Order.prototype.getQuantity = async function(product) {
+  const productId = typeof product === 'number' ? product : product.id
+  const item = await db.model('order_item').findOne({
+    where: {
+      orderId: this.id,
+      productId: productId
+    }
+  })
+  return item ? item.quantity : 0
+}
+
 Order.prototype.getQuantities = function(options = {}) {
   const mergedOptions = {
     ...options,
