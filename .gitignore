@@ -1,9 +1,14 @@
-node_modules
-public/bundle.js
-public/bundle.js.map
-public/style.css
-public/style.css.map
-secrets.js
 .DS_Store
+node_modules
+# don't commit secrets!
+secrets.js
+# don't commit generated files
+public/dist/*
+public/dist/.hot/*
+# ... but keep the folders they go in
+!public/dist/.hot
+!public/dist/.gitkeep
+!public/dist/.hot/.gitkeep
+# don't commit error logs
 npm-debug.log
 yarn-error.log
