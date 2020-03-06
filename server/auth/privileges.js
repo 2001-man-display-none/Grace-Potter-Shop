@@ -14,4 +14,12 @@ const usersOnly = (req, res, next) => {
   }
 }
 
-module.exports = {adminsOnly, usersOnly}
+const guestsOnly = (req, res, next) => {
+  if (req.user) {
+    res.sendStatus(401)
+  } else {
+    next()
+  }
+}
+
+module.exports = {adminsOnly, usersOnly, guestsOnly}
