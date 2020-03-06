@@ -8,18 +8,24 @@ class Cart extends React.Component {
   componentDidMount() {
     this.props.fetchCart()
   }
+  total() {
+    return this.props.cartItems
+      .map(item => item.price * item.order_item.quantity)
+      .reduce((x, y) => x + y)
+  }
+
   render() {
     if (this.props.cartItems.length > 0) {
       return (
         <div>
           <h1>Your Shopping Cart</h1>
           <div className="total">
-            <h3>Total: $$$$</h3>
+            <h3>Total: $ {this.total().toFixed(2)}</h3>
             <Link to="/checkout">Proceed to Checkout</Link>
           </div>
           <ConnectedCartTile cartItems={this.props.cartItems} />
           <div className="total">
-            <h3>Total: $$$$</h3>
+            <h3>Total: $ {this.total().toFixed(2)}</h3>
             <Link to="/checkout">Proceed to Checkout</Link>
           </div>
         </div>

@@ -25,7 +25,7 @@ const CartTile = props => {
             </div>
             <div>
               <div>
-                <span>Quantity: # {item.quantity}</span>
+                <span>Quantity: # {item.order_item.quantity}</span>
               </div>
               <div>
                 <button type="button">+</button>
@@ -33,7 +33,7 @@ const CartTile = props => {
               </div>
               <div id="cart-price">
                 <p>Total:</p>
-                <p>${item.price * 2}</p>
+                <p>${(item.price * item.order_item.quantity).toFixed(2)}</p>
               </div>
               <div>
                 <button type="button" onClick={() => props.deleteItem(item.id)}>
