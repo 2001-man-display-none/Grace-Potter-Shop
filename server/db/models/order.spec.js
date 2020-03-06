@@ -52,6 +52,16 @@ describe('Order model', () => {
         expect(products[0].order_item.quantity).to.equal(2)
       })
 
+      it('can accept the product as an id', async () => {
+        await order.setQuantity(product.id, 2)
+        const products = await order.getProducts({
+          joinTableAttributes: ['quantity']
+        })
+        expect(products).to.be.an('array')
+        expect(products[0].id).to.equal(product.id)
+        expect(products[0].order_item.quantity).to.equal(2)
+      })
+
       it('updates the quantity if item already present', async () => {
         await order.setQuantity(product, 2)
         await order.setQuantity(product, 1)
