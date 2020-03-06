@@ -1,7 +1,8 @@
 const router = require('express').Router({mergeParams: true})
-const {User, Order, Product} = require('../db/models')
+const {OrderItem, Order, Product} = require('../db/models')
 module.exports = router
 
+// /api/cart
 router.get('/', async (req, res, next) => {
   try {
     const user = req.user
@@ -20,16 +21,19 @@ router.get('/', async (req, res, next) => {
 })
 
 //quantity buttons need to pass down productId & qtyAmt
-router.put('/:productId', async (req, res, next) => {
+router.patch('/:itemId', async (req, res, next) => {
   try {
     const user = req.user
-    const productId = req.params.productId
-    if (user) {
-      const order = await user.getCart()
-      await order.setQuantity(productId, req.body)
-      const updatedCart = await order.getQuantities()
-
-      res.status(200).json(updatedCart)
+    const itemId = req.params.itemId
+    const order = await user.getCart({
+      include: [{model: Product, order: [['createAt', 'DESC']]}]
+    })
+    if (order) {
+      await order.setQuantity(itemId, req.body.quantity)
+      const newOrder = await user.getCart({
+        include: [{model: Product, order: [['createAt', 'DESC']]}]
+      })
+      res.json(newOrder.products).status(200)
     }
   } catch (error) {
     next(error)
@@ -46,7 +50,9 @@ router.delete('/:productId', async (req, res, next) => {
     await order.removeProduct(product)
 
     const newOrder = await user.getCart({
-      include: [{model: Product, order: [['createAt', 'DESC']]}]
+      include: [
+        {model: Product, as: 'orderItem', order: [['createAt', 'DESC']]}
+      ]
     })
 
     res.json(newOrder.products).status(204)

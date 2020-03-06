@@ -10,9 +10,10 @@ const Order = db.define('order', {
 })
 
 Order.prototype.setQuantity = function(product, quantity) {
-  // const OrderItem = db.model('order_item')
+  const OrderItem = db.model('order_item')
+  const productId = typeof product === 'object' ? product.id : product
   if (quantity > 0) {
-    return this.addProduct(product, {through: {quantity}})
+    return OrderItem.upsert({orderId: this.id, productId, quantity})
   } else {
     return this.removeProduct(product)
   }
