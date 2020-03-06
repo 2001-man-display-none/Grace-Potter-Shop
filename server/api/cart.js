@@ -1,5 +1,5 @@
 const router = require('express').Router({mergeParams: true})
-const {Order, Product} = require('../db/models')
+const {User, Order, Product} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -13,6 +13,23 @@ router.get('/', async (req, res, next) => {
       res.json(order.products)
     } else {
       res.json([])
+    }
+  } catch (error) {
+    next(error)
+  }
+})
+
+//quantity buttons need to pass down productId & qtyAmt
+router.put('/:productId', async (req, res, next) => {
+  try {
+    const user = req.user
+    const productId = req.params.productId
+    if (user) {
+      const order = await user.getCart()
+      await order.setQuantity(productId, req.body)
+      const updatedCart = await order.getQuantities()
+
+      res.status(200).json(updatedCart)
     }
   } catch (error) {
     next(error)
@@ -46,7 +63,7 @@ router.post('/checkout', async (req, res, next) => {
     const newOrder = await Order.findByPk(order.id, {
       include: [{model: Product}]
     })
-    console.log(newOrder)
+
     res.status(201).json(newOrder)
   } catch (error) {
     next(error)

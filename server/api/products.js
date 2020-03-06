@@ -34,6 +34,27 @@ router.post('/', adminsOnly, async (req, res, next) => {
   }
 })
 
+router.post('/:productId', async (req, res, next) => {
+  try {
+    const user = req.user
+    const productId = req.params.productId
+
+    if (user) {
+      const order = await user.getOrCreateCart()
+      const product = await Product.findByPk(productId)
+      await order.addProduct(product)
+
+      const updatedOrder = await user.getCart({
+        include: [{model: Product, order: [['createAt', 'DESC']]}]
+      })
+
+      res.status(201).json(updatedOrder.products)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.delete('/:productId', adminsOnly, async (req, res, next) => {
   try {
     let productId = req.params.productId

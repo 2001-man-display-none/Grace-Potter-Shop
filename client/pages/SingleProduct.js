@@ -1,15 +1,28 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchSingleProduct} from '../store/singleProduct'
+import {fetchSingleProduct, addToCart} from '../store/singleProduct'
 
 class SingleProduct extends React.Component {
+  constructor() {
+    super()
+    this.state = {}
+    this.handleAddToCart = this.handleAddToCart.bind(this)
+  }
+
   componentDidMount() {
     let productId = this.props.productId
     this.props.fetchSingleProductDispatch(productId)
   }
 
+  handleAddToCart(event) {
+    event.preventDefault()
+    let productId = event.target.id
+    this.props.addToCartDispatch(productId)
+  }
+
   render() {
     let singleProduct = this.props.singleProduct
+    let productId = this.props.productId
 
     return (
       <div>
@@ -21,9 +34,10 @@ class SingleProduct extends React.Component {
         <h3>${singleProduct.price}</h3>
         <div>
           <button
+            id={productId}
             type="button"
             className="button"
-            // onClick={this.handleRemove}
+            onClick={this.handleAddToCart}
           >
             Add To Cart
           </button>
@@ -43,11 +57,13 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchSingleProductDispatch: productId =>
-      dispatch(fetchSingleProduct(productId))
+      dispatch(fetchSingleProduct(productId)),
+    addToCartDispatch: productId => dispatch(addToCart(productId))
   }
 }
 
-const SingleProductConnect = connect(mapStateToProps, mapDispatchToProps)(
-  SingleProduct
-)
+const SingleProductConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SingleProduct)
 export default SingleProductConnect
