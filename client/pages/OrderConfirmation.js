@@ -56,13 +56,6 @@ const stateProps = state => ({
   order: state.cart.latestOrder
 })
 
-const dispatchProps = dispatch => ({
-  meDispatch: () => dispatch(me())
-})
-
-const ConnectedOrderConfirmation = connect(
-  stateProps,
-  dispatchProps
-)(OrderConfirmation)
+const ConnectedOrderConfirmation = connect(stateProps)(OrderConfirmation)
 
 export default ConnectedOrderConfirmation
