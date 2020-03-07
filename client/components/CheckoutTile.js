@@ -3,8 +3,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {deleteItemThunk} from '../store/cart'
 
-//make into class to keep subtotal as local state
-
 const CheckoutTile = props => {
   return (
     <div>
@@ -23,7 +21,7 @@ const CheckoutTile = props => {
             </div>
             <div>
               <div>
-                <span>Quantity: #{item.order_item.quantity} </span>
+                <span>Quantity: {item.order_item.quantity} </span>
               </div>
               <div id="cart-price">
                 <p>
