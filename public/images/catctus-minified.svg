@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 265.4 385.3">
+  <g transform="translate(-61 224)">
+    <ellipse cx="194.1" cy=".5" fill="#00d25e" rx="101.9" ry="107.2"/>
+    <path fill="#00aa4d" d="M199-106a102 107 0 00-5-1A102 107 0 0092 1a102 107 0 00102 107 102 107 0 005 0z"/>
+    <path fill="#00d25e" d="M199-106v214A102 107 0 00296 1a102 107 0 00-97-107z"/>
+    <ellipse cx="193.7" cy="-2.6" fill="#00d25e" stroke="#178000" stroke-dasharray="40,20,10,20" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" rx="63.4" ry="104"/>
+    <ellipse cx="192.3" cy="-.7" fill="#00d25e" stroke="#178000" stroke-dasharray="20,20" stroke-dashoffset="74" stroke-linecap="round" stroke-linejoin="round" stroke-width="10" rx="21" ry="104.5"/>
+    <g>
+      <ellipse cx="194.2" cy=".4" fill="none" stroke="#178000" stroke-dasharray="36.8,18.4,9.2,18.4" stroke-dashoffset="18.4" stroke-linecap="round" stroke-width="9.2" rx="101.8" ry="107.1"/>
+    </g>
+  </g>
+  <path fill="#d66433" stroke="#d66433" stroke-width="8" d="M260 285h-16l-32 96H52l-32-96H4v-40h256z"/>
+  <g fill="#a84b22">
+    <path d="M98 285H20l31 100h62"/>
+    <path stroke="#a84b22" stroke-width="8" d="M12 245h65l3 40H12z"/>
+  </g>
+  <path fill="none" stroke="#893d1c" stroke-linecap="square" stroke-width="8" d="M4 285h256"/>
+  <path style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#893d1c" d="M20 284l-8 2 33 99h8z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible"/>
+  <path fill="none" stroke="#893d1c" stroke-linecap="square" stroke-width="8" d="M4 245v40"/>
+  <g>
+    <g stroke="#178000" stroke-linejoin="round" stroke-width="8">
+      <path fill="#00aa4d" d="M16 4l54 96 25-77z"/>
+      <path fill="#00d25e" d="M261 5L147 25l67 76z"/>
+    </g>
+    <g transform="translate(-61 224)">
+      <ellipse cx="200.4" cy="-143.2" fill="#00d25e" rx="82.1" ry="69.5"/>
+      <path fill="#00aa4d" d="M230-79c-22 8-43 6-60 1s-34-21-43-31c-10-11-9-35-9-45 1-11 18-35 22-39 6-6 12-7 21 0 13 8 22 14 27 34 6 21-20 41-21 48 0 8 22 13 29 6 3 2 16 6 22 3 8-4 9-7 19 0 4 2 18 14-7 23z"/>
+    </g>
+    <g transform="translate(-72 -19)">
+      <path fill="none" stroke="#178000" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" d="M181 133c9 20 30 0 27 0s16 20 28-1"/>
+      <path fill="#004e21" d="M198 100c-2 5-8 9-21 8-13 0-23-7-22-16 0-9 14-15 22-14 8 2 23 16 21 22zM221 99c1 6 4 11 17 11 14-1 23-7 23-17-1-9-14-15-23-13-8 1-19 14-17 19zM199 116c-3 1 4 12 9 12 6-1 13-11 9-12z"/>
+      <ellipse cx="200.4" cy="-143.2" fill="none" stroke="#178000" stroke-dasharray="48,16" stroke-dashoffset="28.8" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" rx="82.1" ry="69.5" transform="translate(11 243)"/>
+    </g>
+  </g>
+</svg>

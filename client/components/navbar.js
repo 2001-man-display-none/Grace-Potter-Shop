@@ -18,9 +18,10 @@ class Navbar extends React.Component {
         <nav>
           <ul className="nav-left">
             <li id="logo">
-              <img className="logo" src="/gp-home.png" />
+              <img className="logo" src="/images/catctus-minified.svg" />
               <Link className="logo-link" to="/">
-                Grace Potter
+                Grace
+                <br /> Potter
               </Link>
             </li>
           </ul>
@@ -32,7 +33,7 @@ class Navbar extends React.Component {
           <ul className="nav-right">
             {isLoggedIn ? (
               <>
-                {/* The navbar will show these NavLinks after you log in */}
+                {/* The navbar will show these links after you log in */}
                 <li>
                   <NavLink to="/home">Home</NavLink>
                 </li>
@@ -44,7 +45,7 @@ class Navbar extends React.Component {
               </>
             ) : (
               <>
-                {/* The navbar will show these NavLinks before you log in */}
+                {/* The navbar will show these links before you log in */}
                 <li>
                   <NavLink to="/login">Login</NavLink>
                 </li>

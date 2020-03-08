@@ -38,7 +38,7 @@ class Cart extends React.Component {
       return (
         <div id="empty-cart">
           <h1>Your cart is empty... </h1>
-          <img src="/sad-flower.png"></img>
+          <img src="/images/sad-flower.png"></img>
         </div>
       )
     }

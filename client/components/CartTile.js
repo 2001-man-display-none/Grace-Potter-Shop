@@ -31,10 +31,15 @@ class CartTile extends React.Component {
     let {item} = this.props
 
     return (
-      <div key={item.id} id="cart-tile">
+      <div key={item.id} className="cart-tile">
         <div>
           <Link to={`/items/${item.id}`}>
-            <img src={item.image} width="200" height="200" />
+            <img
+              className="cart-tile-image"
+              src={item.image}
+              width="200"
+              height="200"
+            />
           </Link>
         </div>
         <div>
@@ -53,17 +58,17 @@ class CartTile extends React.Component {
               id={item.id}
               className="smbuttons"
               type="button"
-              onClick={this.handleIncrease}
+              onClick={this.handleDecrease}
             >
-              +
+              -
             </button>
             <button
               id={item.id}
               className="smbuttons"
               type="button"
-              onClick={this.handleDecrease}
+              onClick={this.handleIncrease}
             >
-              -
+              +
             </button>
           </div>
           <div id="cart-price">
@@ -75,7 +80,7 @@ class CartTile extends React.Component {
               type="button"
               onClick={() => this.props.deleteItem(item.id)}
             >
-              Remove item from cart
+              Remove from cart
             </button>
           </div>
         </div>
