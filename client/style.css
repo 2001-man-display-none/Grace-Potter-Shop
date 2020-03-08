@@ -1,48 +1,86 @@
 @import url('~normalize.css/normalize.css');
+@import url('./variables.css');
 
 /* general styles */
 * {
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: sans-serif;
+  min-height: 100%;
+}
+
+#main-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: white;
+}
+
+main {
+  flex-grow: 1;
+  max-width: 1000px;
+  align-self: center;
+  background-color: white;
 }
 
 a {
   text-decoration: none;
+  color: var(--color-primary);
 }
+/*
+a:hover {
+  text-decoration: underline var(--color-secondary);
+} */
 
 /* navbar styles */
 
 nav {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: rgb(197, 233, 197);
-  padding: 15px;
+  align-items: stretch;
+  padding: 4px 16px 4px 0;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-nav > div:not(:first-child) {
-  padding: 0 12px;
-}
-
-nav ul {
+nav > ul {
   display: flex;
   margin: 0;
   padding: 0;
+  align-items: stretch;
 }
 
-nav li {
-  display: block;
+nav > ul > li {
+  display: flex;
   margin: 0;
-  padding: 0 12px;
+}
+
+.nav-link,
+.logo-link {
+  color: inherit;
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  height: 100%;
+}
+
+.nav-link:hover {
+  color: var(--color-secondary-lightest);
 }
 
 #logo {
   padding: 0 4px;
   display: flex;
-  align-content: flex-end;
+  align-items: center;
 }
 
 #logo img {
@@ -60,12 +98,6 @@ nav li {
 
 .nav-right {
   display: flex;
-  align-items: center;
-}
-
-.nav-right div {
-  display: flex;
-  align-items: center;
 }
 
 /* forms (just login/signup for now) */
@@ -79,30 +111,37 @@ label {
   display: block;
 }
 
-/* cart stuff? */
-
-.cart-info {
-  position: relative;
-  height: 40px;
-  width: 40px;
-}
+/* navbar cart badge stuff */
 
 .cart-icon {
-  /* background-color: purple; */
-  width: 100%;
-  height: 100%;
-  background-image: url('https://media.istockphoto.com/vectors/green-shopping-trolley-cart-icon-vector-vector-id898475762?k=6&m=898475762&s=170667a&w=0&h=PJX4WGXuwaEwdOOdS4lzEGx3XoFsdgnjiu4B-dm_7X0=');
-  background-size: 100%;
-  text-align: center;
+  height: 40px;
+  position: relative;
+  display: flex;
+  align-self: center;
+  align-items: center;
 }
 
-.cart-num {
-  position: absolute;
-  top: 0;
-  right: 10px;
-  font-weight: bold;
-  font-size: 20px;
+.cart-icon svg {
+  height: 40px;
+  width: auto;
 }
+
+.cart-icon path {
+  stroke: white;
+}
+
+.cart-icon .cart-badge {
+  display: block;
+  position: absolute;
+  left: 40%;
+  right: 20%;
+  top: 0;
+  bottom: 30%;
+  text-align: center;
+  color: var(--color-secondary-lightest);
+}
+
+/* actual cart stuff */
 
 #cart-tile {
   padding: 10px;
@@ -166,4 +205,17 @@ label {
 #empty-cart img {
   height: 175px;
   width: 168px;
+}
+
+/* footer */
+
+footer {
+  padding: calc(2 * var(--spacing));
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+footer p {
+  margin: 0;
+  padding: 0;
 }
