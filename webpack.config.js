@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 
 const isDev = process.env.NODE_ENV === 'development'
 
@@ -10,6 +11,10 @@ const prodPlugins = [
   })
 ]
 const devPlugins = [
+  new CleanWebpackPlugin({
+    dry: true,
+    cleanOnceBeforeBuildPatterns: ['.hot/*', '!**/.gitkeep']
+  }),
   new webpack.HotModuleReplacementPlugin(),
   new webpack.NoEmitOnErrorsPlugin()
 ]
@@ -35,7 +40,10 @@ module.exports = {
   },
   devtool: 'source-map',
   watchOptions: {
-    ignored: /node_modules/
+    ignored: /(node_modules|public)/
+  },
+  optimization: {
+    noEmitOnErrors: true
   },
   plugins: isDev ? devPlugins : prodPlugins,
   module: {
