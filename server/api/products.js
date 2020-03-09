@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
       res.status(404).send('No products found')
     }
   } catch (err) {
-    res.status(500).send(err)
+    next(err)
   }
 })
 
@@ -22,9 +22,11 @@ router.get('/:productId', async (req, res, next) => {
     let product = await Product.findByPk(productId)
     if (product) {
       res.json(product)
+    } else {
+      res.status(404).send('No product found')
     }
   } catch (err) {
-    res.status(500).send(err)
+    next(err)
   }
 })
 
@@ -32,7 +34,9 @@ router.get('/:productId', async (req, res, next) => {
 router.post('/', adminsOnly, async (req, res, next) => {
   try {
     let product = await Product.create(req.body)
-    res.status(201).json(product)
+    if (product) {
+      res.status(201).json(product)
+    }
   } catch (err) {
     res.status(500).send(err)
   }

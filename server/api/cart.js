@@ -55,16 +55,13 @@ router.patch('/:productId', async (req, res, next) => {
   }
 })
 
-router.put('/:productId', async (req, res, next) => {
+router.post('/:productId', async (req, res, next) => {
   try {
     const productId = req.params.productId
 
     const cart = await req.cart.getOrCreate()
     const prevCount = await cart.getQuantity(productId)
-    await cart.setQuantity(
-      productId,
-      Number(prevCount) + Number(req.body.quantity)
-    )
+    await cart.setQuantity(productId, prevCount + req.body.quantity)
 
     const updatedCart = await cart.getQuantities()
 

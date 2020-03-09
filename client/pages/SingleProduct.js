@@ -34,9 +34,8 @@ class SingleProduct extends React.Component {
 
   handleQtyChange(value) {
     this.setState({
-      [event.target.name]: value
+      [event.target.name]: +value
     })
-    console.log(this.state)
   }
 
   render() {
