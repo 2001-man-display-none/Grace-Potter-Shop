@@ -39,6 +39,26 @@ Order.prototype.getQuantities = function(options = {}) {
   return this.getProducts(mergedOptions)
 }
 
+Order.prototype.mergeFrom = async function(otherOrder) {
+  const thisQuantities = await this.getQuantities()
+  const otherQuantities = await otherOrder.getQuantities()
+
+  const oldQuantities = new Map(
+    thisQuantities.map(item => [item.id, item.order_item.quantity])
+  )
+
+  // Note: if this turns out to be a bottleneck we could bulk insert instead.
+  const updates = otherQuantities.map(item => {
+    const id = item.id
+    const quantity = item.order_item.quantity
+    if (quantity > (oldQuantities.get(id) || 0)) {
+      return this.setQuantity(id, quantity)
+    }
+  })
+
+  await Promise.all(updates)
+}
+
 Order.findCartByPk = function(pk, options = {}) {
   const mergedOptions = {
     ...options,
