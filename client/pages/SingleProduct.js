@@ -1,13 +1,15 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleProduct} from '../store/singleProduct'
-import {addToCart} from '../store/cart'
+import {updateQty} from '../store/cart'
 import ConfirmationPopup from '../components/ConfirmationPopup'
+import QuantityDropdown from '../components/QuantityDropdown'
 
 class SingleProduct extends React.Component {
   constructor() {
     super()
-    this.state = {showPopup: false}
+    this.state = {showPopup: false, quantity: 1}
+    this.handleQtyChange = this.handleQtyChange.bind(this)
     this.handleAddToCart = this.handleAddToCart.bind(this)
     this.toggleConfirmationPopup = this.toggleConfirmationPopup.bind(this)
   }
@@ -20,7 +22,7 @@ class SingleProduct extends React.Component {
   handleAddToCart(event) {
     event.preventDefault()
     let productId = event.target.id
-    this.props.addToCartDispatch(productId)
+    this.props.updateQtyDispatch(productId, {quantity: this.state.quantity})
     this.toggleConfirmationPopup()
   }
 
@@ -30,10 +32,17 @@ class SingleProduct extends React.Component {
     })
   }
 
+  handleQtyChange(value) {
+    this.setState({
+      [event.target.name]: value
+    })
+    console.log(this.state)
+  }
+
   render() {
     let singleProduct = this.props.singleProduct
     let productId = this.props.productId
-
+    console.log('singlepage:', this.state)
     return (
       <div>
         <h2>{singleProduct.name}</h2>
@@ -42,6 +51,7 @@ class SingleProduct extends React.Component {
           Meet {singleProduct.name}: {singleProduct.description}
         </p>
         <h3>${singleProduct.price}</h3>
+        <QuantityDropdown handleQtyChange={this.handleQtyChange} />
         <div>
           <button
             id={productId}
@@ -76,7 +86,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchSingleProductDispatch: productId =>
       dispatch(fetchSingleProduct(productId)),
-    addToCartDispatch: productId => dispatch(addToCart(productId))
+    updateQtyDispatch: (productId, newProduct) =>
+      dispatch(updateQty(productId, newProduct))
   }
 }
 
