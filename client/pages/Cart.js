@@ -11,11 +11,12 @@ class Cart extends React.Component {
   total() {
     return this.props.cartItems
       .map(item => item.price * item.order_item.quantity)
-      .reduce((x, y) => x + y)
+      .reduce((currPrice, newPrice) => currPrice + newPrice)
   }
 
   render() {
-    if (this.props.cartItems.length > 0) {
+    const {cartItems} = this.props
+    if (cartItems.length > 0) {
       return (
         <div className="page cart-page">
           <h1>Your Shopping Cart</h1>
@@ -24,7 +25,7 @@ class Cart extends React.Component {
             <Link to="/checkout">Proceed to Checkout</Link>
           </div> */}
           <div id="cart">
-            {this.props.cartItems.map(item => (
+            {cartItems.map(item => (
               <CartTile key={item.id} item={item} />
             ))}
           </div>
