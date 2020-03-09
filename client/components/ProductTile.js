@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 const ProductTile = props => {
   const {product} = props
   return (
-    <div className="product-card">
+    <div className="card card-hover product-card">
       <Link to={`/products/${product.id}`}>
         <img src={product.image} />
       </Link>

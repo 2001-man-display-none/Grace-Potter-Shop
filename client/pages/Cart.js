@@ -37,7 +37,7 @@ class Cart extends React.Component {
             </div>
             <div className="cart-row-right">
               <Link
-                className="pure-button button-primary button-large"
+                className="pure-button button-primary button-xlarge"
                 to="/checkout"
               >
                 Proceed to Checkout
