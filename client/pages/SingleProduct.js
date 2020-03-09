@@ -22,7 +22,7 @@ class SingleProduct extends React.Component {
   handleAddToCart(event) {
     event.preventDefault()
     let productId = event.target.id
-    this.props.addToCartDispatch(productId, {quantity: this.state.quantity})
+    this.props.addToCartDispatch(productId, this.state.quantity)
     this.toggleConfirmationPopup()
   }
 
@@ -34,14 +34,13 @@ class SingleProduct extends React.Component {
 
   handleQtyChange(value) {
     this.setState({
-      [event.target.name]: +value
+      quantity: +value
     })
   }
 
   render() {
     let singleProduct = this.props.singleProduct
     let productId = this.props.productId
-    console.log('singlepage:', this.state)
     return (
       <div>
         <h2>{singleProduct.name}</h2>
