@@ -17,20 +17,32 @@ class Cart extends React.Component {
   render() {
     if (this.props.cartItems.length > 0) {
       return (
-        <div>
+        <div className="page cart-page">
           <h1>Your Shopping Cart</h1>
-          <div className="total">
+          {/* <div className="cart-header">
             <h3>Total: $ {this.total().toFixed(2)}</h3>
             <Link to="/checkout">Proceed to Checkout</Link>
-          </div>
+          </div> */}
           <div id="cart">
             {this.props.cartItems.map(item => (
               <CartTile key={item.id} item={item} />
             ))}
           </div>
-          <div className="total">
-            <h3>Total: $ {this.total().toFixed(2)}</h3>
-            <Link to="/checkout">Proceed to Checkout</Link>
+          <div className="cart-footer">
+            <div className="cart-row-left"></div>
+            <div className="cart-row-mid">
+              <div className="cart-total">
+                Total: ${this.total().toFixed(2)}
+              </div>
+            </div>
+            <div className="cart-row-right">
+              <Link
+                className="pure-button button-primary button-large"
+                to="/checkout"
+              >
+                Proceed to Checkout
+              </Link>
+            </div>
           </div>
         </div>
       )
@@ -38,7 +50,7 @@ class Cart extends React.Component {
       return (
         <div id="empty-cart">
           <h1>Your cart is empty... </h1>
-          <img src="/sad-flower.png"></img>
+          <img src="/images/sad-flower.png"></img>
         </div>
       )
     }

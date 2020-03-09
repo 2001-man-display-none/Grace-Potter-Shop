@@ -2,17 +2,16 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 
 const ProductTile = props => {
+  const {product} = props
   return (
-    <div className="product-list">
-      {props.products.map(product => (
-        <div key={product.id} className="product-card">
-          <Link to={`/products/${product.id}`}>
-            <img src={product.image} />
-            <h2>{product.name}</h2>
-          </Link>
-          <p className="price">${product.price}</p>
-        </div>
-      ))}
+    <div className="product-card">
+      <Link to={`/products/${product.id}`}>
+        <img src={product.image} />
+      </Link>
+      <Link className="product-card-body" to={`/products/${product.id}`}>
+        <div className="price">${product.price}</div>
+        <div className="product-link">{product.name}</div>
+      </Link>
     </div>
   )
 }
