@@ -8,9 +8,11 @@ router.get('/', async (req, res, next) => {
     const products = await Product.findAll()
     if (products) {
       res.json(products)
+    } else {
+      res.status(404).send('No products found')
     }
   } catch (err) {
-    res.status(404).send(err)
+    res.status(500).send(err)
   }
 })
 
