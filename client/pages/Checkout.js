@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchCart, checkout} from '../store/cart'
 import {Link} from 'react-router-dom'
-import ConnectedCheckoutTile from '../components/CheckoutTile'
+import ItemInfo from '../components/ItemInfo'
 
 class Checkout extends React.Component {
   componentDidMount() {
@@ -12,8 +12,8 @@ class Checkout extends React.Component {
   total(cartItems) {
     return cartItems
       .map(item => item.price * item.order_item.quantity)
-      .reduce((x, y) => {
-        return x + y
+      .reduce((currPrice, newPrice) => {
+        return currPrice + newPrice
       }, 0)
       .toFixed(2)
   }
@@ -36,14 +36,22 @@ class Checkout extends React.Component {
             Confirm Order
           </button>
         </div>
-        <ConnectedCheckoutTile cartItems={this.props.cartItems} />
+        <div id="cart">
+          {cart.map(item => (
+            <ItemInfo key={item.id} item={item} />
+          ))}
+        </div>
         <div className="total">
           <Link to="/cart">Return to cart</Link>
           <h3>Total: $ {this.total(cart)}</h3>
-          <button type="button" onClick={() => {}}>
+          <button
+            type="button"
+            onClick={() => {
+              this.props.checkout()
+            }}
+          >
             Confirm Order
           </button>
-          {/* <Link to="/confirmation" onClick={()=> {}}>Confirm Order</Link> */}
         </div>
       </div>
     )
