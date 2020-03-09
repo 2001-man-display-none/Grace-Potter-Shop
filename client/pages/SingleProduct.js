@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleProduct} from '../store/singleProduct'
-import {updateQty} from '../store/cart'
+import {updateQty, addToCart} from '../store/cart'
 import ConfirmationPopup from '../components/ConfirmationPopup'
 import QuantityDropdown from '../components/QuantityDropdown'
 
@@ -22,7 +22,8 @@ class SingleProduct extends React.Component {
   handleAddToCart(event) {
     event.preventDefault()
     let productId = event.target.id
-    this.props.updateQtyDispatch(productId, {quantity: this.state.quantity})
+    // this.props.updateQtyDispatch(productId, {quantity: this.state.quantity})
+    this.props.addToCartDispatch(productId, {quantity: this.state.quantity})
     this.toggleConfirmationPopup()
   }
 
@@ -86,6 +87,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchSingleProductDispatch: productId =>
       dispatch(fetchSingleProduct(productId)),
+    addToCartDispatch: (productId, updatedProduct) =>
+      dispatch(addToCart(productId, updatedProduct)),
     updateQtyDispatch: (productId, newProduct) =>
       dispatch(updateQty(productId, newProduct))
   }
