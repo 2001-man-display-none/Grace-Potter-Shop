@@ -29,6 +29,7 @@ router.post('/checkout', async (req, res, next) => {
   try {
     const order = await req.cart.get()
     await order.update({status: 'fulfilled'})
+    req.cart.clear()
     const newOrder = await Order.findByPk(order.id, {
       include: [{model: Product}],
       through: {attributes: ['quantity']}
