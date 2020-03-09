@@ -1,6 +1,9 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+
+import NavLink from './NavLink'
+import CartIcon from './CartIcon'
 import {logout} from '../store/user'
 import {fetchCart} from '../store/cart'
 
@@ -9,32 +12,33 @@ class Navbar extends React.Component {
     this.props.fetchCart()
   }
   render() {
-    const props = this.props
+    const {isLoggedIn, dispatchLogout, numOfItemsInCart} = this.props
     return (
       <div>
         <nav>
           <ul className="nav-left">
             <li id="logo">
-              <img className="logo" src="/gp-home.png" />
-            </li>
-            <li>
-              <h3>Grace Potter</h3>
+              <img className="logo" src="/images/catctus-minified.svg" />
+              <Link className="logo-link" to="/">
+                Grace
+                <br /> Potter
+              </Link>
             </li>
           </ul>
           <ul className="nav-center">
             <li>
-              <Link to="/products">Products</Link>
+              <NavLink to="/products">Products</NavLink>
             </li>
           </ul>
           <ul className="nav-right">
-            {props.isLoggedIn ? (
+            {isLoggedIn ? (
               <>
                 {/* The navbar will show these links after you log in */}
                 <li>
-                  <Link to="/home">Home</Link>
+                  <NavLink to="/home">Home</NavLink>
                 </li>
                 <li>
-                  <a href="#" onClick={props.handleClick}>
+                  <a className="nav-link" href="#" onClick={dispatchLogout}>
                     Logout
                   </a>
                 </li>
@@ -43,20 +47,17 @@ class Navbar extends React.Component {
               <>
                 {/* The navbar will show these links before you log in */}
                 <li>
-                  <Link to="/login">Login</Link>
+                  <NavLink to="/login">Login</NavLink>
                 </li>
                 <li>
-                  <Link to="/signup">Sign Up</Link>
+                  <NavLink to="/signup">Sign Up</NavLink>
                 </li>
               </>
             )}
-            <div>
-              <div className="cart-info">
-                <div className="cart-icon" />
-                <div className="cart-num">{props.numOfItemsInCart}</div>
-              </div>
-              <Link to="/cart">Cart</Link>
-            </div>
+            <li>
+              <CartIcon itemCount={numOfItemsInCart} />
+              <NavLink to="/cart">Cart</NavLink>
+            </li>
           </ul>
         </nav>
       </div>
@@ -77,9 +78,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return {
-    handleClick() {
-      dispatch(logout())
-    },
+    dispatchLogout: () => dispatch(logout()),
     fetchCart: () => dispatch(fetchCart())
   }
 }
