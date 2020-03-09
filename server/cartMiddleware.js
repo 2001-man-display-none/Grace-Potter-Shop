@@ -50,11 +50,11 @@ class CartMiddleware {
 
       if (guestCart && !userCart) {
         guestCart.setUser(this.req.user)
+        this.req.session.cartId = null
       } else {
-        // what do we do when they have items in their
-        // guest cart but log into an account that already
-        // has a cart?
-        console.warn("cartMiddleware: conflict, cant't save guest cart to user")
+        await userCart.mergeFrom(guestCart)
+        this.req.session.cartId = null
+        await guestCart.destroy()
       }
     }
   }

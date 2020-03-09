@@ -1,9 +1,16 @@
 'use strict'
 
 const faker = require('faker')
+const axios = require('axios')
 
 const db = require('../server/db')
 const {User, Product, Order, OrderItem} = require('../server/db/models')
+
+// const base = 'https://trefle.io/api/plants/122750?token='
+const apiKey = '?token=YjAwaXFsODFVOVhmWkR6dEY4MEhoZz09'
+// const url = base + apiKey
+// const url =
+//   'https://trefle.io/api/plants/122750?token=YjAwaXFsODFVOVhmWkR6dEY4MEhoZz09'
 
 function repeat(n, f) {
   return Array(n)
@@ -19,6 +26,17 @@ async function seed(quiet = false) {
   const userData = repeat(100, fakeUser)
   const users = await Promise.all(userData.map(d => User.create(d)))
   log(`seeded ${users.length} users`)
+
+  const {data} = await axios.get(
+    'https://trefle.io/api/plants?token=YjAwaXFsODFVOVhmWkR6dEY4MEhoZz09'
+  )
+  // console.log(data[0])
+
+  data.map(async plant => {
+    let plantLink = plant.link + apiKey
+    const plantData = await axios.get(plantLink)
+    console.log(plantData.images)
+  })
 
   const productData = repeat(50, fakeProduct)
   const products = await Promise.all(productData.map(p => Product.create(p)))
