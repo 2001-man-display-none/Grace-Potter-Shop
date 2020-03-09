@@ -6,8 +6,8 @@ class OrderConfirmation extends React.Component {
   total(cart) {
     return cart
       .map(item => item.price * item.order_item.quantity)
-      .reduce((x, y) => {
-        return x + y
+      .reduce((currTotal, itemTotal) => {
+        return currTotal + itemTotal
       }, 0)
       .toFixed(2)
   }
