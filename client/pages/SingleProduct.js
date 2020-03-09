@@ -2,12 +2,16 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleProduct} from '../store/singleProduct'
 import {addToCart} from '../store/cart'
+import ConfirmationPopup from '../components/ConfirmationPopup'
+import QuantityDropdown from '../components/QuantityDropdown'
 
 class SingleProduct extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {showPopup: false, quantity: 1}
+    this.handleQtyChange = this.handleQtyChange.bind(this)
     this.handleAddToCart = this.handleAddToCart.bind(this)
+    this.toggleConfirmationPopup = this.toggleConfirmationPopup.bind(this)
   }
 
   componentDidMount() {
@@ -18,13 +22,25 @@ class SingleProduct extends React.Component {
   handleAddToCart(event) {
     event.preventDefault()
     let productId = event.target.id
-    this.props.addToCartDispatch(productId)
+    this.props.addToCartDispatch(productId, this.state.quantity)
+    this.toggleConfirmationPopup()
+  }
+
+  toggleConfirmationPopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    })
+  }
+
+  handleQtyChange(value) {
+    this.setState({
+      quantity: +value
+    })
   }
 
   render() {
     let singleProduct = this.props.singleProduct
     let productId = this.props.productId
-
     return (
       <div className="page-wide single-product-page">
         <div className="single-product-image">
@@ -47,6 +63,15 @@ class SingleProduct extends React.Component {
             >
               Add To Cart
             </button>
+            <QuantityDropdown handleQtyChange={this.handleQtyChange} />
+            <div className="cart-toast">
+              {this.state.showPopup ? (
+                <ConfirmationPopup
+                  closePopup={this.toggleConfirmationPopup}
+                  singleProduct={singleProduct.name}
+                />
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
@@ -65,7 +90,8 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchSingleProductDispatch: productId =>
       dispatch(fetchSingleProduct(productId)),
-    addToCartDispatch: productId => dispatch(addToCart(productId))
+    addToCartDispatch: (productId, updatedProduct) =>
+      dispatch(addToCart(productId, updatedProduct))
   }
 }
 

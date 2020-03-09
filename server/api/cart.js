@@ -61,7 +61,7 @@ router.post('/:productId', async (req, res, next) => {
 
     const cart = await req.cart.getOrCreate()
     const prevCount = await cart.getQuantity(productId)
-    await cart.setQuantity(productId, prevCount + 1)
+    await cart.setQuantity(productId, prevCount + req.body.quantity)
 
     const updatedCart = await cart.getQuantities()
 
