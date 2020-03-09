@@ -12,8 +12,8 @@ class Checkout extends React.Component {
   total(cartItems) {
     return cartItems
       .map(item => item.price * item.order_item.quantity)
-      .reduce((currTotal, newTotal) => {
-        return currTotal + newTotal
+      .reduce((currTotal, itemTotal) => {
+        return currTotal + itemTotal
       }, 0)
       .toFixed(2)
   }

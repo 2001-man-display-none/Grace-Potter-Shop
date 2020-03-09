@@ -11,7 +11,7 @@ class Cart extends React.Component {
   total() {
     return this.props.cartItems
       .map(item => item.price * item.order_item.quantity)
-      .reduce((currTotal, newTotal) => currTotal + newTotal)
+      .reduce((currTotal, itemTotal) => currTotal + itemTotal)
   }
 
   render() {
