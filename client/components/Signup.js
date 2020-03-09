@@ -17,21 +17,15 @@ const Signup = props => {
       >
         <fieldset>
           <div className="pure-control-group">
-            <label htmlFor="name">
-              <small>Name</small>
-            </label>
+            <label htmlFor="name">Name</label>
             <input name="name" type="text" />
           </div>
           <div className="pure-control-group">
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
+            <label htmlFor="email">Email</label>
             <input name="email" type="text" />
           </div>
           <div className="pure-control-group">
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
+            <label htmlFor="password">Password</label>
             <input name="password" type="password" />
           </div>
           <div className="pure-controls">
