@@ -2,12 +2,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchSingleProduct} from '../store/singleProduct'
 import {addToCart} from '../store/cart'
+import ConfirmationPopup from '../components/ConfirmationPopup'
 
 class SingleProduct extends React.Component {
   constructor() {
     super()
-    this.state = {}
+    this.state = {showPopup: false}
     this.handleAddToCart = this.handleAddToCart.bind(this)
+    this.toggleConfirmationPopup = this.toggleConfirmationPopup.bind(this)
   }
 
   componentDidMount() {
@@ -19,6 +21,13 @@ class SingleProduct extends React.Component {
     event.preventDefault()
     let productId = event.target.id
     this.props.addToCartDispatch(productId)
+    this.toggleConfirmationPopup()
+  }
+
+  toggleConfirmationPopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    })
   }
 
   render() {
@@ -42,6 +51,14 @@ class SingleProduct extends React.Component {
           >
             Add To Cart
           </button>
+          <div>
+            {this.state.showPopup ? (
+              <ConfirmationPopup
+                closePopup={this.toggleConfirmationPopup}
+                singleProduct={singleProduct.name}
+              />
+            ) : null}
+          </div>
         </div>
       </div>
     )

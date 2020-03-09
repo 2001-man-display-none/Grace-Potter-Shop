@@ -17,7 +17,11 @@ export class ProductList extends React.Component {
         return (
           <div>
             <h1>Available Products</h1>
-            <ProductTile {...this.props} />
+            <div className="product-list">
+              {this.props.products.map(product => (
+                <ProductTile key={product.id} product={product} />
+              ))}
+            </div>
           </div>
         )
       default:
