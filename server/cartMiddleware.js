@@ -39,6 +39,10 @@ class CartMiddleware {
     return cart
   }
 
+  clear() {
+    this.req.session.cartId = null
+  }
+
   async saveToUser() {
     if (this.req.user && this.req.session.cartId) {
       const guestCart = await this.getGuestCart()
