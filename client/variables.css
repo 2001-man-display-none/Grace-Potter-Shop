@@ -14,5 +14,13 @@
   --color-light: #fff5b5;
   --color-dark: #352309;
 
+  --color-white-back: #f0f0f0;
+  --color-white-mid: #f8f8f8;
+  --color-white-fore: #ffffff;
+
   --spacing: 8px;
+
+  --font-family-normal: 'Roboto', sans-serif;
+  --font-family-heading: 'Open Sans', sans-serif;
+  --font-weight-heading: 600;
 }

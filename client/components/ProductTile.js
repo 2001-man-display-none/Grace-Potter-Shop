@@ -8,9 +8,9 @@ const ProductTile = props => {
       <Link to={`/products/${product.id}`}>
         <img src={product.image} />
       </Link>
-      <div className="price">${product.price}</div>
-      <Link className="product-link" to={`/products/${product.id}`}>
-        {product.name}
+      <Link className="product-card-body" to={`/products/${product.id}`}>
+        <div className="price">${product.price}</div>
+        <div className="product-link">{product.name}</div>
       </Link>
     </div>
   )
