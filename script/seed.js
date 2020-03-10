@@ -1,13 +1,9 @@
 'use strict'
 
 const faker = require('faker')
-const axios = require('axios')
 
 const db = require('../server/db')
 const {User, Product, Order, OrderItem} = require('../server/db/models')
-
-const apiKey = '?token=YjAwaXFsODFVOVhmWkR6dEY4MEhoZz09'
-const url = 'https://trefle.io/api/plants/'
 
 function repeat(n, f) {
   return Array(n)
@@ -24,48 +20,16 @@ async function seed(quiet = false) {
   const users = await Promise.all(userData.map(d => User.create(d)))
   log(`seeded ${users.length} users`)
 
-  //getting product data from Trefle API
-  //**REMEMBER use your own personal Trefle API key
-  const {data} = await axios.get(url + apiKey)
+  const productData = repeat(50, fakeProduct)
+  const products = await Promise.all(productData.map(p => Product.create(p)))
+  log(`seeded ${products.length} products`)
 
-  //mapping through all the plants in the API database... its only pulling 30??
-  const productData = data.map(async plant => {
-    //going to the single product link to which has more information about the plant than on the 'All Plants' view
-    let plantLink = plant.link + apiKey
-    const {data} = await axios.get(plantLink)
+  const orders = await fakeOrders(users, products)
+  log(`seeded ${orders.length} orders`)
 
-    //setting a random price
-    let randomPrice = Math.random() * 50
-
-    //checking if databse has an image, if not, using a stock image
-    let image
-    if (data.images.length > 1) {
-      image = data.images[0].url
-    } else {
-      image =
-        'https://cdn3.iconfinder.com/data/icons/spring-23/32/sunflower-flower-spring-blossom-nature-ecology-512.png'
-    }
-
-    //creating an instance for each product in the Product model
-    await Product.create({
-      name: data.main_species.common_name
-        ? data.main_species.common_name
-        : 'tulip',
-      description: data.slug,
-      price: randomPrice.toFixed(2),
-      image: image
-    })
-  })
-
-  // const products = await Promise.all(productData.map(p => Product.create(p)))
-  log(`seeded ${productData.length} products`)
-
-  // const orders = await fakeOrders(users, products)
-  // log(`seeded ${orders.length} orders`)
-
-  // const itemsData = orders.map(order => fakeOrderItems(order, products))
-  // const items = await OrderItem.bulkCreate(itemsData.flat())
-  // log(`seeded ${items.length} order items`)
+  const itemsData = orders.map(order => fakeOrderItems(order, products))
+  const items = await OrderItem.bulkCreate(itemsData.flat())
+  log(`seeded ${items.length} order items`)
 
   log(`seeded successfully`)
 }

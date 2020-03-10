@@ -1,0 +1,567 @@
+[
+  {
+    "scientific_name": "Ceanothus ×flexilis",
+    "family_common_name": "Buckthorn family",
+    "common_name": "flexible ceanothus",
+    "specifications_mature_height": {
+      "ft": 1,
+      "cm": 30.478512648582743
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Low",
+    "growth_drought_tolerance": "High",
+    "flower_conspicuous": true,
+    "foliage_texture": "Coarse",
+    "images": []
+  },
+  {
+    "scientific_name": "Forsythia ×intermedia",
+    "family_common_name": "Olive family",
+    "common_name": "showy forsythia",
+    "specifications_mature_height": {
+      "ft": 10,
+      "cm": 304.78512648582745
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "High",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": true,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Lupinus ×alpestris",
+    "family_common_name": "Pea family",
+    "common_name": "Great Basin lupine",
+    "specifications_mature_height": {
+      "ft": 2.2,
+      "cm": 67.05272782688205
+    },
+    "seed_commercial_availability": "No Known Source",
+    "growth_moisture_use": "Low",
+    "growth_drought_tolerance": "High",
+    "flower_conspicuous": true,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Photinia ×fraseri",
+    "family_common_name": "Rose family",
+    "common_name": "Fraser's photinia",
+    "specifications_mature_height": {
+      "ft": 12,
+      "cm": 365.74215178299295
+    },
+    "seed_commercial_availability": "No Known Source",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": null,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Taxus ×media",
+    "family_common_name": "Yew family",
+    "common_name": "hybrid yew",
+    "specifications_mature_height": {
+      "ft": 14,
+      "cm": 426.69917708015845
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Low",
+    "growth_drought_tolerance": "High",
+    "flower_conspicuous": null,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Crataegus ×anomala",
+    "family_common_name": "Rose family",
+    "common_name": "Arnold hawthorn",
+    "specifications_mature_height": {
+      "ft": 30,
+      "cm": 914.3553794574824
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": true,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Citrus ×paradisi",
+    "family_common_name": "Rue family",
+    "common_name": "grapefruit",
+    "specifications_mature_height": {
+      "ft": 20,
+      "cm": 609.5702529716549
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": true,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Magnolia ×soulangiana",
+    "family_common_name": "Magnolia family",
+    "common_name": "Chinese magnolia",
+    "specifications_mature_height": {
+      "ft": 30,
+      "cm": 914.3553794574824
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": true,
+    "foliage_texture": "Coarse",
+    "images": []
+  },
+  {
+    "scientific_name": "Populus ×canadensis",
+    "family_common_name": "Willow family",
+    "common_name": "Carolina poplar",
+    "specifications_mature_height": {
+      "ft": 120,
+      "cm": 3657.4215178299296
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "High",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": null,
+    "foliage_texture": "Coarse",
+    "images": []
+  },
+  {
+    "scientific_name": "Salix ×sepulcralis",
+    "family_common_name": "Willow family",
+    "common_name": "weeping willow",
+    "specifications_mature_height": {
+      "ft": 70,
+      "cm": 2133.4958854007923
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "High",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": null,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Salix ×cottetii",
+    "family_common_name": "Willow family",
+    "common_name": "Cottet willow",
+    "specifications_mature_height": {
+      "ft": 5,
+      "cm": 152.39256324291372
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "High",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": null,
+    "foliage_texture": "Coarse",
+    "images": []
+  },
+  {
+    "scientific_name": "Abies ×shastensis",
+    "family_common_name": null,
+    "common_name": null,
+    "specifications_mature_height": {
+      "ft": 180,
+      "cm": 5486.132276744894
+    },
+    "seed_commercial_availability": "Contracting Only",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": null,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Arnica ×diversifolia",
+    "family_common_name": "Aster family",
+    "common_name": "rayless arnica",
+    "specifications_mature_height": {
+      "ft": 1.3,
+      "cm": 39.62206644315757
+    },
+    "seed_commercial_availability": "No Known Source",
+    "growth_moisture_use": "High",
+    "growth_drought_tolerance": "None",
+    "flower_conspicuous": true,
+    "foliage_texture": "Coarse",
+    "images": []
+  },
+  {
+    "scientific_name": "Arabis ×divaricarpa",
+    "family_common_name": "Mustard family",
+    "common_name": "spreadingpod rockcress",
+    "specifications_mature_height": {
+      "ft": 3,
+      "cm": 91.43553794574824
+    },
+    "seed_commercial_availability": "No Known Source",
+    "growth_moisture_use": "Low",
+    "growth_drought_tolerance": "High",
+    "flower_conspicuous": true,
+    "foliage_texture": "Coarse",
+    "images": []
+  },
+  {
+    "scientific_name": "Atriplex ×aptera",
+    "family_common_name": "Goosefoot family",
+    "common_name": "moundscale",
+    "specifications_mature_height": {
+      "ft": 3,
+      "cm": 91.43553794574824
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "High",
+    "flower_conspicuous": null,
+    "foliage_texture": "Coarse",
+    "images": []
+  },
+  {
+    "scientific_name": "Symplocarpus foetidus",
+    "family_common_name": "Arum family",
+    "common_name": "skunk cabbage",
+    "specifications_mature_height": {
+      "ft": 2,
+      "cm": 60.95702529716549
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "High",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": true,
+    "foliage_texture": "Coarse",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/05/SKUNKCABBAGE-MOSS-400X575.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/%EC%95%89%EC%9D%80%EB%B6%80%EC%B1%84.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Symplocarpus_foetidus_002.JPG"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Skunk_Cabbage_Leaves.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/5d/Eastern_Skunk_Cabbage_along_brook_in_sprintime.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Skunk_cabbage_and_marsh_marigolds.jpg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Vaccinium stamineum",
+    "family_common_name": "Heath family",
+    "common_name": "deerberry",
+    "specifications_mature_height": {
+      "ft": 16,
+      "cm": 487.6562023773239
+    },
+    "seed_commercial_availability": "No Known Source",
+    "growth_moisture_use": "Low",
+    "growth_drought_tolerance": "High",
+    "flower_conspicuous": true,
+    "foliage_texture": "Medium",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/3e/Vaccinium_stamineum_1.jpg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Chamaecyparis nootkatensis",
+    "family_common_name": null,
+    "common_name": null,
+    "specifications_mature_height": {
+      "ft": 75,
+      "cm": 2285.888448643706
+    },
+    "seed_commercial_availability": "Contracting Only",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": null,
+    "foliage_texture": "Fine",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/Symbol_redirect_arrow_with_gradient.svg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Carex stricta",
+    "family_common_name": "Sedge family",
+    "common_name": "upright sedge",
+    "specifications_mature_height": {
+      "ft": 4.2,
+      "cm": 128.00975312404753
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": null,
+    "foliage_texture": "Fine",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/Carex_stricta.jpg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Carex subspathacea",
+    "family_common_name": "Sedge family",
+    "common_name": "Hoppner's sedge",
+    "specifications_mature_height": {
+      "ft": 1,
+      "cm": 30.478512648582743
+    },
+    "seed_commercial_availability": null,
+    "growth_moisture_use": null,
+    "growth_drought_tolerance": "None",
+    "flower_conspicuous": null,
+    "foliage_texture": "Fine",
+    "images": []
+  },
+  {
+    "scientific_name": "Crescentia cujete",
+    "family_common_name": "Trumpet-creeper family",
+    "common_name": "common calabash tree",
+    "specifications_mature_height": {
+      "ft": 33,
+      "cm": 1005.7909174032305
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": null,
+    "growth_drought_tolerance": null,
+    "flower_conspicuous": true,
+    "foliage_texture": null,
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/ff/Crescentia_cujete_MHNT.BOT.2011.18.25.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/5/56/Pair_of_lemons.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/98/Tree_template.svg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Verbena_Purple_1.JPG"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/95/2014.09-421-196ap_calabash_tree%2Cbowl_Finkoloni%2CN%27Goutjina_Cmn.%28Koutiala_Crc.%2CSikasso_Rgn%29%2CML_fri05sep2014-1016h.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Arabic_herbal_medicine_guidebook.jpeg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9b/Coat_of_arms_of_Saint_Lucia.svg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Dodonaea viscosa",
+    "family_common_name": "Soapberry family",
+    "common_name": "Florida hopbush",
+    "specifications_mature_height": {
+      "ft": 15,
+      "cm": 457.1776897287412
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Low",
+    "growth_drought_tolerance": "High",
+    "flower_conspicuous": null,
+    "foliage_texture": "Medium",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/0/0c/Akeake.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Dodonaea_viscosa_%28Hopbush%29_W2_IMG_1899.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Dodonaea_viscosa_%28Hopbush%29_in_Hyderabad%2C_AP_W_IMG_9820.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Dodonaea_viscosa_%28Hopbush%29_in_Hyderabad%2C_AP_W_IMG_9823.jpg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Downingia bicornuta",
+    "family_common_name": "Bellflower family",
+    "common_name": "doublehorn calicoflower",
+    "specifications_mature_height": {
+      "ft": 0.8,
+      "cm": 24.382810118866196
+    },
+    "seed_commercial_availability": "No Known Source",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": true,
+    "foliage_texture": "Medium",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Downingiabicornuta.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/e/e6/GlockenblumenBluete.jpg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Dryas drummondii",
+    "family_common_name": "Rose family",
+    "common_name": "Drummond's mountain-avens",
+    "specifications_mature_height": {
+      "ft": 1,
+      "cm": 30.478512648582743
+    },
+    "seed_commercial_availability": "Contracting Only",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": true,
+    "foliage_texture": "Medium",
+    "images": []
+  },
+  {
+    "scientific_name": "Allium acuminatum",
+    "family_common_name": "Lily family",
+    "common_name": "tapertip onion",
+    "specifications_mature_height": {
+      "ft": 1,
+      "cm": 30.478512648582743
+    },
+    "seed_commercial_availability": "Contracting Only",
+    "growth_moisture_use": "Low",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": true,
+    "foliage_texture": "Fine",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/21/Alliumacuminatum.JPG"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Anaphalis margaritacea",
+    "family_common_name": "Aster family",
+    "common_name": "western pearly everlasting",
+    "specifications_mature_height": {
+      "ft": 3,
+      "cm": 91.43553794574824
+    },
+    "seed_commercial_availability": "Contracting Only",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": true,
+    "foliage_texture": "Coarse",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Anapahlis_margaritacea.jpg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Amaranthus californicus",
+    "family_common_name": "Amaranth family",
+    "common_name": "California amaranth",
+    "specifications_mature_height": {
+      "ft": 1,
+      "cm": 30.478512648582743
+    },
+    "seed_commercial_availability": "No Known Source",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": null,
+    "foliage_texture": "Fine",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Amaranthus_cruentus_Foxtail_2.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Amaranthuscalifornicus.jpg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Amelanchier sanguinea",
+    "family_common_name": "Rose family",
+    "common_name": "roundleaf serviceberry",
+    "specifications_mature_height": {
+      "ft": 10,
+      "cm": 304.78512648582745
+    },
+    "seed_commercial_availability": "No Known Source",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Medium",
+    "flower_conspicuous": true,
+    "foliage_texture": "Medium",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Aardbei-bloemcloseup.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Amelanchier_sanguinea_-roundleaf_serciveberry.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Amelanchier_sanguinea_range_map_1.png"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/4/41/Blutrote_Felsenbirne_%28Amelanchier_sanguinea%29_5868.JPG"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Amelanchier canadensis",
+    "family_common_name": "Rose family",
+    "common_name": "Canadian serviceberry",
+    "specifications_mature_height": {
+      "ft": 23,
+      "cm": 701.0057909174031
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "Low",
+    "flower_conspicuous": true,
+    "foliage_texture": "Coarse",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Amelanchier_canadensis_berry.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/2/28/Amelanchier_canadensis_flower.jpg"
+      }
+    ]
+  },
+  {
+    "scientific_name": "Andropogon virginicus",
+    "family_common_name": "Grass family",
+    "common_name": "broomsedge bluestem",
+    "specifications_mature_height": {
+      "ft": 3,
+      "cm": 91.43553794574824
+    },
+    "seed_commercial_availability": "Routinely Available",
+    "growth_moisture_use": "Medium",
+    "growth_drought_tolerance": "High",
+    "flower_conspicuous": null,
+    "foliage_texture": "Medium",
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/BroomsedgeInWinter.JPG"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/a/ad/Starr_031118-0122_Andropogon_virginicus.jpg"
+      }
+    ]
+  }
+]
