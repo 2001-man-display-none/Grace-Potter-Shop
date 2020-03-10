@@ -114,7 +114,11 @@ class CartTile extends React.Component {
               </button>
             </div>
           </div>
-        ) : null}
+        ) : (
+          <div className="cart-row-right">
+            <div className="cart-item-quantity">{quantity}</div>
+          </div>
+        )}
       </div>
     )
   }

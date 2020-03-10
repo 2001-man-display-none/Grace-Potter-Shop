@@ -5,24 +5,32 @@ import {addToCart} from '../store/cart'
 
 const ProductTile = props => {
   const {product} = props
+  const toProduct = `/products/${product.id}`
+
   return (
     <div className="card card-hover product-card">
-      <Link to={`/products/${product.id}`}>
-        <img src={product.image} />
-      </Link>
-      <Link className="product-card-body" to={`/products/${product.id}`}>
-        <div className="price">${product.price}</div>
-        <div className="product-link">{product.name}</div>
-      </Link>
-      <div>
-        <button
-          id={product.id}
-          type="button"
-          className="button"
-          onClick={() => props.addToCart(product.id)}
-        >
-          Add To Cart
-        </button>
+      <div className="product-card-image">
+        <div className="product-card-overlay">
+          <button
+            id={product.id}
+            type="button"
+            className="pure-button product-card-button button-small"
+            onClick={() => props.addToCart(product.id)}
+          >
+            Add To Cart
+          </button>
+        </div>
+        <Link to={toProduct}>
+          <img src={product.image} />
+        </Link>
+      </div>
+      <div className="product-card-body">
+        <Link to={toProduct} className="price">
+          ${product.price}
+        </Link>
+        <Link to={toProduct} className="product-link">
+          {product.name}
+        </Link>
       </div>
     </div>
   )

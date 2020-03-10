@@ -43,6 +43,14 @@ class SingleProduct extends React.Component {
     let productId = this.props.productId
     return (
       <div className="page-wide single-product-page">
+        <div className="cart-toast">
+          {this.state.showPopup ? (
+            <ConfirmationPopup
+              closePopup={this.toggleConfirmationPopup}
+              singleProduct={singleProduct.name}
+            />
+          ) : null}
+        </div>
         <div className="single-product-image">
           <img src={singleProduct.image} width="200" height="200" />
         </div>
@@ -58,20 +66,12 @@ class SingleProduct extends React.Component {
             <button
               id={productId}
               type="button"
-              className="pure-button button-primary"
+              className="pure-button button-primary button-large"
               onClick={this.handleAddToCart}
             >
               Add To Cart
             </button>
             <QuantityDropdown handleQtyChange={this.handleQtyChange} />
-            <div className="cart-toast">
-              {this.state.showPopup ? (
-                <ConfirmationPopup
-                  closePopup={this.toggleConfirmationPopup}
-                  singleProduct={singleProduct.name}
-                />
-              ) : null}
-            </div>
           </div>
         </div>
       </div>
