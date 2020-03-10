@@ -40,7 +40,7 @@ class CartTile extends React.Component {
   }
 
   render() {
-    const {item} = this.props
+    const {item, status} = this.props
     const {quantity} = item.order_item
 
     const price = (
@@ -71,49 +71,50 @@ class CartTile extends React.Component {
           <Link className="cart-item-link" to={`/items/${item.id}`}>
             {item.name}
           </Link>
-          {/* <p>{item.description}</p> */}
           <p>
             {price}
             {unitPrice}
           </p>
         </div>
-        <div className="cart-row-right">
-          <div className="cart-item-controls">
-            <div className="cart-item-controls-quantity">
-              <label>Quantity</label>
+        {status ? (
+          <div className="cart-row-right">
+            <div className="cart-item-controls">
+              <div className="cart-item-controls-quantity">
+                <label>Quantity</label>
+                <button
+                  id={item.id}
+                  className="pure-button"
+                  type="button"
+                  onClick={this.handleDecrease}
+                  disabled={quantity <= 1}
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  className="cart-item-quantity"
+                  value={quantity}
+                  onChange={this.handleChange}
+                />
+                <button
+                  id={item.id}
+                  className="pure-button"
+                  type="button"
+                  onClick={this.handleIncrease}
+                >
+                  +
+                </button>
+              </div>
               <button
-                id={item.id}
-                className="pure-button"
                 type="button"
-                onClick={this.handleDecrease}
-                disabled={quantity <= 1}
-              >
-                -
-              </button>
-              <input
-                type="number"
-                className="cart-item-quantity"
-                value={quantity}
-                onChange={this.handleChange}
-              />
-              <button
-                id={item.id}
                 className="pure-button"
-                type="button"
-                onClick={this.handleIncrease}
+                onClick={() => this.props.deleteItem(item.id)}
               >
-                +
+                Remove from cart
               </button>
             </div>
-            <button
-              type="button"
-              className="pure-button"
-              onClick={() => this.props.deleteItem(item.id)}
-            >
-              Remove from cart
-            </button>
           </div>
-        </div>
+        ) : null}
       </div>
     )
   }
