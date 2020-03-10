@@ -6,7 +6,6 @@ import {fetchSingleProduct} from '../store/singleProduct'
 import {addToCart} from '../store/cart'
 import QuantityDropdown from '../components/QuantityDropdown'
 import AddToCartButton from '../components/AddToCartButton'
-import '../components/AddToCartButton-style.css'
 
 class SingleProduct extends React.Component {
   constructor() {
