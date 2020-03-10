@@ -15,21 +15,21 @@
     <path stroke="#a84b22" stroke-width="8" d="M12 245h65l3 40H12z"/>
   </g>
   <path fill="none" stroke="#893d1c" stroke-linecap="square" stroke-width="8" d="M4 285h256"/>
-  <path style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1" fill="#893d1c" d="M20 284l-8 2 33 99h8z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible"/>
+  <path fill="#893d1c" d="M20 284l-8 2 33 99h8z" color="#000" font-family="sans-serif" font-weight="400" overflow="visible" style="line-height:normal;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;isolation:auto;mix-blend-mode:normal;solid-color:#000;solid-opacity:1"/>
   <path fill="none" stroke="#893d1c" stroke-linecap="square" stroke-width="8" d="M4 245v40"/>
   <g>
     <g stroke="#178000" stroke-linejoin="round" stroke-width="8">
-      <path fill="#00aa4d" d="M16 4l54 96 25-77z"/>
-      <path fill="#00d25e" d="M261 5L147 25l67 76z"/>
+      <path fill="#00aa4d" d="M27 21l37 81 25-77z"/>
+      <path fill="#00d25e" d="M217 7l-76 20 67 76z"/>
     </g>
     <g transform="translate(-61 224)">
-      <ellipse cx="200.4" cy="-143.2" fill="#00d25e" rx="82.1" ry="69.5"/>
-      <path fill="#00aa4d" d="M230-79c-22 8-43 6-60 1s-34-21-43-31c-10-11-9-35-9-45 1-11 18-35 22-39 6-6 12-7 21 0 13 8 22 14 27 34 6 21-20 41-21 48 0 8 22 13 29 6 3 2 16 6 22 3 8-4 9-7 19 0 4 2 18 14-7 23z"/>
+      <ellipse cx="194.6" cy="-141.3" fill="#00d25e" rx="82.1" ry="69.5"/>
+      <path fill="#00aa4d" d="M225-77c-23 7-44 6-61 1s-34-21-43-31c-9-11-9-35-9-45 1-11 18-35 23-39 5-6 11-7 21 0 12 8 21 14 26 34 6 21-20 41-21 48 0 8 23 13 29 6 4 2 16 6 22 3 8-4 9-8 19 0 4 2 18 14-6 23z"/>
     </g>
     <g transform="translate(-72 -19)">
-      <path fill="none" stroke="#178000" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" d="M181 133c9 20 30 0 27 0s16 20 28-1"/>
-      <path fill="#004e21" d="M198 100c-2 5-8 9-21 8-13 0-23-7-22-16 0-9 14-15 22-14 8 2 23 16 21 22zM221 99c1 6 4 11 17 11 14-1 23-7 23-17-1-9-14-15-23-13-8 1-19 14-17 19zM199 116c-3 1 4 12 9 12 6-1 13-11 9-12z"/>
-      <ellipse cx="200.4" cy="-143.2" fill="none" stroke="#178000" stroke-dasharray="48,16" stroke-dashoffset="28.8" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" rx="82.1" ry="69.5" transform="translate(11 243)"/>
+      <path fill="none" stroke="#178000" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" d="M175 135c9 20 30 0 27 0s17 20 28-1"/>
+      <path fill="#004e21" d="M192 102c-2 5-8 9-21 8-13 0-23-7-22-16 0-10 14-15 22-14 8 2 23 16 21 22zM215 101c2 6 4 11 18 11 13-1 22-7 22-17-1-9-14-15-22-13-9 1-19 14-18 19zM194 118c-4 1 4 12 9 12 5-1 12-11 8-12z"/>
+      <ellipse cx="205.5" cy="101.6" fill="none" stroke="#178000" stroke-dasharray="48,16" stroke-dashoffset="28.8" stroke-linecap="round" stroke-linejoin="round" stroke-width="8" rx="82.1" ry="69.5"/>
     </g>
   </g>
 </svg>

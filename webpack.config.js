@@ -20,6 +20,7 @@ const devPlugins = [
 ]
 
 module.exports = {
+  target: 'web',
   mode: isDev ? 'development' : 'production',
   entry: [
     // enable hot reloading
@@ -31,6 +32,7 @@ module.exports = {
   ],
   output: {
     path: path.join(__dirname, 'public/dist'),
+    publicPath: '/dist/',
     filename: 'bundle.js',
     hotUpdateChunkFilename: '.hot/[id].[hash].hot-update.js',
     hotUpdateMainFilename: '.hot/[hash].hot-update.json'
