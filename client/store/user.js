@@ -70,6 +70,26 @@ export const signup = (name, email, password, redirect = '/home') => {
   }
 }
 
+export const editProfile = (name, email, password, redirect = '/home') => {
+  return async dispatch => {
+    let res
+    try {
+      res = await axios.put(`/auth/editProfile`, {name, email, password})
+    } catch (authError) {
+      return dispatch(getUser({error: authError}))
+    }
+
+    try {
+      dispatch(getUser(res.data))
+      if (redirect) {
+        history.push(redirect)
+      }
+    } catch (dispatchOrHistoryErr) {
+      console.error(dispatchOrHistoryErr)
+    }
+  }
+}
+
 export const logout = () => async dispatch => {
   try {
     await axios.post('/auth/logout')

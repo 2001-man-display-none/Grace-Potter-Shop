@@ -10,6 +10,8 @@ import SingleProduct from './pages/SingleProduct'
 import ProductList from './pages/ProductList'
 import Checkout from './pages/Checkout'
 import OrderConfirmation from './pages/OrderConfirmation'
+import EditProfileForm from './components/EditProfileForm'
+
 /**
  * COMPONENT
  */
@@ -36,7 +38,10 @@ class Routes extends Component {
         {guest && <Route path="/login" component={Login} />}
         {guest && <Route path="/signup" component={Signup} />}
         {/* Routes for logged in users only */}
-        {loggedIn && <Route path="/home" component={UserHome} />}
+        {loggedIn && <Route exact path="/home" component={UserHome} />}
+        {loggedIn && (
+          <Route exact path="/home/editProfile" component={EditProfileForm} />
+        )}
         {/* Displays our product list as a fallback */}
         <Route component={ProductList} />
       </Switch>

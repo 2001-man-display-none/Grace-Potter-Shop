@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchCart, checkout} from '../store/cart'
 import {Link} from 'react-router-dom'
+import {fetchCart, checkout} from '../store/cart'
 import CartTile from '../components/CartTile'
 
 class Checkout extends React.Component {

@@ -44,7 +44,7 @@ class SingleProduct extends React.Component {
         </p>
         <h3>${singleProduct.price}</h3>
         <QuantityDropdown handleQtyChange={this.handleQtyChange} />
-        <ToastProvider placement="bottom-right">
+        <ToastProvider placement="top-right">
           <AddToCartButton
             className="addtocartButton"
             productId={productId}

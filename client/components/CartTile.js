@@ -58,7 +58,7 @@ class CartTile extends React.Component {
     return (
       <div key={item.id} className="cart-tile">
         <div className="cart-row-left">
-          <Link to={`/items/${item.id}`}>
+          <Link to={`/products/${item.id}`}>
             <img
               className="cart-tile-image"
               src={item.image}
@@ -68,7 +68,7 @@ class CartTile extends React.Component {
           </Link>
         </div>
         <div className="cart-row-mid">
-          <Link className="cart-item-link" to={`/items/${item.id}`}>
+          <Link className="cart-item-link" to={`/products/${item.id}`}>
             {item.name}
           </Link>
           <p>

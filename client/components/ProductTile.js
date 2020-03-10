@@ -28,7 +28,7 @@ class ProductTile extends React.Component {
           <div className="price">${product.price}</div>
           <div className="product-link">{product.name}</div>
         </Link>
-        <ToastProvider placement="bottom-right">
+        <ToastProvider placement="top-right">
           <AddToCartButton
             className="addtocartButton"
             productId={product.id}
