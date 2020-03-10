@@ -51,7 +51,7 @@ async function seed(quiet = false) {
   const users = await Promise.all(userData.map(d => User.create(d)))
   log(`seeded ${users.length} users`)
 
-  const productData = generateProductData()
+  const productData = generateProductData().slice(0, 199)
   const products = await Promise.all(productData.map(p => Product.create(p)))
   log(`seeded ${products.length} products`)
 
