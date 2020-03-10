@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchCart, checkout} from '../store/cart'
 import {Link} from 'react-router-dom'
+import {fetchCart, checkout} from '../store/cart'
 import CartTile from '../components/CartTile'
 
 class Checkout extends React.Component {
@@ -24,21 +24,9 @@ class Checkout extends React.Component {
     return (
       <div className="page checkout-page">
         <h1>Please Confirm Your Order</h1>
-        {/* <div className="total">
-          <Link to="/cart">Return to cart</Link>
-          <h3>Total: $ {this.total(cartItems)}</h3>
-          <button
-            type="button"
-            onClick={() => {
-              this.props.checkout()
-            }}
-          >
-            Confirm Order
-          </button>
-        </div> */}
         <div id="cart">
           {cartItems.map(item => (
-            <CartTile key={item.id} item={item} status={false} />
+            <CartTile key={item.id} item={item} showControls={false} />
           ))}
         </div>
         <div className="cart-footer">

@@ -20,13 +20,9 @@ class Cart extends React.Component {
       return (
         <div className="page cart-page">
           <h1>Your Shopping Cart</h1>
-          {/* <div className="cart-header">
-            <h3>Total: $ {this.total().toFixed(2)}</h3>
-            <Link to="/checkout">Proceed to Checkout</Link>
-          </div> */}
           <div id="cart">
             {cartItems.map(item => (
-              <CartTile key={item.id} item={item} status={true} />
+              <CartTile key={item.id} item={item} showControls={true} />
             ))}
           </div>
           <div className="cart-footer">
