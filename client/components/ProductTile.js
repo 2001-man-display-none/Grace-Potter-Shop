@@ -15,37 +15,48 @@ class ProductTile extends React.Component {
   handleAddToCart(event) {
     event.preventDefault()
     let productId = event.target.id
-    this.props.addToCartDispatch(productId)
+    this.props.addToCart(productId, 1)
   }
 
   render() {
     const {product} = this.props
+    const toProduct = `/products/${product.id}`
+
     return (
-      <div className="product-card">
-        <Link to={`/products/${product.id}`}>
-          <img src={product.image} />
-        </Link>
-        <Link className="product-card-body" to={`/products/${product.id}`}>
-          <div className="price">${product.price}</div>
-          <div className="product-link">{product.name}</div>
-        </Link>
-        <ToastProvider
-          // components={{Toast: MyCustomToast}}
-          placement="top-right"
-        >
-          <AddToCartButton
-            productId={product.id}
-            singleProduct={product.name}
-            handleAddToCart={this.handleAddToCart}
-          />
-        </ToastProvider>
+      <div className="card card-hover product-card">
+        <div className="product-card-image">
+          <div className="product-card-overlay">
+            <ToastProvider
+              // components={{Toast: MyCustomToast}}
+              placement="top-right"
+            >
+              <AddToCartButton
+                productId={product.id}
+                className="pure-button product-card-button button-small"
+                singleProduct={product.name}
+                handleAddToCart={this.handleAddToCart}
+              />
+            </ToastProvider>
+          </div>
+          <Link to={toProduct}>
+            <img src={product.image} />
+          </Link>
+        </div>
+        <div className="product-card-body">
+          <Link to={toProduct} className="price">
+            ${product.price}
+          </Link>
+          <Link to={toProduct} className="product-link">
+            {product.name}
+          </Link>
+        </div>
       </div>
     )
   }
 }
 
 const mapDispatch = dispatch => ({
-  addToCartDispatch: productId => dispatch(addToCart(productId))
+  addToCart: productId => dispatch(addToCart(productId))
 })
 
 const ConnectedProductTile = connect(null, mapDispatch)(ProductTile)

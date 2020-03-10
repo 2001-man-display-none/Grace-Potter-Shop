@@ -36,22 +36,33 @@ class SingleProduct extends React.Component {
     let singleProduct = this.props.singleProduct
     let productId = this.props.productId
     return (
-      <div>
-        <h2>{singleProduct.name}</h2>
-        <img src={singleProduct.image} width="200" height="200" />
-        <p>
-          Meet {singleProduct.name}: {singleProduct.description}
-        </p>
-        <h3>${singleProduct.price}</h3>
-        <QuantityDropdown handleQtyChange={this.handleQtyChange} />
-        <ToastProvider placement="top-right">
-          <AddToCartButton
-            productId={productId}
-            singleProduct={singleProduct.name}
-            handleAddToCart={this.handleAddToCart}
-          />
-        </ToastProvider>
-        <Link to="/products">Back</Link>
+      <div className="page-wide single-product-page">
+        {/* <div className="cart-toast">
+
+        </div> */}
+        <div className="single-product-image">
+          <img src={singleProduct.image} width="200" height="200" />
+        </div>
+        <div className="single-product-main">
+          <h1>{singleProduct.name}</h1>
+          <h3>${singleProduct.price}</h3>
+          <p>
+            Meet {singleProduct.name}: {singleProduct.description}
+          </p>
+        </div>
+        <div className="single-product-controls">
+          <div className="card">
+            <QuantityDropdown handleQtyChange={this.handleQtyChange} />
+            <ToastProvider placement="top-right">
+              <AddToCartButton
+                className="pure-button button-primary button-large"
+                productId={productId}
+                singleProduct={singleProduct.name}
+                handleAddToCart={this.handleAddToCart}
+              />
+            </ToastProvider>
+          </div>
+        </div>
       </div>
     )
   }

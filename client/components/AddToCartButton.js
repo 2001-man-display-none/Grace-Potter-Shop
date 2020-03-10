@@ -2,7 +2,7 @@ import React from 'react'
 import {useToasts} from 'react-toast-notifications'
 
 const AddToCartButton = props => {
-  let {productId, singleProduct, handleAddToCart} = props
+  let {productId, singleProduct, handleAddToCart, className} = props
 
   const {addToast} = useToasts()
   return (
@@ -10,6 +10,7 @@ const AddToCartButton = props => {
       <button
         id={productId}
         type="button"
+        className={className}
         onClick={event =>
           addToast(
             `${singleProduct.toUpperCase()} has been added to your cart!`,
