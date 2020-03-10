@@ -15,7 +15,7 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
+const getUser = (user, error) => ({type: GET_USER, user, error})
 const removeUser = () => ({type: REMOVE_USER})
 
 /**
@@ -36,7 +36,7 @@ export const login = (email, password, redirect = '/home') => {
     try {
       res = await axios.post(`/auth/login`, {email, password})
     } catch (authError) {
-      return dispatch(getUser({error: authError}))
+      return dispatch(getUser(null, authError))
     }
 
     try {
@@ -56,7 +56,7 @@ export const signup = (name, email, password, redirect = '/home') => {
     try {
       res = await axios.post(`/auth/signup`, {name, email, password})
     } catch (authError) {
-      return dispatch(getUser({error: authError}))
+      return dispatch(getUser(null, authError))
     }
 
     try {
@@ -76,7 +76,7 @@ export const editProfile = (name, email, password, redirect = '/home') => {
     try {
       res = await axios.put(`/auth/editProfile`, {name, email, password})
     } catch (authError) {
-      return dispatch(getUser({error: authError}))
+      return dispatch(getUser(null, authError))
     }
 
     try {
@@ -106,7 +106,11 @@ export const logout = () => async dispatch => {
 const userReducer = (state = defaultUser, action) => {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      if (!action.error) {
+        return action.user
+      } else {
+        return {...state, error: action.error}
+      }
     case REMOVE_USER:
       return defaultUser
     default:
