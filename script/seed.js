@@ -25,13 +25,19 @@ async function seed(quiet = false) {
   log(`seeded ${users.length} users`)
 
   //getting product data from Trefle API
+  //**REMEMBER use your own personal Trefle API key
   const {data} = await axios.get(url + apiKey)
 
+  //mapping through all the plants in the API database... its only pulling 30??
   const productData = data.map(async plant => {
+    //going to the single product link to which has more information about the plant than on the 'All Plants' view
     let plantLink = plant.link + apiKey
     const {data} = await axios.get(plantLink)
 
+    //setting a random price
     let randomPrice = Math.random() * 50
+
+    //checking if databse has an image, if not, using a stock image
     let image
     if (data.images.length > 1) {
       image = data.images[0].url
@@ -39,6 +45,8 @@ async function seed(quiet = false) {
       image =
         'https://cdn3.iconfinder.com/data/icons/spring-23/32/sunflower-flower-spring-blossom-nature-ecology-512.png'
     }
+
+    //creating an instance for each product in the Product model
     await Product.create({
       name: data.main_species.common_name
         ? data.main_species.common_name
