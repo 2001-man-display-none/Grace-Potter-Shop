@@ -65,6 +65,11 @@ class Navbar extends React.Component {
   }
 }
 
+const getProductQty = products => {
+  return products.reduce((sum, currentProduct) => {
+    return currentProduct.order_item.quantity + sum
+  }, 0)
+}
 /**
  * CONTAINER
  */
@@ -72,7 +77,7 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
-    numOfItemsInCart: state.cart.products.length
+    numOfItemsInCart: getProductQty(state.cart.products)
   }
 }
 

@@ -1,5 +1,7 @@
 import React from 'react'
+import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {addToCart} from '../store/cart'
 
 const ProductTile = props => {
   const {product} = props
@@ -12,8 +14,24 @@ const ProductTile = props => {
         <div className="price">${product.price}</div>
         <div className="product-link">{product.name}</div>
       </Link>
+      <div>
+        <button
+          id={product.id}
+          type="button"
+          className="button"
+          onClick={() => props.addToCart(product.id)}
+        >
+          Add To Cart
+        </button>
+      </div>
     </div>
   )
 }
 
-export default ProductTile
+const mapDispatch = dispatch => ({
+  addToCart: productId => dispatch(addToCart(productId))
+})
+
+const ConnectedProductTile = connect(null, mapDispatch)(ProductTile)
+
+export default ConnectedProductTile
