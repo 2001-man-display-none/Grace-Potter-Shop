@@ -1,6 +1,5 @@
 import React from 'react'
 import {useToasts} from 'react-toast-notifications'
-import './AddToCartButton-style.css'
 
 const AddToCartButton = props => {
   let {productId, singleProduct, handleAddToCart} = props

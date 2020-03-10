@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom'
 import {ToastProvider} from 'react-toast-notifications'
 import {addToCart} from '../store/cart'
 import AddToCartButton from '../components/AddToCartButton'
+// import MyCustomToast from '../components/customToaster'
 
 class ProductTile extends React.Component {
   constructor() {
@@ -28,9 +29,11 @@ class ProductTile extends React.Component {
           <div className="price">${product.price}</div>
           <div className="product-link">{product.name}</div>
         </Link>
-        <ToastProvider placement="top-right">
+        <ToastProvider
+          // components={{Toast: MyCustomToast}}
+          placement="top-right"
+        >
           <AddToCartButton
-            className="addtocartButton"
             productId={product.id}
             singleProduct={product.name}
             handleAddToCart={this.handleAddToCart}
