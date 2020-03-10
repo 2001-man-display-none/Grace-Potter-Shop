@@ -10,38 +10,49 @@ const pageLimit = 100
 //getting product data from Trefle API
 //**REMEMBER use your own personal Trefle API key
 const fetchPlantsPage = async pageNum => {
-  const res = await axios.get(url, {
-    params: {
-      page: pageNum,
-      token: apiKey,
-      complete_data: true
-    }
-  })
-  const totalPages = res.headers['total-pages']
-  return {data: res.data, totalPages}
+  try {
+    const res = await axios.get(url, {
+      params: {
+        page: pageNum,
+        token: apiKey,
+        complete_data: true
+      }
+    })
+    const totalPages = res.headers['total-pages']
+    return {data: res.data, totalPages}
+  } catch (error) {
+    console.log('Error in the fetchPlantsPage func', error)
+  }
 }
 
 const fetchAllPlants = async () => {
   const pages = []
+
   const firstPage = await fetchPlantsPage(1)
+  if (!firstPage) return console.log('Page not Found 404')
+
   pages.push(firstPage.data)
   const maxPages = Math.min(pageLimit, firstPage.totalPages)
 
   for (let i = 2; i < maxPages; i++) {
     const pageData = await fetchPlantsPage(i)
-    pages.push(pageData.data)
+    if (!pageData) console.log('Skipping page:', i)
+    else pages.push(pageData.data)
   }
-
   return pages.flat()
 }
 
 const fetchSinglePlantDetails = async link => {
-  const res = await axios.get(link, {
-    params: {
-      token: apiKey
-    }
-  })
-  return res.data
+  try {
+    const res = await axios.get(link, {
+      params: {
+        token: apiKey
+      }
+    })
+    return res.data
+  } catch (error) {
+    console.log('Error in the fetchSinglePlantDetails func', error)
+  }
 }
 
 const filterPlantProps = plant => {
@@ -70,8 +81,11 @@ const fetchAllPlantDetails = async () => {
 
   for (let i = 0; i < plantOverviews.length; i++) {
     const plantInfo = await fetchSinglePlantDetails(plantOverviews[i].link)
+    if (!plantInfo)
+      console.log(`failed to get info for ${plantOverviews[i].link}`)
+    else plantDetail.push(filterPlantProps(plantInfo))
+
     if (i % 30 === 0 && i > 0) console.log(`Processed ${i} plants`)
-    plantDetail.push(filterPlantProps(plantInfo))
   }
 
   return plantDetail
