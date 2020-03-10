@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/singleProduct'
 import {addToCart} from '../store/cart'
 import ConfirmationPopup from '../components/ConfirmationPopup'
@@ -67,6 +68,7 @@ class SingleProduct extends React.Component {
               />
             ) : null}
           </div>
+          <Link to="/products">Back</Link>
         </div>
       </div>
     )
