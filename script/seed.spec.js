@@ -7,7 +7,7 @@ const chaiAsPromised = require('chai-as-promised')
 chai.use(chaiAsPromised)
 const {expect} = chai
 
-const seed = require('./seed')
+const {seed} = require('./seed')
 const {User, Product, Order, OrderItem} = require('../server/db/models')
 
 describe('seed script', () => {
