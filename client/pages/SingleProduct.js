@@ -1,18 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {ToastProvider} from 'react-toast-notifications'
 import {fetchSingleProduct} from '../store/singleProduct'
 import {addToCart} from '../store/cart'
-import ConfirmationPopup from '../components/ConfirmationPopup'
 import QuantityDropdown from '../components/QuantityDropdown'
+import AddToCartButton from '../components/AddToCartButton'
+import '../components/AddToCartButton-style.css'
 
 class SingleProduct extends React.Component {
   constructor() {
     super()
-    this.state = {showPopup: false, quantity: 1}
+    this.state = {quantity: 1}
     this.handleQtyChange = this.handleQtyChange.bind(this)
     this.handleAddToCart = this.handleAddToCart.bind(this)
-    this.toggleConfirmationPopup = this.toggleConfirmationPopup.bind(this)
   }
 
   componentDidMount() {
@@ -24,13 +25,6 @@ class SingleProduct extends React.Component {
     event.preventDefault()
     let productId = event.target.id
     this.props.addToCartDispatch(productId, this.state.quantity)
-    this.toggleConfirmationPopup()
-  }
-
-  toggleConfirmationPopup() {
-    this.setState({
-      showPopup: !this.state.showPopup
-    })
   }
 
   handleQtyChange(value) {
@@ -51,25 +45,15 @@ class SingleProduct extends React.Component {
         </p>
         <h3>${singleProduct.price}</h3>
         <QuantityDropdown handleQtyChange={this.handleQtyChange} />
-        <div>
-          <button
-            id={productId}
-            type="button"
-            className="button"
-            onClick={this.handleAddToCart}
-          >
-            Add To Cart
-          </button>
-          <div>
-            {this.state.showPopup ? (
-              <ConfirmationPopup
-                closePopup={this.toggleConfirmationPopup}
-                singleProduct={singleProduct.name}
-              />
-            ) : null}
-          </div>
-          <Link to="/products">Back</Link>
-        </div>
+        <ToastProvider placement="bottom-right">
+          <AddToCartButton
+            className="addtocartButton"
+            productId={productId}
+            singleProduct={singleProduct.name}
+            handleAddToCart={this.handleAddToCart}
+          />
+        </ToastProvider>
+        <Link to="/products">Back</Link>
       </div>
     )
   }
