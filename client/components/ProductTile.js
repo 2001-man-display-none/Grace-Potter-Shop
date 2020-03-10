@@ -1,10 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {ToastProvider} from 'react-toast-notifications'
 import {addToCart} from '../store/cart'
 import AddToCartButton from '../components/AddToCartButton'
-// import MyCustomToast from '../components/customToaster'
 
 class ProductTile extends React.Component {
   constructor() {
@@ -26,17 +24,12 @@ class ProductTile extends React.Component {
       <div className="card card-hover product-card">
         <div className="product-card-image">
           <div className="product-card-overlay">
-            <ToastProvider
-              // components={{Toast: MyCustomToast}}
-              placement="top-right"
-            >
-              <AddToCartButton
-                productId={product.id}
-                className="pure-button product-card-button button-small"
-                singleProduct={product.name}
-                handleAddToCart={this.handleAddToCart}
-              />
-            </ToastProvider>
+            <AddToCartButton
+              productId={product.id}
+              className="pure-button product-card-button button-small"
+              singleProduct={product.name}
+              handleAddToCart={this.handleAddToCart}
+            />
           </div>
           <Link to={toProduct}>
             <img src={product.image} />

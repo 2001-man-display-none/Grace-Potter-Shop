@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
-import {ToastProvider} from 'react-toast-notifications'
 import {fetchSingleProduct} from '../store/singleProduct'
 import {addToCart} from '../store/cart'
 import QuantityDropdown from '../components/QuantityDropdown'
@@ -37,9 +36,6 @@ class SingleProduct extends React.Component {
     let productId = this.props.productId
     return (
       <div className="page-wide single-product-page">
-        {/* <div className="cart-toast">
-
-        </div> */}
         <div className="single-product-image">
           <img src={singleProduct.image} width="200" height="200" />
         </div>
@@ -53,14 +49,12 @@ class SingleProduct extends React.Component {
         <div className="single-product-controls">
           <div className="card">
             <QuantityDropdown handleQtyChange={this.handleQtyChange} />
-            <ToastProvider placement="top-right">
-              <AddToCartButton
-                className="pure-button button-primary button-large"
-                productId={productId}
-                singleProduct={singleProduct.name}
-                handleAddToCart={this.handleAddToCart}
-              />
-            </ToastProvider>
+            <AddToCartButton
+              className="pure-button button-primary button-large"
+              productId={productId}
+              singleProduct={singleProduct.name}
+              handleAddToCart={this.handleAddToCart}
+            />
           </div>
         </div>
       </div>

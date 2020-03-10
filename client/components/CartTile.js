@@ -40,7 +40,7 @@ class CartTile extends React.Component {
   }
 
   render() {
-    const {item, status} = this.props
+    const {item, showControls = false} = this.props
     const {quantity} = item.order_item
 
     const price = (
@@ -76,7 +76,7 @@ class CartTile extends React.Component {
             {unitPrice}
           </p>
         </div>
-        {status ? (
+        {showControls ? (
           <div className="cart-row-right">
             <div className="cart-item-controls">
               <div className="cart-item-controls-quantity">

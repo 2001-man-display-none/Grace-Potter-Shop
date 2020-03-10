@@ -7,7 +7,7 @@ const OrderHistory = props => {
       <h2>Order #{props.order.id}:</h2>
       <div id="cart">
         {props.products.map(item => (
-          <CartTile key={item.id} item={item} status={false} />
+          <CartTile key={item.id} item={item} showControls={false} />
         ))}
       </div>
     </div>

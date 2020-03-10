@@ -14,7 +14,7 @@ export class UserHome extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="page page-home">
         <div>
           <h2>Welcome, {this.props.name}!</h2>
           <Link to="/home/editProfile">
