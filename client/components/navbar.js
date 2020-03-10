@@ -74,8 +74,12 @@ class Navbar extends React.Component {
               </>
             )}
             <li>
-              <CartIcon itemCount={numOfItemsInCart} />
-              <NavLink to="/cart">Cart</NavLink>
+              <div to="/cart" className="nav-link-group">
+                <Link to="/cart">
+                  <CartIcon itemCount={numOfItemsInCart} />
+                </Link>
+                <NavLink to="/cart">Cart</NavLink>
+              </div>
             </li>
           </ul>
         </nav>

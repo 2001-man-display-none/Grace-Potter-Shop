@@ -39,8 +39,16 @@ main {
   justify-content: center;
 }
 
-main > .page {
+.page {
   flex: 0 1 1000px;
+}
+
+.page h1:first-child {
+  text-align: center;
+}
+
+.page-wide {
+  flex-grow: 1;
 }
 
 a {
@@ -54,7 +62,20 @@ a {
   background: var(--color-primary-lighter);
 }
 
+.button-small {
+  font-size: 85%;
+  font-weight: normal;
+  font-family: var(--font-family-heading);
+}
+
 .button-large {
+  font-size: 110%;
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-heading);
+  border-radius: 4px;
+}
+
+.button-xlarge {
   font-size: 125%;
   font-family: var(--font-family-heading);
   font-weight: var(--font-weight-heading);
@@ -65,7 +86,7 @@ a {
 
 nav {
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   padding: 4px 16px 4px 0;
   display: flex;
   align-items: stretch;
@@ -101,8 +122,21 @@ nav li {
   height: 100%;
 }
 
-.nav-link:hover {
+.nav-link-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-left: 12px;
+}
+
+.nav-link:hover,
+.nav-link-group:hover .nav-link {
   color: var(--color-secondary-lightest);
+}
+
+.nav-link-group > .nav-link:not(:first-child) {
+  padding-left: 6px;
 }
 
 #logo {
@@ -185,8 +219,8 @@ label {
 .cart-icon .cart-badge {
   display: block;
   position: absolute;
-  left: 40%;
-  right: 20%;
+  left: 30%;
+  right: 17%;
   top: 0;
   bottom: 30%;
   text-align: center;
@@ -310,6 +344,36 @@ label {
   margin-left: 10px;
 }
 
+/* resuable cards */
+
+.card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  background-color: var(--color-white-mid);
+  border: solid var(--color-primary-light) 1px;
+  box-shadow: 4px 5px 8px -4px rgba(1, 15, 0, 0.33);
+}
+
+.card-hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease-in-out;
+  box-shadow: 5px 6px 8px -3px rgba(1, 15, 0, 0.66);
+}
+
+.card-hover:hover::after {
+  opacity: 1;
+}
+
 /* products page stuff */
 
 .product-list {
@@ -319,48 +383,58 @@ label {
 }
 
 .product-card {
-  position: relative;
-  z-index: 1;
-  overflow: visible;
   width: 200px;
+  height: 250px;
   margin: 16px;
-  display: flex;
-  flex-direction: column;
-  align-content: stretch;
-  background-color: var(--color-white-mid);
-  border: solid var(--color-primary-light) 1px;
-  box-shadow: 4px 5px 8px -4px rgba(1, 15, 0, 0.33);
 }
 
-.product-card::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  z-index: -1;
-  transition: opacity 0.3s ease-in-out;
-  box-shadow: 5px 6px 8px -3px rgba(1, 15, 0, 0.66);
-}
-
-.product-card:hover::after {
-  opacity: 1;
-}
-
-.product-card img {
-  width: 100%;
-}
-
-.product-card-body {
-  padding: 4px;
-  display: flex;
-  flex-direction: column;
+.product-card-image {
+  position: relative;
   flex-grow: 1;
 }
 
-.product-card-body .price {
+.product-card img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.product-card-overlay {
+  position: absolute;
+  pointer-events: none;
+  padding: 1em;
+  top: 1em;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  background: rgba(250, 253, 250, 0.55);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.product-card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.5em;
+  min-height: 2.5em;
+}
+
+.product-card-button {
+  pointer-events: auto;
+  margin-right: -4px;
+  z-index: 2;
+  display: block;
+}
+
+.product-card:hover .product-card-overlay {
+  opacity: 1;
+}
+
+a.price {
   color: black;
-  padding: 4px;
+  font-size: 14px;
 }
 
 .product-card-body .product-link {
@@ -368,7 +442,50 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 4px 4px;
+  margin-top: 0.5em;
+}
+
+/* single product page stuff */
+
+.single-product-page {
+  display: flex;
+  margin: 20px;
+}
+
+.single-product-image {
+  flex: 1 0 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.single-product-image > img {
+  width: 100%;
+  height: auto;
+}
+
+.single-product-main {
+  padding: 0 40px;
+  flex: 0 1 30em;
+}
+
+.single-product-main h1 {
+  margin-top: 0;
+}
+
+.single-product-controls {
+  flex: 1 0 200px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.single-product-controls .card {
+  padding: 20px;
+  flex: 0 1 250px;
+}
+
+.single-product-controls > .card > *:not(:first-child) {
+  margin-top: 10px;
 }
 
 /* ??? */

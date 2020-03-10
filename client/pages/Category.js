@@ -5,8 +5,17 @@ import ProductTile from '../components/ProductTile'
 
 export class ProductList extends React.Component {
   componentDidMount() {
-    const {category, slug} = this.props
-    this.props.selectCategory(category)
+    this.loadFromSlug(this.props.slug)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.slug !== this.props.slug) {
+      this.loadFromSlug(this.props.slug)
+    }
+  }
+
+  loadFromSlug(slug) {
+    this.props.selectCategory(slug)
     this.props.fetchCategoryProducts(slug)
   }
 

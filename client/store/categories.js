@@ -120,6 +120,7 @@ const currentCategoryReducer = (
         // This can happen if a user clicks a second category before
         // the first one loads. In that case we just want to ignore
         // the response for the old no-longer-selected category.
+        console.log('ignoring category update for wrong category')
         return state
       } else {
         return {
