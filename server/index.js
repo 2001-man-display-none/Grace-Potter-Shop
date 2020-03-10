@@ -47,6 +47,16 @@ const createApp = () => {
   // logging middleware
   app.use(morgan('dev'))
 
+  // In the development environment, enable webpack hot reloading.
+  if (process.env.NODE_ENV === 'development') {
+    const {
+      webpackDevMiddleware,
+      webpackHotMiddleware
+    } = require('./webpackMiddleware')
+    app.use(webpackDevMiddleware)
+    app.use(webpackHotMiddleware)
+  }
+
   // body parsing middleware
   app.use(express.json())
   app.use(express.urlencoded({extended: true}))

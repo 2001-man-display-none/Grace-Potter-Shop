@@ -29,6 +29,7 @@ router.post('/checkout', async (req, res, next) => {
   try {
     const order = await req.cart.get()
     await order.update({status: 'fulfilled'})
+    req.cart.clear()
     const newOrder = await Order.findByPk(order.id, {
       include: [{model: Product}],
       through: {attributes: ['quantity']}
@@ -60,7 +61,7 @@ router.post('/:productId', async (req, res, next) => {
 
     const cart = await req.cart.getOrCreate()
     const prevCount = await cart.getQuantity(productId)
-    await cart.setQuantity(productId, prevCount + 1)
+    await cart.setQuantity(productId, prevCount + req.body.quantity)
 
     const updatedCart = await cart.getQuantities()
 
