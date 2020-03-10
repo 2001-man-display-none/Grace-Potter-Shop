@@ -197,6 +197,18 @@ label {
   display: block;
 }
 
+/* cart toast notifications */
+
+.cart-toast-wrapper,
+.cart-toast-wrapper * {
+  overflow: hidden; /* prevents surprise scrollbars */
+}
+
+.cart-toast-wrapper:last-child {
+  margin-bottom: 80px;
+  right: 0;
+}
+
 /* navbar cart badge stuff */
 
 .cart-icon {

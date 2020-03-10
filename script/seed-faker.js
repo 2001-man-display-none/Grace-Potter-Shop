@@ -82,11 +82,13 @@ const plant = () => {
   return `${adjective} ${genus} ${species}`
 }
 
-const accessory = () => {
-  const material = faker.commerce.productMaterial
-  const nonsense = faker.random.word
-  const type = faker.random.arrayElement(['soil', 'pot'])
-  return [material, nonsense, type].join(' ')
+function fakePrice() {
+  const dollars = faker.random.arrayElement(
+    // if you take this comment out prettier will make you upset (:
+    [1, 4, 5, 8, 9, 11, 15, 19, 25, 33, 39, 40, 49, 55, 69]
+  )
+  const cents = faker.random.arrayElement([0, 0, 0, 25, 49, 95, 99, 99])
+  return dollars + cents / 100
 }
 
 function fakeProduct(categories) {
@@ -94,7 +96,7 @@ function fakeProduct(categories) {
     name: plant(),
     description: faker.lorem.sentence(),
     image: faker.image.nature(),
-    price: faker.commerce.price(),
+    price: fakePrice(),
     categoryId: faker.random.arrayElement(categories).id
   }
 }
@@ -168,4 +170,13 @@ if (module === require.main) {
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = {
+  repeat,
+  seed,
+  fakeOrder,
+  fakeOrders,
+  fakeOrderItems,
+  fakeUser,
+  fakePrice,
+  fakeCategories
+}

@@ -16,7 +16,9 @@
     "prepare": "if [ -d .git ]; then npm-merge-driver install; fi",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "postinstall": "touch secrets.js",
-    "seed": "node script/seed.js",
+    "seed-faker": "node script/seed-faker.js",
+    "seed-api": "node script/seed-trefle.js",
+    "pull-data": "node script/pull-data-trefle.js",
     "start": "node server",
     "start-dev": "NODE_ENV='development' npm run build-client-watch & NODE_ENV='development' npm run start-server",
     "start-server": "nodemon server -e html,js,scss --ignore public --ignore client",
@@ -60,11 +62,13 @@
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
+    "react-toast-notifications": "^2.4.0",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "sequelize": "^5.21.5",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "yarn": "^1.22.4"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

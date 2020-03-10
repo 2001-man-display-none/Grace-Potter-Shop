@@ -1,17 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/singleProduct'
 import {addToCart} from '../store/cart'
-import ConfirmationPopup from '../components/ConfirmationPopup'
 import QuantityDropdown from '../components/QuantityDropdown'
+import AddToCartButton from '../components/AddToCartButton'
 
 class SingleProduct extends React.Component {
   constructor() {
     super()
-    this.state = {showPopup: false, quantity: 1}
+    this.state = {quantity: 1}
     this.handleQtyChange = this.handleQtyChange.bind(this)
     this.handleAddToCart = this.handleAddToCart.bind(this)
-    this.toggleConfirmationPopup = this.toggleConfirmationPopup.bind(this)
   }
 
   componentDidMount() {
@@ -23,13 +23,6 @@ class SingleProduct extends React.Component {
     event.preventDefault()
     let productId = event.target.id
     this.props.addToCartDispatch(productId, this.state.quantity)
-    this.toggleConfirmationPopup()
-  }
-
-  toggleConfirmationPopup() {
-    this.setState({
-      showPopup: !this.state.showPopup
-    })
   }
 
   handleQtyChange(value) {
@@ -43,14 +36,6 @@ class SingleProduct extends React.Component {
     let productId = this.props.productId
     return (
       <div className="page-wide single-product-page">
-        <div className="cart-toast">
-          {this.state.showPopup ? (
-            <ConfirmationPopup
-              closePopup={this.toggleConfirmationPopup}
-              singleProduct={singleProduct.name}
-            />
-          ) : null}
-        </div>
         <div className="single-product-image">
           <img src={singleProduct.image} width="200" height="200" />
         </div>
@@ -63,15 +48,13 @@ class SingleProduct extends React.Component {
         </div>
         <div className="single-product-controls">
           <div className="card">
-            <button
-              id={productId}
-              type="button"
-              className="pure-button button-primary button-large"
-              onClick={this.handleAddToCart}
-            >
-              Add To Cart
-            </button>
             <QuantityDropdown handleQtyChange={this.handleQtyChange} />
+            <AddToCartButton
+              className="pure-button button-primary button-large"
+              productId={productId}
+              singleProduct={singleProduct.name}
+              handleAddToCart={this.handleAddToCart}
+            />
           </div>
         </div>
       </div>
