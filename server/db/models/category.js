@@ -21,6 +21,9 @@ const Category = db.define('category', {
     type: Sequelize.BOOLEAN,
     allowNull: false,
     defaultValue: false
+  },
+  defaultImage: {
+    type: Sequelize.TEXT
   }
 })
 
