@@ -44,7 +44,7 @@ describe('Category routes', () => {
       const res = await request(app)
         .get('/api/categories/succulents')
         .expect(200)
-      const names = res.body.map(category => category.name)
+      const names = res.body.products.map(category => category.name)
       expect(names).to.have.members(['Catctus'])
     })
 

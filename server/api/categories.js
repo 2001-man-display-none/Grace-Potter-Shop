@@ -27,7 +27,7 @@ router.get('/:categorySlug', async (req, res, next) => {
       include: [{model: Product}]
     })
     if (category) {
-      res.json(category.products)
+      res.json(category)
     } else {
       res.sendStatus(404)
     }
