@@ -13,6 +13,8 @@ const ProductTile = props => {
       <Link className="product-card-body" to={`/products/${product.id}`}>
         <div className="price">${product.price}</div>
         <div className="product-link">{product.name}</div>
+      </Link>
+      <div>
         <button
           id={product.id}
           type="button"
@@ -21,7 +23,7 @@ const ProductTile = props => {
         >
           Add To Cart
         </button>
-      </Link>
+      </div>
     </div>
   )
 }
