@@ -366,24 +366,23 @@ label {
   align-content: stretch;
   background-color: var(--color-white-mid);
   border: solid var(--color-primary-light) 1px;
-  box-shadow: 4px 5px 8px -4px rgba(1, 15, 0, 0.33);
 }
 
-.card-hover::after {
+.card:after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0;
+  opacity: 0.3;
   z-index: -1;
   transition: opacity 0.3s ease-in-out;
-  box-shadow: 5px 6px 8px -3px rgba(1, 15, 0, 0.66);
+  box-shadow: 4px 5px 4px -1px rgba(1, 15, 0, 0.66);
 }
 
 .card-hover:hover::after {
-  opacity: 1;
+  opacity: 0.8;
 }
 
 /* products page stuff */
@@ -396,7 +395,7 @@ label {
 
 .product-card {
   width: 200px;
-  height: 250px;
+  height: 280px;
   margin: 16px;
 }
 
@@ -415,7 +414,7 @@ label {
   position: absolute;
   pointer-events: none;
   padding: 1em;
-  top: 1em;
+  top: 2em;
   left: 0;
   right: 0;
   display: flex;
@@ -431,6 +430,7 @@ label {
   justify-content: center;
   padding: 0.5em;
   min-height: 2.5em;
+  flex-grow: 1;
 }
 
 .product-card-button {

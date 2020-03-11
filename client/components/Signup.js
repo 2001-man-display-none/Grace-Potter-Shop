@@ -33,9 +33,11 @@ const Signup = props => {
               Sign Up
             </button>
           </div>
-          {error && error.response && (
-            <span className="pure-form-message">{error.response.data}</span>
-          )}
+          <div className="pure-controls">
+            {error && error.response && (
+              <span className="pure-form-message">{error.response.data}</span>
+            )}
+          </div>
         </fieldset>
       </form>
     </div>
