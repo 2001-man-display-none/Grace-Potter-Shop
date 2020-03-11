@@ -3,7 +3,13 @@
 const faker = require('faker')
 
 const db = require('../server/db')
-const {User, Product, Order, OrderItem} = require('../server/db/models')
+const {
+  User,
+  Product,
+  Order,
+  OrderItem,
+  Category
+} = require('../server/db/models')
 
 function repeat(n, f) {
   return Array(n)
@@ -16,11 +22,17 @@ async function seed(quiet = false) {
   await db.sync({force: true})
   log('db synced!')
 
+  const categoryData = fakeCategories()
+  const categories = await Promise.all(
+    categoryData.map(d => Category.create(d))
+  )
+  log(`seeded ${categories.length} categories`)
+
   const userData = repeat(100, fakeUser)
   const users = await Promise.all(userData.map(d => User.create(d)))
   log(`seeded ${users.length} users`)
 
-  const productData = repeat(50, fakeProduct)
+  const productData = repeat(50, () => fakeProduct(categories))
   const products = await Promise.all(productData.map(p => Product.create(p)))
   log(`seeded ${products.length} products`)
 
@@ -79,12 +91,13 @@ function fakePrice() {
   return dollars + cents / 100
 }
 
-function fakeProduct() {
+function fakeProduct(categories) {
   return {
     name: plant(),
     description: faker.lorem.sentence(),
     image: faker.image.nature(),
-    price: fakePrice()
+    price: fakePrice(),
+    categoryId: faker.random.arrayElement(categories).id
   }
 }
 
@@ -139,6 +152,16 @@ function fakeOrderItems(order, products) {
   return items
 }
 
+function fakeCategories() {
+  return [
+    {name: 'Seeds', inMenu: true},
+    {name: 'Flowering', inMenu: true},
+    {name: 'Succulents', inMenu: true},
+    {name: 'Tools', inMenu: true},
+    {name: 'Lawn Gnomes', inMenu: false}
+  ]
+}
+
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 // `Async` functions always return a promise, so we can use `catch` to handle
 // any errors that might occur inside of `seed`.
@@ -154,5 +177,6 @@ module.exports = {
   fakeOrders,
   fakeOrderItems,
   fakeUser,
-  fakePrice
+  fakePrice,
+  fakeCategories
 }

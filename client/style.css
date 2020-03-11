@@ -43,6 +43,10 @@ main {
   flex: 0 1 1000px;
 }
 
+.page h1:first-child {
+  text-align: center;
+}
+
 .page-wide {
   flex-grow: 1;
 }
@@ -91,14 +95,14 @@ nav {
   color: white;
 }
 
-nav > ul {
+nav ul {
   display: flex;
   margin: 0;
   padding: 0;
   align-items: stretch;
 }
 
-nav > ul > li {
+nav li {
   display: flex;
   margin: 0;
 }
@@ -162,10 +166,24 @@ nav > ul > li {
 .nav-center {
   flex: 1;
   display: flex;
+  justify-content: space-evenly;
 }
 
 .nav-right {
   display: flex;
+}
+
+.nav-submenu a.nav-link {
+  font-size: 16px;
+  padding: 8px;
+}
+
+.nav-submenu li:not(:last-child):after {
+  content: '/';
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* forms (just login/signup for now) */
@@ -388,7 +406,7 @@ label {
 }
 
 .product-card img {
-  height: 100%;
+  height: 200px;
   width: 100%;
   object-fit: cover;
 }
