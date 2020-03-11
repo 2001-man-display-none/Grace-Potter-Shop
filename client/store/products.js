@@ -21,9 +21,7 @@ export const gotError = (error, failedAction) => ({
 export const fetchAll = pageNum => async dispatch => {
   try {
     const res = await axios.get(`/api/products/?pageNum=${pageNum}`)
-    dispatch(
-      gotProducts(res.data.productData.result, res.data.productData.pageCount)
-    )
+    dispatch(gotProducts(res.data.result, res.data.pageCount))
   } catch (err) {
     dispatch(gotError(err, {type: GOT_PRODUCTS}))
   }

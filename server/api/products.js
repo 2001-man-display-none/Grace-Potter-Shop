@@ -16,7 +16,8 @@ router.get('/', async (req, res, next) => {
       const pageCount = Math.ceil(products.length / pageSize)
       const paginatedData = products.slice(offset, offset + limit)
       res.status(200).json({
-        productData: {result: paginatedData, pageCount}
+        result: paginatedData,
+        pageCount
       })
     } else {
       res.status(404).send('No products found')
