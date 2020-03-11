@@ -402,6 +402,7 @@ label {
 .product-card-image {
   position: relative;
   flex-grow: 1;
+  overflow: hidden;
 }
 
 .product-card img {
