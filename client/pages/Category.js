@@ -19,6 +19,10 @@ export class CategoryPage extends React.Component {
     this.props.fetchCategoryProducts(slug)
   }
 
+  async handlePageChange(pageNum) {
+    await this.props.fetchProducts(pageNum.selected)
+  }
+
   render() {
     const {category, products, status} = this.props
     switch (status) {
