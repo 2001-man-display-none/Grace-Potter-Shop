@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {guestsOnly} = require('./privileges')
+const {guestsOnly, usersOnly} = require('./privileges')
 const User = require('../db/models/user')
 module.exports = router
 
@@ -31,6 +31,22 @@ router.post('/signup', guestsOnly, async (req, res, next) => {
     req.login(user, err => (err ? next(err) : res.json(user)))
     if (req.cart) {
       req.cart.saveToUser()
+    }
+  } catch (err) {
+    if (err.name === 'SequelizeUniqueConstraintError') {
+      res.status(401).send('User already exists')
+    } else {
+      next(err)
+    }
+  }
+})
+
+router.put('/editProfile', usersOnly, async (req, res, next) => {
+  try {
+    const user = req.user
+    if (user) {
+      const updatedUser = await user.update(req.body)
+      res.json(updatedUser)
     }
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {

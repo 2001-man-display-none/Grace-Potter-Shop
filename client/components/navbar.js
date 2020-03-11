@@ -6,13 +6,21 @@ import NavLink from './NavLink'
 import CartIcon from './CartIcon'
 import {logout} from '../store/user'
 import {fetchCart} from '../store/cart'
+import {fetchMenu} from '../store/categories'
 
 class Navbar extends React.Component {
   componentDidMount() {
     this.props.fetchCart()
+    this.props.fetchMenu()
   }
+
   render() {
-    const {isLoggedIn, dispatchLogout, numOfItemsInCart} = this.props
+    const {
+      isLoggedIn,
+      dispatchLogout,
+      numOfItemsInCart,
+      menuCategories
+    } = this.props
     return (
       <div>
         <nav>
@@ -25,11 +33,22 @@ class Navbar extends React.Component {
               </Link>
             </li>
           </ul>
-          <ul className="nav-center">
-            <li>
-              <NavLink to="/products">Products</NavLink>
-            </li>
-          </ul>
+          <div className="nav-center">
+            <ul>
+              <li>
+                <NavLink to="/products">Products</NavLink>
+              </li>
+            </ul>
+            <ul className="nav-submenu">
+              {menuCategories.map(category => (
+                <li key={category.id}>
+                  <NavLink to={`/category/${category.slug}`}>
+                    {category.name}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+          </div>
           <ul className="nav-right">
             {isLoggedIn ? (
               <>
@@ -55,8 +74,12 @@ class Navbar extends React.Component {
               </>
             )}
             <li>
-              <CartIcon itemCount={numOfItemsInCart} />
-              <NavLink to="/cart">Cart</NavLink>
+              <div to="/cart" className="nav-link-group">
+                <Link to="/cart">
+                  <CartIcon itemCount={numOfItemsInCart} />
+                </Link>
+                <NavLink to="/cart">Cart</NavLink>
+              </div>
             </li>
           </ul>
         </nav>
@@ -77,14 +100,16 @@ const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
     userId: state.user.id,
-    numOfItemsInCart: getProductQty(state.cart.products)
+    numOfItemsInCart: getProductQty(state.cart.products),
+    menuCategories: state.categories.menu.value
   }
 }
 
 const mapDispatch = dispatch => {
   return {
     dispatchLogout: () => dispatch(logout()),
-    fetchCart: () => dispatch(fetchCart())
+    fetchCart: () => dispatch(fetchCart()),
+    fetchMenu: () => dispatch(fetchMenu())
   }
 }
 

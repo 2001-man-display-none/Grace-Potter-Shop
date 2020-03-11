@@ -2,11 +2,13 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchAll} from '../store/products'
 import ProductTile from '../components/ProductTile'
+import {addToCart} from '../store/cart'
 
 export class ProductList extends React.Component {
   componentDidMount() {
     this.props.fetchProducts()
   }
+
   render() {
     switch (this.props.status) {
       case 'loading':
@@ -36,7 +38,8 @@ const stateProps = state => ({
 })
 
 const dispatchProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchAll())
+  fetchProducts: () => dispatch(fetchAll()),
+  addToCart: productId => dispatch(addToCart(productId))
 })
 
 const ConnectedProductList = connect(stateProps, dispatchProps)(ProductList)

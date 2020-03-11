@@ -3,7 +3,13 @@
 const faker = require('faker')
 
 const db = require('../server/db')
-const {User, Product, Order, OrderItem} = require('../server/db/models')
+const {
+  User,
+  Product,
+  Order,
+  OrderItem,
+  Category
+} = require('../server/db/models')
 
 function repeat(n, f) {
   return Array(n)
@@ -16,11 +22,17 @@ async function seed(quiet = false) {
   await db.sync({force: true})
   log('db synced!')
 
+  const categoryData = fakeCategories()
+  const categories = await Promise.all(
+    categoryData.map(d => Category.create(d))
+  )
+  log(`seeded ${categories.length} categories`)
+
   const userData = repeat(100, fakeUser)
   const users = await Promise.all(userData.map(d => User.create(d)))
   log(`seeded ${users.length} users`)
 
-  const productData = repeat(50, fakeProduct)
+  const productData = repeat(50, () => fakeProduct(categories))
   const products = await Promise.all(productData.map(p => Product.create(p)))
   log(`seeded ${products.length} products`)
 
@@ -70,19 +82,22 @@ const plant = () => {
   return `${adjective} ${genus} ${species}`
 }
 
-const accessory = () => {
-  const material = faker.commerce.productMaterial
-  const nonsense = faker.random.word
-  const type = faker.random.arrayElement(['soil', 'pot'])
-  return [material, nonsense, type].join(' ')
+function fakePrice() {
+  const dollars = faker.random.arrayElement(
+    // if you take this comment out prettier will make you upset (:
+    [1, 4, 5, 8, 9, 11, 15, 19, 25, 33, 39, 40, 49, 55, 69]
+  )
+  const cents = faker.random.arrayElement([0, 0, 0, 25, 49, 95, 99, 99])
+  return dollars + cents / 100
 }
 
-function fakeProduct() {
+function fakeProduct(categories) {
   return {
     name: plant(),
     description: faker.lorem.sentence(),
     image: faker.image.nature(),
-    price: faker.commerce.price()
+    price: fakePrice(),
+    categoryId: faker.random.arrayElement(categories).id
   }
 }
 
@@ -137,6 +152,16 @@ function fakeOrderItems(order, products) {
   return items
 }
 
+function fakeCategories() {
+  return [
+    {name: 'Seeds', inMenu: true},
+    {name: 'Flowering', inMenu: true},
+    {name: 'Succulents', inMenu: true},
+    {name: 'Tools', inMenu: true},
+    {name: 'Lawn Gnomes', inMenu: false}
+  ]
+}
+
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 // `Async` functions always return a promise, so we can use `catch` to handle
 // any errors that might occur inside of `seed`.
@@ -145,4 +170,13 @@ if (module === require.main) {
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = {
+  repeat,
+  seed,
+  fakeOrder,
+  fakeOrders,
+  fakeOrderItems,
+  fakeUser,
+  fakePrice,
+  fakeCategories
+}

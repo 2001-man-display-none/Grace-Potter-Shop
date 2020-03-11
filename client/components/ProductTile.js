@@ -2,30 +2,50 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {addToCart} from '../store/cart'
+import AddToCartButton from '../components/AddToCartButton'
 
-const ProductTile = props => {
-  const {product} = props
-  return (
-    <div className="product-card">
-      <Link to={`/products/${product.id}`}>
-        <img src={product.image} />
-      </Link>
-      <Link className="product-card-body" to={`/products/${product.id}`}>
-        <div className="price">${product.price}</div>
-        <div className="product-link">{product.name}</div>
-      </Link>
-      <div>
-        <button
-          id={product.id}
-          type="button"
-          className="button"
-          onClick={() => props.addToCart(product.id)}
-        >
-          Add To Cart
-        </button>
+class ProductTile extends React.Component {
+  constructor() {
+    super()
+    this.handleAddToCart = this.handleAddToCart.bind(this)
+  }
+
+  handleAddToCart(event) {
+    event.preventDefault()
+    let productId = event.target.id
+    this.props.addToCart(productId, 1)
+  }
+
+  render() {
+    const {product} = this.props
+    const toProduct = `/products/${product.id}`
+
+    return (
+      <div className="card card-hover product-card">
+        <div className="product-card-image">
+          <div className="product-card-overlay">
+            <AddToCartButton
+              productId={product.id}
+              className="pure-button product-card-button button-small"
+              singleProduct={product.name}
+              handleAddToCart={this.handleAddToCart}
+            />
+          </div>
+          <Link to={toProduct}>
+            <img src={product.image} />
+          </Link>
+        </div>
+        <div className="product-card-body">
+          <Link to={toProduct} className="price">
+            ${product.price}
+          </Link>
+          <Link to={toProduct} className="product-link">
+            {product.name}
+          </Link>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 const mapDispatch = dispatch => ({

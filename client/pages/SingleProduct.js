@@ -1,17 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 import {fetchSingleProduct} from '../store/singleProduct'
 import {addToCart} from '../store/cart'
-import ConfirmationPopup from '../components/ConfirmationPopup'
 import QuantityDropdown from '../components/QuantityDropdown'
+import AddToCartButton from '../components/AddToCartButton'
 
 class SingleProduct extends React.Component {
   constructor() {
     super()
-    this.state = {showPopup: false, quantity: 1}
+    this.state = {quantity: 1}
     this.handleQtyChange = this.handleQtyChange.bind(this)
     this.handleAddToCart = this.handleAddToCart.bind(this)
-    this.toggleConfirmationPopup = this.toggleConfirmationPopup.bind(this)
   }
 
   componentDidMount() {
@@ -23,13 +23,6 @@ class SingleProduct extends React.Component {
     event.preventDefault()
     let productId = event.target.id
     this.props.addToCartDispatch(productId, this.state.quantity)
-    this.toggleConfirmationPopup()
-  }
-
-  toggleConfirmationPopup() {
-    this.setState({
-      showPopup: !this.state.showPopup
-    })
   }
 
   handleQtyChange(value) {
@@ -42,30 +35,26 @@ class SingleProduct extends React.Component {
     let singleProduct = this.props.singleProduct
     let productId = this.props.productId
     return (
-      <div>
-        <h2>{singleProduct.name}</h2>
-        <img src={singleProduct.image} width="200" height="200" />
-        <p>
-          Meet {singleProduct.name}: {singleProduct.description}
-        </p>
-        <h3>${singleProduct.price}</h3>
-        <QuantityDropdown handleQtyChange={this.handleQtyChange} />
-        <div>
-          <button
-            id={productId}
-            type="button"
-            className="button"
-            onClick={this.handleAddToCart}
-          >
-            Add To Cart
-          </button>
-          <div>
-            {this.state.showPopup ? (
-              <ConfirmationPopup
-                closePopup={this.toggleConfirmationPopup}
-                singleProduct={singleProduct.name}
-              />
-            ) : null}
+      <div className="page-wide single-product-page">
+        <div className="single-product-image">
+          <img src={singleProduct.image} width="200" height="200" />
+        </div>
+        <div className="single-product-main">
+          <h1>{singleProduct.name}</h1>
+          <h3>${singleProduct.price}</h3>
+          <p>
+            Meet {singleProduct.name}: {singleProduct.description}
+          </p>
+        </div>
+        <div className="single-product-controls">
+          <div className="card">
+            <AddToCartButton
+              className="pure-button button-primary button-large"
+              productId={productId}
+              singleProduct={singleProduct.name}
+              handleAddToCart={this.handleAddToCart}
+            />
+            <QuantityDropdown handleQtyChange={this.handleQtyChange} />
           </div>
         </div>
       </div>
