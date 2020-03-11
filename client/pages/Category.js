@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {selectCategory, fetchSingleCategory} from '../store/categories'
 import ProductTile from '../components/ProductTile'
 
-export class ProductList extends React.Component {
+export class CategoryPage extends React.Component {
   componentDidMount() {
     this.loadFromSlug(this.props.slug)
   }
@@ -57,6 +57,6 @@ const dispatchProps = dispatch => ({
   selectCategory: category => dispatch(selectCategory(category))
 })
 
-const ConnectedProductList = connect(stateProps, dispatchProps)(ProductList)
+const ConnectedCategoryPage = connect(stateProps, dispatchProps)(CategoryPage)
 
-export default ConnectedProductList
+export default ConnectedCategoryPage

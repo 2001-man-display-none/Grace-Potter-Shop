@@ -18,7 +18,7 @@ const filteredSeedData = seedData.filter(plant => plant.images.length >= 1)
 
 function fakeCategories() {
   return [
-    {name: 'Trees', inMenu: true},
+    {name: 'Outdoor Plants', inMenu: true},
     //    {name: 'Succulents', inMenu: true},
     {name: 'Flowers', inMenu: true},
     {name: 'Other', inMenu: true}
