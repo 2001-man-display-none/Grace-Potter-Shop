@@ -56,9 +56,13 @@ function generateProductData() {
 
     const name = common_name ? common_name : scientific_name
 
+    const family = family_common_name
+      ? family_common_name.toLowerCase()
+      : 'unknown'
+
     const descriptionParts = [
       family_common_name
-        ? `The ${name} comes from the ${family_common_name.toLowerCase()} family.`
+        ? `The ${name} comes from the ${family}.`
         : `Meet the ${name}!`,
       specifications_mature_height &&
         specifications_mature_height.ft &&
