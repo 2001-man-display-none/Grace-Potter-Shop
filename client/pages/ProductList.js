@@ -59,19 +59,11 @@ export class ProductList extends React.Component {
   }
 }
 
-const stateProps = state => {
-  console.log(state.products)
-  return {
-    products: state.products.products,
-    status: state.products.status,
-    pageCount: state.products.pageCount
-  }
-}
-// const stateProps = state => ({
-//   products: state.products.products,
-//   status: state.products.status,
-//   pageCount: state.products.pageCount
-// })
+const stateProps = state => ({
+  products: state.products.products,
+  status: state.products.status,
+  pageCount: state.products.pageCount
+})
 
 const dispatchProps = dispatch => ({
   fetchProducts: pageNum => dispatch(fetchAll(pageNum)),

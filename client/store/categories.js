@@ -27,7 +27,7 @@ export const selectCategory = slug => ({
   slug
 })
 
-export const gotSingleCategory = (category, error) => ({
+export const gotSingleCategory = (category, metaData, error) => ({
   type: GOT_SINGLE_CATEGORY,
   category,
   error
@@ -57,13 +57,22 @@ export const fetchMenu = () => {
   }
 }
 
-export const fetchSingleCategory = slug => {
+export const fetchSingleCategory = (slug, pageNum) => {
   return async dispatch => {
     try {
-      const {data} = await axios.get(`/api/categories/${slug}`)
+      const {data} = await axios.get(
+        `/api/categories/${slug}/?pageNum=${pageNum}`
+      )
+      console.log(data)
+      // dispatch(
+      //   gotSingleCategory(
+      //     data.categoriesData.result,
+      //     data.categoriesData.pageCount
+      //   )
+      // )
       dispatch(gotSingleCategory(data))
     } catch (error) {
-      dispatch(gotSingleCategory(null, error))
+      dispatch(gotSingleCategory(null, null, error))
     }
   }
 }
@@ -127,7 +136,8 @@ const currentCategoryReducer = (
           ...state,
           status: action.error ? STATUS_ERROR : STATUS_DONE,
           value: action.category,
-          error: action.error
+          error: action.error,
+          pageCount: action.metaData
         }
       }
     default:

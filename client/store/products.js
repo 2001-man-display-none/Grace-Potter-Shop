@@ -21,7 +21,6 @@ export const gotError = (error, failedAction) => ({
 export const fetchAll = pageNum => async dispatch => {
   try {
     const res = await axios.get(`/api/products/?pageNum=${pageNum}`)
-    console.log(res.data.productData.pageCount)
     dispatch(
       gotProducts(res.data.productData.result, res.data.productData.pageCount)
     )
@@ -40,7 +39,6 @@ export const initialState = {
 export default function(state = initialState, action) {
   switch (action.type) {
     case GOT_PRODUCTS:
-      console.log('action', action)
       return {
         ...state,
         status: 'done',
