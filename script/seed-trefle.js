@@ -68,7 +68,7 @@ async function seed(quiet = false) {
     categoryIdByName[category.name] = category.id
   })
 
-  const productData = generateProductData(categoryIdByName).slice(0, 199)
+  const productData = generateProductData(categoryIdByName)
   const products = await Promise.all(productData.map(p => Product.create(p)))
   log(`seeded ${products.length} products`)
 

@@ -1,13 +1,23 @@
 const router = require('express').Router()
 const {Product} = require('../db/models')
 const {adminsOnly} = require('../auth/privileges')
+const {calculateLimitAndOffset} = require('paginate-info')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
   try {
+    const pageNum = Number(req.query.pageNum) + 1
+    const pageSize = 12
+    const {limit, offset} = calculateLimitAndOffset(pageNum, pageSize)
+
     const products = await Product.findAll()
+
     if (products) {
-      res.json(products)
+      const pageCount = Math.ceil(products.length / pageSize)
+      const paginatedData = products.slice(offset, offset + limit)
+      res.status(200).json({
+        productData: {result: paginatedData, pageCount}
+      })
     } else {
       res.status(404).send('No products found')
     }

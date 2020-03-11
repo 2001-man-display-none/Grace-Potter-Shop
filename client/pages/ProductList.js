@@ -9,31 +9,20 @@ export class ProductList extends React.Component {
   constructor() {
     super()
     this.state = {
-      currPage: 1,
-      productsPerPage: 12,
-      currProducts: [],
+      currPage: 0,
       pageCount: 0
     }
     this.handlePageChange = this.handlePageChange.bind(this)
   }
   async componentDidMount() {
     await this.props.fetchProducts(this.state.currPage)
-
-    const state = this.state
-    const iOfLastProduct = state.currPage * state.productsPerPage
-    const iOfFirstProduct = iOfLastProduct - state.productsPerPage
     this.setState({
-      currProducts: this.props.products.slice(iOfFirstProduct, iOfLastProduct),
-      pageCount: Math.ceil(this.props.products.length / state.productsPerPage)
+      pageCount: this.props.pageCount
     })
   }
 
-  handlePageChange(pageNumber) {
-    console.log(pageNumber)
-    console.log(typeof pageNumber)
-    this.setState({
-      currPage: Number(pageNumber)
-    })
+  async handlePageChange(pageNum) {
+    await this.props.fetchProducts(pageNum.selected)
   }
 
   render() {
@@ -47,7 +36,7 @@ export class ProductList extends React.Component {
           <div className="page products-page">
             <h1>Available Products</h1>
             <div className="product-list">
-              {this.state.currProducts.map(product => (
+              {this.props.products.map(product => (
                 <ProductTile key={product.id} product={product} />
               ))}
             </div>
@@ -57,6 +46,9 @@ export class ProductList extends React.Component {
                 pageCount={this.state.pageCount}
                 forcePage={this.state.currPage}
                 onPageChange={this.handlePageChange}
+                containerClassName="pagination"
+                subContainerClassName="pages pagination"
+                activeClassName="active"
               />
             </div>
           </div>
@@ -67,10 +59,19 @@ export class ProductList extends React.Component {
   }
 }
 
-const stateProps = state => ({
-  products: state.products.products,
-  status: state.products.status
-})
+const stateProps = state => {
+  console.log(state.products)
+  return {
+    products: state.products.products,
+    status: state.products.status,
+    pageCount: state.products.pageCount
+  }
+}
+// const stateProps = state => ({
+//   products: state.products.products,
+//   status: state.products.status,
+//   pageCount: state.products.pageCount
+// })
 
 const dispatchProps = dispatch => ({
   fetchProducts: pageNum => dispatch(fetchAll(pageNum)),
