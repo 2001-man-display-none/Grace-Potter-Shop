@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const seedData = require('./seed-data.json')
 const faker = require('faker')
 const {
@@ -11,6 +12,8 @@ const {
 const db = require('../server/db')
 const {User, Product, OrderItem, Category} = require('../server/db/models')
 
+const maxProductsPerCategory = 40
+
 const filteredSeedData = seedData.filter(plant => plant.images.length >= 1)
 
 //categories: Seeds, flowers, succulents, other
@@ -18,8 +21,9 @@ const filteredSeedData = seedData.filter(plant => plant.images.length >= 1)
 
 function fakeCategories() {
   return [
+    {name: 'unused', inMenu: false},
     {name: 'Outdoor Plants', inMenu: true},
-    //    {name: 'Succulents', inMenu: true},
+    {name: 'Succulents', inMenu: true},
     {name: 'Flowers', inMenu: true},
     {name: 'Other', inMenu: true}
   ]
@@ -30,7 +34,7 @@ function categorizePlant(plant) {
   if (succulentFamily.includes(plant.family_common_name)) {
     return 'Succulents'
   } else if (plant.specifications_mature_height.ft > 6) {
-    return 'Trees'
+    return 'Outdoor Plants'
   } else if (plant.flower_conspicuous === true) {
     return 'Flowers'
   } else {
@@ -38,16 +42,43 @@ function categorizePlant(plant) {
   }
 }
 
-function generateProductData(categoryIdByName) {
+function generateProductData() {
   return filteredSeedData.map(plant => {
-    const name = plant.common_name ? plant.common_name : plant.scientific_name
-    const categoryId = categoryIdByName[categorizePlant(plant)]
+    const {
+      common_name,
+      scientific_name,
+      family_common_name,
+      growth_moisture_use,
+      specifications_mature_height,
+      flower_conspicuous,
+      images
+    } = plant
+
+    const name = common_name ? common_name : scientific_name
+
+    const family = family_common_name
+      ? family_common_name.toLowerCase()
+      : 'unknown'
+
+    const descriptionParts = [
+      family_common_name
+        ? `The ${name} comes from the ${family}.`
+        : `Meet the ${name}!`,
+      specifications_mature_height &&
+        specifications_mature_height.ft &&
+        `It can grow to a height of up to ${specifications_mature_height.ft} ft.`,
+      growth_moisture_use &&
+        `It needs a ${growth_moisture_use.toLowerCase()} level of water.`,
+      flower_conspicuous && `The ${name} is known for its flowers.`
+    ]
+    const description = descriptionParts.filter(x => !!x).join(' ')
+
     return {
       name: name,
-      description: `The ${name} comes from the ${plant.family_common_name} family. It need a ${plant.growth_moisture_use} level of water.`,
-      image: plant.images[0].url,
+      description: description,
+      image: images[0].url,
       price: fakePrice(),
-      categoryId: categoryId
+      categoryName: categorizePlant(plant)
     }
   })
 }
@@ -63,13 +94,23 @@ async function seed(quiet = false) {
   )
   log(`seeded ${categories.length} categories`)
 
-  const categoryIdByName = {}
+  const categoryMap = {}
   categories.forEach(category => {
-    categoryIdByName[category.name] = category.id
+    categoryMap[category.name] = {id: category.id, count: 0, products: []}
   })
 
-  const productData = generateProductData(categoryIdByName)
-  const products = await Promise.all(productData.map(p => Product.create(p)))
+  const productData = generateProductData()
+  const productPromises = productData
+    .map(product => {
+      const categoryInfo = categoryMap[product.categoryName]
+      if (categoryInfo.count < maxProductsPerCategory) {
+        product.categoryId = categoryInfo.id
+        categoryInfo.count++
+        return Product.create(product)
+      }
+    })
+    .filter(p => !!p)
+  const products = await Promise.all(productPromises)
   log(`seeded ${products.length} products`)
 
   const userData = repeat(100, fakeUser)

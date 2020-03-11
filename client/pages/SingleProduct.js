@@ -42,9 +42,7 @@ class SingleProduct extends React.Component {
         <div className="single-product-main">
           <h1>{singleProduct.name}</h1>
           <h3>${singleProduct.price}</h3>
-          <p>
-            Meet {singleProduct.name}: {singleProduct.description}
-          </p>
+          <p>{singleProduct.description}</p>
         </div>
         <div className="single-product-controls">
           <div className="card">
