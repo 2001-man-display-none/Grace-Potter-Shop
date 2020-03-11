@@ -9,6 +9,7 @@ import UserHome from './pages/UserHome'
 import Cart from './pages/Cart'
 import SingleProduct from './pages/SingleProduct'
 import ProductList from './pages/ProductList'
+import Category from './pages/Category'
 import Checkout from './pages/Checkout'
 import OrderConfirmation from './pages/OrderConfirmation'
 import EditProfileForm from './components/EditProfileForm'
@@ -32,6 +33,7 @@ class Routes extends Component {
         {/* Routes available to all visitors */}
         <Route exact path="/products" component={ProductList} />
         <Route exact path="/products/:productId" component={SingleProduct} />
+        <Route exact path="/category/:slug" component={Category} />
         <Route path="/cart" component={Cart} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/confirmation" component={OrderConfirmation} />

@@ -48,13 +48,13 @@ class SingleProduct extends React.Component {
         </div>
         <div className="single-product-controls">
           <div className="card">
-            <QuantityDropdown handleQtyChange={this.handleQtyChange} />
             <AddToCartButton
               className="pure-button button-primary button-large"
               productId={productId}
               singleProduct={singleProduct.name}
               handleAddToCart={this.handleAddToCart}
             />
+            <QuantityDropdown handleQtyChange={this.handleQtyChange} />
           </div>
         </div>
       </div>

@@ -12,7 +12,6 @@ const prodPlugins = [
 ]
 const devPlugins = [
   new CleanWebpackPlugin({
-    dry: true,
     cleanOnceBeforeBuildPatterns: ['.hot/*', '!**/.gitkeep']
   }),
   new webpack.HotModuleReplacementPlugin(),
