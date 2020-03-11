@@ -17,9 +17,9 @@ export const gotError = (error, failedAction) => ({
 })
 
 // THUNK CREATORS
-export const fetchAll = () => async dispatch => {
+export const fetchAll = pageNum => async dispatch => {
   try {
-    const res = await axios.get('/api/products')
+    const res = await axios.get(`/api/products/?pageNum=&${pageNum}`)
     dispatch(gotProducts(res.data))
   } catch (err) {
     dispatch(gotError(err, {type: GOT_PRODUCTS}))

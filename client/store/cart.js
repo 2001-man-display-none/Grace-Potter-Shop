@@ -4,6 +4,7 @@ import {GET_USER, REMOVE_USER} from './user'
 
 const GOT_CART = 'GOT_CART'
 const LATEST_ORDER = 'LATEST_ORDER'
+const GET_PAST_ORDERS = 'GET_PAST_ORDERS'
 
 export const gotCart = products => ({
   type: GOT_CART,
@@ -14,6 +15,22 @@ export const latestOrder = order => ({
   type: LATEST_ORDER,
   order
 })
+
+export const getPastOrders = pastOrders => ({
+  type: GET_PAST_ORDERS,
+  pastOrders
+})
+
+export const fetchPastOrders = () => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.get('/api/home')
+      dispatch(getPastOrders(data))
+    } catch (err) {
+      console.log('Having trouble locating your past orders')
+    }
+  }
+}
 
 export const fetchCart = () => {
   return async dispatch => {
@@ -76,7 +93,8 @@ export const deleteItemThunk = productId => {
 // INITIAL STATE
 export const initialState = {
   products: [],
-  latestOrder: {}
+  latestOrder: {},
+  pastOrders: []
 }
 
 // REDUCER
@@ -88,6 +106,11 @@ export default function(state = initialState, action) {
       return {...state, products: [], latestOrder: action.order}
     case REMOVE_USER:
       return {...state, products: []}
+    case GET_PAST_ORDERS:
+      return {
+        ...state,
+        pastOrders: action.pastOrders
+      }
     default:
       return state
   }

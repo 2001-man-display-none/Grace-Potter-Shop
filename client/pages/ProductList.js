@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchAll} from '../store/products'
 import ProductTile from '../components/ProductTile'
 import ReactPaginate from 'react-paginate'
+import {addToCart} from '../store/cart'
 
 export class ProductList extends React.Component {
   constructor() {
@@ -16,7 +17,7 @@ export class ProductList extends React.Component {
     this.handlePageChange = this.handlePageChange.bind(this)
   }
   async componentDidMount() {
-    await this.props.fetchProducts()
+    await this.props.fetchProducts(this.state.currPage)
 
     const state = this.state
     const iOfLastProduct = state.currPage * state.productsPerPage
@@ -72,7 +73,8 @@ const stateProps = state => ({
 })
 
 const dispatchProps = dispatch => ({
-  fetchProducts: () => dispatch(fetchAll())
+  fetchProducts: pageNum => dispatch(fetchAll(pageNum)),
+  addToCart: productId => dispatch(addToCart(productId))
 })
 
 const ConnectedProductList = connect(stateProps, dispatchProps)(ProductList)
