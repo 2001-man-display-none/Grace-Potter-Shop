@@ -31,10 +31,10 @@ API
 
 ## Authors
 
-[**Shay Lewis**](https://github.com/shaylew/)
-[**Renata Bubic**](https://github.com/renatabubic)
-[**Sooin Chung**](https://github.com/sooinc)
-[**Eunjoon Hwang**](https://github.com/joonybejoy)
+- [**Shay Lewis**](https://github.com/shaylew/)
+- [**Renata Bubic**](https://github.com/renatabubic)
+- [**Sooin Chung**](https://github.com/sooinc)
+- [**Eunjoon Hwang**](https://github.com/joonybejoy)
 
 ## License
 
